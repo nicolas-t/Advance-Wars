@@ -6,11 +6,10 @@
 	if ( typeof Deplacement.initialized == "undefined" ) {
 		//function privées
 		Deplacement.prototype.calculPorteeDeplacement = function(oldX, oldY, newX,newY,k,cheminparcouru) {
-			var v = $.inArray(newX+'_'+newY, unitsMap);
-			if(map[nom_map][newX+'_'+newY]['c_avancement'][this.unit.type] && (v <0 || units[v].team.id == this.unit.team.id)){
+			if(map[nom_map][newX+'_'+newY]['c_avancement'][this.unit.type]){
 				if($.inArray(newX+'_'+newY, cheminparcouru) == -1){
 					var v = $.inArray(newX+'_'+newY, unitsMap);
-					if((v < 0) || (v >= 0 && (this.unit.team.id == this.unit.team.id ))){
+					if((v < 0) || (v >= 0 && (units[v].team.id == this.unit.team.id))){
 						$('#deplacement_'+newX+'_'+newY).css('background','white');
 						var arr = $.extend(true, [], cheminparcouru);
 						arr.push(newX+'_'+newY);
