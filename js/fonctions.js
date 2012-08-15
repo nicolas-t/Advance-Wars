@@ -48,8 +48,10 @@ $(document).ready(function(){
 			coord = getXY(caseSurvolee);
 			if(map[nom_map][coord[0]+'_'+coord[1]]['c_avancement'][units[selectedUnitID].type])
 			{
-				deplacement.deplacementVisuel();
-				choixChemin = false;
+					if(deplacement.pointValide(coord[0],coord[1])){
+						deplacement.deplacementVisuel();
+						choixChemin = false;
+					}
 			}
 		}
 	});
@@ -58,6 +60,7 @@ $(document).ready(function(){
 
 		selectionUnite(id);
 		deplacement = new Deplacement(units[id]);
+		$('#menuBox').css('display', 'block');
 		deplacement.getPortee();
 		choixChemin = true;
 
@@ -73,5 +76,21 @@ $(document).ready(function(){
 			return false;
 		}
 	});
+	
+	$('#menuBox a').click(function(){
+		if($(this).attr('id') == 'attack'){
+			alert('quand j\'aurai la fonction !');
+		}
+		else if($(this).attr('id') == 'wait'){
+			$('#deplacement_layer td').css('background','');
+			deplacement.confirme();
+		}
+		else if($(this).attr('id') == 'cancel'){
+			deplacement.cancel();
+		}
+		$('#menuBox').css('display', 'none');
+
+	});
+	
 
 });

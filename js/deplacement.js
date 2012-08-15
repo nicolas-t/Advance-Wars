@@ -2,6 +2,7 @@
 	this.unit = unit;
 	route = [];
 	cheminChoisi = [this.unit.x+'_'+this.unit.y];
+	positionAvantConfirme = '';
 	
 	if ( typeof Deplacement.initialized == "undefined" ) {
 		//function privées
@@ -75,7 +76,15 @@
 			}
 			index = keys.sort(tri_nombres).shift();
 			return retour[index];
-		}	
+		}
+		Deplacement.prototype.pointValide = function(x,y) {
+			if($.inArray(x+'_'+y , cheminChoisi)>=0){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}		
 		Deplacement.prototype.routeLaPlusCourte = function(destX,destY)
 		{
 			var retour = new Array();
@@ -206,11 +215,20 @@
 					  })(cheminChoisi[j])
 				  }
 				);
-				if(j == cheminChoisi_length - 1){//derniere case
-					$('#deplacement_layer td').css('background','');
-					this.unit.updatePosition(getXY(cheminChoisi[j]));
-				}
+				if(j == cheminChoisi_length - 1){
+					this.positionAvantConfirme = getXY(cheminChoisi[j]);
+				}				
 			}
+		}
+		Deplacement.prototype.confirme = function() {
+			$('#deplacement_layer td').css('background','');
+			this.unit.updatePosition(this.positionAvantConfirme);
+		}
+		Deplacement.prototype.cancel = function() {
+			this.positionAvantConfirme = '';
+			var position = $('#'+this.unit.x+'_'+this.unit.y).position();
+			$('#deplacement_layer td').css('background','');
+			$("#unit_"+this.unit.id).css({'top' : position.top,'left':position.left});
 		}
 		Deplacement.initialized = true;
 	}

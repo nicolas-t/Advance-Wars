@@ -1,11 +1,6 @@
-﻿
-*{
-cursor: none;
-}
-
-td{
-width:16px;
-height:16px;
+﻿td{
+	width:16px;
+	height:16px;
 }
 
 #cursorSelect{
@@ -17,6 +12,7 @@ height:16px;
 	position:absolute;
 	top:0;
 	left:0;
+
 }
 .units{
 	width:16px;
@@ -24,4 +20,8 @@ height:16px;
 	margin-left:0px;
 	margin-top:0px;
 	position:absolute;
+}
+
+#cursorSelect, .units, td{
+	cursor: none;
 }
