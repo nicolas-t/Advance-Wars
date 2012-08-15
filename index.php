@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		<link rel="stylesheet" href="reset.css" />
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
         <title>Advance Wars, le plus court chemin</title>
     </head>
 

@@ -1,6 +1,8 @@
-﻿*{
+﻿
+*{
 cursor: none;
 }
+
 td{
 width:16px;
 height:16px;
@@ -9,9 +11,9 @@ height:16px;
 #cursorSelect{
 	width:20px;
 	height:20px;
-	margin-left:6px;
-	margin-top:6px;
-	background:url(images/cursor/cursorAdavanceWars.png);
+	margin-left:-2px;
+	margin-top:-2px;
+	background:url(../images/cursor/cursorAdavanceWars.png);
 	position:absolute;
 	top:0;
 	left:0;
@@ -19,7 +21,7 @@ height:16px;
 .units{
 	width:16px;
 	height:16px;
-	margin-left:8px;
-	margin-top:8px;
+	margin-left:0px;
+	margin-top:0px;
 	position:absolute;
 }
