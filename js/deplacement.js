@@ -25,7 +25,7 @@
 		}
 		
 		Deplacement.prototype.deplacementQuatreDirection = function(x,y,k,cheminparcouru) {
-			if(k<this.unit.spec.deplacement)
+			if((k<this.unit.spec.deplacement) && (cheminparcouru.length <= this.unit.spec.essence))
 			{
 				var xp = x + 1;
 				var xm = x - 1;
@@ -203,13 +203,14 @@
 			var cheminChoisi_length = cheminChoisi.length;
 			for(j=0;j<=cheminChoisi_length;j++)
 			{
-				if((this.unit.spec.essence < 0) || (j == cheminChoisi_length)){
+				if(j == cheminChoisi_length){
 					$('#trace_layer td').css('background', '');
 					this.positionAvantConfirme = getXY(cheminChoisi[j-1]);
+					this.unit.updateEssence(j-1);
+					console.log(this.unit.spec.essence);
 				}
 				else{
 					position = $('#'+cheminChoisi[j]).position();
-					this.unit.updateEssence(1);
 					 e.animate({
 						"top" : position.top,
 						"left": position.left

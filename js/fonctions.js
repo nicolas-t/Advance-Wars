@@ -46,6 +46,7 @@ $(document).ready(function(){
 		if($('#menuBox').is(':hidden')){
 			id = getID(caseSurvolee);
 			selectionUnite(id);
+			console.log(units[id].active);
 			if(units[id].active){
 				deplacement = new Deplacement(units[id]);
 				$('#menuBox').css('display', 'block');

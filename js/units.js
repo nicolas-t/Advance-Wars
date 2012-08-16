@@ -50,14 +50,19 @@ function Unit(id, team, type, x, y, active, spec) {
 			if(this.spec.essence<=0){
 				this.updateActive(false);
 			}
+			if(this.spec.essence<=10){
+				$(this.elem).html('<img src="images/pictos/essence.gif"/>');
+			}
 		}
 		Unit.prototype.updateActive = function(newValue) {
 			this.active = newValue;
-			if(this.active){
+			if(newValue && (this.spec.essence>0)){
 				$(this.elem).css({'background': 'url(images/units/'+this.team.color+'/'+this.type+'.gif)'});
+				this.active = true;
 			}
 			else{
 				$(this.elem).css({'background': 'url(images/units/'+this.team.color+'/'+this.type+'_down.gif)'});
+				this.active = false;
 			}
 		}
 		Unit.initialized = true;
