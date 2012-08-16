@@ -2,7 +2,7 @@
 	this.unit = unit;
 	route = [];
 	cheminChoisi = [this.unit.x+'_'+this.unit.y];
-	positionAvantConfirme = '';
+	positionAvantConfirme = [];
 	
 	if ( typeof Deplacement.initialized == "undefined" ) {
 		//function privées
@@ -205,9 +205,9 @@
 			{
 				if(j == cheminChoisi_length){
 					$('#trace_layer td').css('background', '');
-					this.positionAvantConfirme = getXY(cheminChoisi[j-1]);
+					this.positionAvantConfirme = [this.unit.x, this.unit.y];
+					this.unit.updatePosition(getXY(cheminChoisi[j-1]));
 					this.unit.updateEssence(j-1);
-					console.log(this.unit.spec.essence);
 				}
 				else{
 					position = $('#'+cheminChoisi[j]).position();
@@ -228,12 +228,11 @@
 		}
 		Deplacement.prototype.confirme = function() {
 			$('#deplacement_layer td').css('background','');
-			this.unit.updatePosition(this.positionAvantConfirme);
 			this.unit.updateActive(false);
 		}
 		Deplacement.prototype.cancel = function() {
-			this.positionAvantConfirme = '';
-			var position = $('#'+this.unit.x+'_'+this.unit.y).position();
+			this.unit.updatePosition(this.positionAvantConfirme);
+			var position = $('#'+this.positionAvantConfirme[0]+'_'+this.positionAvantConfirme[1]).position();
 			$('#deplacement_layer td').css('background','');
 			$("#unit_"+this.unit.id).css({'top' : position.top,'left':position.left});
 		}
