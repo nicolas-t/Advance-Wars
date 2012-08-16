@@ -46,7 +46,6 @@ $(document).ready(function(){
 		if($('#menuBox').is(':hidden')){
 			id = getID(caseSurvolee);
 			selectionUnite(id);
-			console.log(units[id].active);
 			if(units[id].active){
 				deplacement = new Deplacement(units[id]);
 				$('#menuBox').css('display', 'block');
@@ -70,17 +69,19 @@ $(document).ready(function(){
 	$('#menuBox a').click(function(){
 		if($(this).attr('id') == 'attack'){
 			$('#deplacement_layer td').css('background','');
-			deplacement.confirme();		
+			tir = new Tir(units[id]);
+			tir.getPortee();
+			tir.getCibles();
 		}
 		else if($(this).attr('id') == 'wait'){
 			$('#deplacement_layer td').css('background','');
 			deplacement.confirme();
-
+			$('#menuBox').css('display', 'none');
 		}
 		else if($(this).attr('id') == 'cancel'){
 			deplacement.cancel();
+			$('#menuBox').css('display', 'none');
 		}
-		$('#menuBox').css('display', 'none');
 
 	});
 	
