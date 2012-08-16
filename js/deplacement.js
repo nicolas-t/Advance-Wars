@@ -11,11 +11,12 @@
 				if($.inArray(newX+'_'+newY, cheminparcouru) == -1){
 					var v = $.inArray(newX+'_'+newY, unitsMap);
 					if((v < 0) || (v >= 0 && (units[v].team.id == this.unit.team.id))){
-						$('#deplacement_'+newX+'_'+newY).css('background','white');
 						var arr = $.extend(true, [], cheminparcouru);
 						arr.push(newX+'_'+newY);
 						this.deplacementQuatreDirection(newX, newY, k+map[nom_map][newX+'_'+newY]['c_avancement'][this.unit.type], arr);
 					}
+					$('#deplacement_'+newX+'_'+newY).css('background','white');
+
 				}
 			}
 			else{
@@ -24,7 +25,7 @@
 		}
 		
 		Deplacement.prototype.deplacementQuatreDirection = function(x,y,k,cheminparcouru) {
-			if(k<unites[this.unit.type]['deplacement'])
+			if(k<this.unit.spec.deplacement)
 			{
 				var xp = x + 1;
 				var xm = x - 1;
@@ -198,31 +199,36 @@
 		}
 			
 		Deplacement.prototype.deplacementVisuel = function() {
-			var e = $("#unit_"+this.unit.id);
+			var e = $(this.unit.elem);
 			var cheminChoisi_length = cheminChoisi.length;
-			for(j=0;j<cheminChoisi_length;j++)
+			for(j=0;j<=cheminChoisi_length;j++)
 			{
-				position = $('#'+cheminChoisi[j]).position();
-				 e.animate({
-					"top" : position.top,
-					"left": position.left
-				  },
-				  { queue: true, duration: 60, complete : /*efface le tracé rouge*/
-					  (function(z){
-							return function() {
-								$('#trace_'+z).css('background', '');
-							}
-					  })(cheminChoisi[j])
-				  }
-				);
-				if(j == cheminChoisi_length - 1){
-					this.positionAvantConfirme = getXY(cheminChoisi[j]);
-				}				
+				if((this.unit.spec.essence < 0) || (j == cheminChoisi_length)){
+					$('#trace_layer td').css('background', '');
+					this.positionAvantConfirme = getXY(cheminChoisi[j-1]);
+				}
+				else{
+					position = $('#'+cheminChoisi[j]).position();
+					this.unit.updateEssence(1);
+					 e.animate({
+						"top" : position.top,
+						"left": position.left
+					  },
+					  { queue: true, duration: 60, complete : /*efface le tracé rouge*/
+						  (function(z){
+								return function() {
+									$('#trace_'+z).css('background', '');
+								}
+						  })(cheminChoisi[j])
+					  }
+					);
+				}
 			}
 		}
 		Deplacement.prototype.confirme = function() {
 			$('#deplacement_layer td').css('background','');
 			this.unit.updatePosition(this.positionAvantConfirme);
+			this.unit.updateActive(false);
 		}
 		Deplacement.prototype.cancel = function() {
 			this.positionAvantConfirme = '';

@@ -4,8 +4,6 @@ var caseSurvolee = '';
 var selectedUnitID = '';
 var choixChemin = false;
 
-
-
 function getXY(s){
 	l=s.split('_').reverse();
 	if(l[1] == 'unit'){g = new Array(units[parseInt(l[0])].x, units[parseInt(l[0])].y);}
@@ -22,17 +20,7 @@ function afficherCarte(){
 	   $(this).css('background-image','url("images/'+map[nom_map][$(this).attr('id')]["sprite"]+'")'); 
 	});
 }
-function afficherUnites(){
-	var container = document.getElementById("body");
-	for(j=0; j < units.length; j++)
-	{	
-		var position = $('#'+units[j].x+'_'+units[j].y).position();
-		var u = document.createElement("div");
-		container.appendChild(u);
-		$(u).attr('id', 'unit_'+j).addClass('units unit_'+units[j].x+'_'+units[j].y).css({'background': 'url(images/units/'+units[j].team.color+'/'+units[j].type+'.gif)', 'left': position.left, 'top' : position.top});
-	} 
-	
-}
+
 function selectionUnite(id){
 	selectedUnitID = id;
 }
@@ -40,7 +28,6 @@ function selectionUnite(id){
 $(document).ready(function(){
 
 	afficherCarte();
-	afficherUnites();
 	var deplacement = '';
 	$('#cursorSelect').click(function(){
 		if(choixChemin)
@@ -56,14 +43,16 @@ $(document).ready(function(){
 		}
 	});
 	$('.units').click(function(){
-		id = getID(caseSurvolee);
-
-		selectionUnite(id);
-		deplacement = new Deplacement(units[id]);
-		$('#menuBox').css('display', 'block');
-		deplacement.getPortee();
-		choixChemin = true;
-
+		if($('#menuBox').is(':hidden')){
+			id = getID(caseSurvolee);
+			selectionUnite(id);
+			if(units[id].active){
+				deplacement = new Deplacement(units[id]);
+				$('#menuBox').css('display', 'block');
+				deplacement.getPortee();
+				choixChemin = true;
+			}
+		}
 	});
 	$('#trace_layer td, .units').mouseenter(function(){
 		caseSurvolee = $(this).attr('id');
@@ -76,14 +65,16 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-	
+	// menu, en pagaille pour l'instant
 	$('#menuBox a').click(function(){
 		if($(this).attr('id') == 'attack'){
-			alert('quand j\'aurai la fonction !');
+			$('#deplacement_layer td').css('background','');
+			deplacement.confirme();		
 		}
 		else if($(this).attr('id') == 'wait'){
 			$('#deplacement_layer td').css('background','');
 			deplacement.confirme();
+
 		}
 		else if($(this).attr('id') == 'cancel'){
 			deplacement.cancel();
@@ -92,5 +83,10 @@ $(document).ready(function(){
 
 	});
 	
-
+	$('#jourBox	#nouveauJourRouge').click(function(){
+		teams[0].nouveauJour();
+	});
+	$('#jourBox	#nouveauJourBleu').click(function(){
+		teams[1].nouveauJour();
+	});
 });

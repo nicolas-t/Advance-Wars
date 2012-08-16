@@ -174,18 +174,19 @@ unites['infanterie']['deplacement'] = 3;
 unites['infanterie']['portee_tir'] = 1;
 unites['infanterie']['vue'] = 2;
 
-unites['tank'] = new Array();
-unites['tank']['vie'] = 10;
-unites['tank']['attaque'] = new Array();
-unites['tank']['attaque']['infanterie'] = 75;
-unites['tank']['attaque']['tank'] = 50;
-unites['tank']['attaque']['bateau'] = 40;
-unites['tank']['attaque']['helico'] = 20;
-unites['tank']['munitions'] = 50;
-unites['tank']['essence'] = 70;
-unites['tank']['deplacement'] = 10;
-unites['tank']['portee_tir'] = 1;
-unites['tank']['vue'] = 2;
+var BDD = {
+    Unites: {
+		Tank: {
+			vie : 10,
+			munition : 50,
+			essence : 20,
+			deplacement : 10,
+			portee_tir : 1,
+			vue : 2,
+			attaque : {infanterie : 75, tank : 50, bateau : 40, helico : 20}
+		}
+    }
+}
 
 unites['bateau'] = new Array();
 unites['bateau']['vie'] = 10;
