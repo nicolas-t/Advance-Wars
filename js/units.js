@@ -4,11 +4,13 @@ function Team(id, color, heros) {
 	this.color = color;
 	this.heros = heros;
 	this.units = [];
+	this.jours = 0;
 	if ( typeof Team.initialized == "undefined" ) {
 		Team.prototype.nouveauJour = function() {
 			for(i = 0; i<this.units.length; i++){
 				units[this.units[i]].updateActive(true);
 			}
+			this.jours++;
 		}
 
 		Team.initialized = true;
