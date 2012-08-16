@@ -181,7 +181,7 @@ var BDD = {
 			munition : 50,
 			essence : 20,
 			deplacement : 10,
-			portee_tir : 1,
+			porteeTir : {min : 0, max : 1},
 			vue : 2,
 			attaque : {infanterie : 75, tank : 50, bateau : 40, helico : 20}
 		}
