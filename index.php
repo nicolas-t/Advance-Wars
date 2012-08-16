@@ -14,6 +14,7 @@
 	<script src="maps/hip.js"></script>
 	<script src="js/units.js"></script>
 	<script src="js/deplacement.js"></script>
+	<script src="js/tir.js"></script>
 	<script src="js/fonctions.js"></script>
 	<script>
 	function tri_nombres(a,b){
