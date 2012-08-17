@@ -2,26 +2,36 @@
 	width:16px;
 	height:16px;
 }
-
-#cursorSelect{
+.cursorFire{
+	width:30px;
+	height:29px;
+	margin-left:-4px;
+	margin-top:-4px;
+	background:url(../images/cursor/cursorFire.gif);
+}
+.cursorSelect{
 	width:20px;
 	height:20px;
 	margin-left:-2px;
 	margin-top:-2px;
 	background:url(../images/cursor/cursorAdavanceWars.png);
+}
+
+#cursor{
 	position:absolute;
 	top:0;
 	left:0;
-
 }
+
 .units{
 	width:16px;
 	height:16px;
 	margin-left:0px;
 	margin-top:0px;
 	position:absolute;
+	z-index:10;
 }
 
-#cursorSelect, .units, td{
+#cursor, .units, td{
 	cursor: none;
 }
