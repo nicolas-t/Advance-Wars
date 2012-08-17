@@ -3,14 +3,7 @@
 	this.vue = [];
 	this.warfogTotal = '';
 	if (typeof Warfog.initialized == "undefined" ) {
-		Warfog.prototype.calculPorteeVue = function(oldX, oldY, newX, newY, k, lim) {
-			if($.inArray(newX+'_'+newY, this.vue) == -1){
-				this.vue.push(newX+'_'+newY);
-				//$('#deplacement_'+newX+'_'+newY).css('background','blue');
 
-			}
-			this.vueQuatresDirections(newX, newY, k+1, lim);
-		}
 		
 		Warfog.prototype.complet = function() {
 			var imgd = game.context.getImageData(0, 0, 256, 176);
@@ -56,6 +49,16 @@
 				}
 				this.debrouille(getXY(this.vue[i]));
 			}
+		}	
+		Warfog.prototype.calculPorteeVue = function(oldX, oldY, newX, newY, k, lim) {
+			if((map['hip'][newX+'_'+newY] != 'foret') || ((map['hip'][newX+'_'+newY] == 'foret') && (k==0)))
+			{
+				if($.inArray(newX+'_'+newY, this.vue) == -1){
+					this.vue.push(newX+'_'+newY);
+				}
+		
+			}
+			this.vueQuatresDirections(newX, newY, k+1, lim);
 		}		
 		Warfog.prototype.vueQuatresDirections = function(x, y, k, lim) {
 			if(k<lim)
