@@ -177,14 +177,26 @@ unites['infanterie']['vue'] = 2;
 var BDD = {
     Unites: {
 		Tank: {
+			cout : 7000,
 			vie : 10,
 			munition : 50,
-			essence : 20,
+			essence : 60,
 			deplacement : 10,
-			porteeTir : {min : 2, max : 4},
-			vue : 2,
+			porteeTir : {min : 0, max : 1},
+			vue : 3,
 			attaque : {infanterie : 75, tank : 50, bateau : 40, helico : 20},
 			c_avancement : {'route' : 1, 'foret' : 2, 'plaine' : 2, 'plage' : 0, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
+		},
+		Infantry: {
+			cout : 1000,
+			vie : 10,
+			munition : 9999,
+			essence : 99,
+			deplacement : 3,
+			porteeTir : {min : 0, max : 1},
+			vue : 2,
+			attaque : {infanterie : 75, tank : 50, bateau : 40, helico : 20},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 3, 'mer' : 0, 'lac' : 0}
 		}
     }
 }
