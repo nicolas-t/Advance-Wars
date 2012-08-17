@@ -16,6 +16,7 @@
 	<script src="js/deplacement.js"></script>
 	<script src="js/tir.js"></script>
 	<script src="js/fonctions.js"></script>
+	<script src="js/game.js"></script>
 	<script>
 	function tri_nombres(a,b){
 	return a-b; 
@@ -30,22 +31,25 @@
 			$map_layer="";
 			$deplacement_layer = "";
 			$trace_layer = "";
+			$over_layer = "";
 			for ($y=0; $y<=$maxY; $y++){
 				$fog_layer.= '<tr>';
 				$map_layer.= '<tr>';
 				$deplacement_layer.= '<tr>';
 				$trace_layer.= '<tr>';
+				$over_layer.= '<tr>';
 					for ($x=0; $x<=$maxX; $x++){
 						$map_layer.= '<td id="'.$x.'_'.$y.'"></td>';
 						$fog_layer.= '<td id="fog_'.$x.'_'.$y.'"></td>';
 						$deplacement_layer.= '<td id="deplacement_'.$x.'_'.$y.'"></td>';
 						$trace_layer.= '<td id="trace_'.$x.'_'.$y.'"></td>';
-						
+						$over_layer.= '<td id="over_'.$x.'_'.$y.'"></td>';
 					}
 					$map_layer.= '</tr>';
 					$fog_layer.= '</tr>';
 					$deplacement_layer.= '</tr>';
 					$trace_layer.= '</tr>';
+					$over_layer.= '</tr>';
 					
 				}
 			?>
@@ -61,7 +65,10 @@
 		<table id="trace_layer" style="position:absolute;opacity:1;" border="0" cellspacing="0" cellpadding="0">
 			<?php echo $trace_layer; ?>
 		</table>
-		<div id="cursorSelect"></div>
+		<table id="over_layer" style="position:absolute;opacity:0;z-index:100;" border="0" cellspacing="0" cellpadding="0">
+			<?php echo $over_layer; ?>
+		</table>
+		<div id="cursor" class="cursorSelect"></div>
 		<!--
 		<div id="debugInfo" style="overflow:auto;font-size:11px;position:absolute; top:200px;width:235px;padding:10px; height:50px; border:1px solid silver;">yo</div>
 		--->
