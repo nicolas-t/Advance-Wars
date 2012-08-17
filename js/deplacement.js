@@ -3,7 +3,7 @@
 	route = [];
 	portee = [];
 	cheminChoisi = [this.unit.x+'_'+this.unit.y];
-	positionAvantConfirme = [];
+	this.positionAvantConfirme = [this.unit.x,this.unit.y];
 	
 	if ( typeof Deplacement.initialized == "undefined" ) {
 		//function privées
@@ -11,11 +11,12 @@
 			if(this.unit.spec.c_avancement[map[nom_map][newX+'_'+newY]]){
 				if($.inArray(newX+'_'+newY, cheminparcouru) == -1){
 					var v = unitsMap[newX+'_'+newY];
-					if((v == undefined) || (v !== undefined && (units[v].team.id == this.unit.team.id))){
+					if((v == undefined) || (v !== undefined && (units[v].team.id == this.unit.team.id)) || (v !== undefined && ($(units[v].elem).is(':hidden')))){
 						var arr = $.extend(true, [], cheminparcouru);
 						portee[newX+'_'+newY] = [newX, newY];
 						arr.push(newX+'_'+newY);
 						this.deplacementQuatreDirection(newX, newY, k+this.unit.spec.c_avancement[map[nom_map][newX+'_'+newY]], arr);
+			
 					}
 				}
 			}
@@ -28,7 +29,6 @@
 			for(i in portee)
 			{
 				game.porteeDeplacementVisu(portee[i][0], portee[i][1]);
-				//$('#deplacement_'+newX+'_'+newY).css('background','white');
 			}
 		}
 		Deplacement.prototype.deplacementQuatreDirection = function(x,y,k,cheminparcouru) {
@@ -186,6 +186,7 @@
 		Deplacement.prototype.getPortee = function() {
 			$('#deplacement_layer td').css('background','');
 			this.deplacementQuatreDirection(this.unit.x,this.unit.y,0,[this.unit.x+'_'+this.unit.y]);
+			portee[this.unit.x+'_'+this.unit.y] = [this.unit.x, this.unit.y];
 			this.afficherPorteeDeplacement();
 		}
 		Deplacement.prototype.findChemin = function(destX,destY) {
@@ -211,7 +212,15 @@
 			var cheminChoisi_length = cheminChoisi.length;
 			for(j=0;j<=cheminChoisi_length;j++)
 			{
-				if(j == cheminChoisi_length){
+				if((unitsMap[cheminChoisi[j]] !== undefined &&$(units[unitsMap[cheminChoisi[j]]].elem).is(':hidden'))){
+					$('#trace_layer td').css('background', '');
+					this.positionAvantConfirme = [this.unit.x, this.unit.y];
+					this.unit.updatePosition(getXY(cheminChoisi[j-1]));
+					this.unit.updateEssence(j-1);
+					$('#menuBox #wait').trigger('click');
+					return false;
+				}
+				if((j == cheminChoisi_length)){
 					$('#trace_layer td').css('background', '');
 					this.positionAvantConfirme = [this.unit.x, this.unit.y];
 					this.unit.updatePosition(getXY(cheminChoisi[j-1]));
