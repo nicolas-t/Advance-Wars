@@ -5,23 +5,29 @@
 	this.cases['min']=[];
 	this.portee = [];
 	this.cibles = [];
+	$('.cible').removeClass('cible');
+
 	if ( typeof Tir.initialized == "undefined" ) {
 		Tir.prototype.getPortee = function() {
 			this.porteeQuatresDirections(this.unit.x,this.unit.y, 0, this.unit.spec.porteeTir.max,'max');	
-			this.porteeQuatresDirections(this.unit.x,this.unit.y, 0, this.unit.spec.porteeTir.min,'min');	
+			this.porteeQuatresDirections(this.unit.x,this.unit.y, 0, this.unit.spec.porteeTir.min,'min');
 			for(var i =0; i < this.cases['max'].length; i++){
 				if(($.inArray(this.cases['max'][i], this.cases['min']) == -1) && ($.inArray(this.cases['max'][i], this.portee) == -1)){
 					this.portee.push(this.cases['max'][i]);
+					$('#deplacement_'+this.cases['max'][i]).css('background','blue');
+
 				}
 			}
+			
 			return this.portee;
 		}
 		Tir.prototype.getCibles = function() {
 			for(var i =0; i < this.portee.length; i++){
-				var v = $.inArray(this.portee[i], unitsMap);
-				if((v >= 0) && (units[v].team.id != unit.team.id ) ){
+				var v = unitsMap[this.portee[i]];
+				if((v !== undefined) && (units[v].team.id != this.unit.team.id ) ){
 					this.cibles.push(this.portee[i][i]);
 					$('#deplacement_'+this.portee[i]).css('background','blue');
+					$('#over_'+this.portee[i]).addClass('cible');
 				}
 			}
 			return this.portee;

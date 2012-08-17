@@ -9,8 +9,8 @@
 		Deplacement.prototype.calculPorteeDeplacement = function(oldX, oldY, newX,newY,k,cheminparcouru) {
 			if(map[nom_map][newX+'_'+newY]['c_avancement'][this.unit.type]){
 				if($.inArray(newX+'_'+newY, cheminparcouru) == -1){
-					var v = $.inArray(newX+'_'+newY, unitsMap);
-					if((v < 0) || (v >= 0 && (units[v].team.id == this.unit.team.id))){
+					var v = unitsMap[newX+'_'+newY];
+					if((v == undefined) || (v !== undefined && (units[v].team.id == this.unit.team.id))){
 						var arr = $.extend(true, [], cheminparcouru);
 						arr.push(newX+'_'+newY);
 						this.deplacementQuatreDirection(newX, newY, k+map[nom_map][newX+'_'+newY]['c_avancement'][this.unit.type], arr);
