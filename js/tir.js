@@ -14,8 +14,6 @@
 			for(var i =0; i < this.cases['max'].length; i++){
 				if(($.inArray(this.cases['max'][i], this.cases['min']) == -1) && ($.inArray(this.cases['max'][i], this.portee) == -1)){
 					this.portee.push(this.cases['max'][i]);
-					$('#deplacement_'+this.cases['max'][i]).css('background','blue');
-
 				}
 			}
 			
