@@ -53,7 +53,7 @@
 					
 				}
 			?>
-		<table id="map_layer" style="position:absolute;" border="0" cellspacing="0" cellpadding="0">
+		<table id="map_layer" style="position:absolute;background:url(maps/hip.gif)" border="0" cellspacing="0" cellpadding="0">
 			<?php echo $map_layer; ?>
 		</table>
 		<table id="fog_layer" style="position:absolute;opacity:0.0;background:#22489d; " border="0" cellspacing="0" cellpadding="0">
