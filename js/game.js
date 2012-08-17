@@ -1,4 +1,7 @@
-﻿function Game(map, team) {
+﻿// fucking messy
+// fichier à ranger ... vraiment
+
+function Game(map, team) {
 	this.map = map;
 	this.team = team;
 	this.caseSurvolee = [];
@@ -11,6 +14,8 @@
 	this.canvas = document.getElementById("canvasMap");
 	this.image = document.getElementById("canvasSource");
 	this.context = this.canvas.getContext("2d");
+	
+
 	
 	$('#over_layer td').on('mouseenter',function(){
 		that.caseSurvolee = getXY($(this).attr('id'));
@@ -25,10 +30,22 @@
 		}
 	});
 	$('#over_layer td').on('click',function(){
+		// code en vrac... rangement prévu.... plus tard...
+		
 		if(that.isUnit()){
 			// c'est une unité;
 			if(that.choixCible && !that.isAllie()){
 				console.log('a l\'attaque');
+			}
+			else if(!that.isAllie() && !that.isVisible()){
+				//ca c'est pareil que plus bas
+				if(units[that.selectedUnitID].spec.c_avancement[that.map[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]])
+				{
+					if(deplacement.pointValide(that.caseSurvolee[0],that.caseSurvolee[1])){
+						deplacement.deplacementVisuel();
+						that.choixChemin = false;
+					}
+				}
 			}
 			else{
 				if($('#menuBox').is(':hidden')){
@@ -50,6 +67,7 @@
 			// c'est la map
 			if(that.choixChemin)
 			{
+				// c'est pareil que ça !
 				if(units[that.selectedUnitID].spec.c_avancement[that.map[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]])
 				{
 					if(deplacement.pointValide(that.caseSurvolee[0],that.caseSurvolee[1])){
@@ -69,29 +87,35 @@
 	});
 	
 	//MENU 
-		$('#menuBox a').click(function(){
-		if($(this).attr('id') == 'attack'){
-			$('#deplacement_layer td').css('background','');
-			that.choixCible = true;	
-			that.choixChemin = false;	
-			tir = new Tir(units[that.selectedUnitID]);
-			tir.getPortee();
-			tir.getCibles();
-		}
-		else if($(this).attr('id') == 'wait'){
-			$('#deplacement_layer td').css('background','');
-			$('#menuBox').css('display', 'none');
-			deplacement.confirme();
-			that.choixCible = false;
-		}
-		else if($(this).attr('id') == 'cancel'){
-			$('#menuBox').css('display', 'none');
-			deplacement.cancel();
-			that.choixCible = false;
-		}
-			game.loadLastCanvas();
+	$('#menuBox #wait').on('click',function(){
+		$('#deplacement_layer td').css('background','');
+		$('#menuBox').css('display', 'none');
+		deplacement.confirme();
+		warfog.recalcul();
+		that.choixCible = false;
+		that.choixChemin = false;
+		warfog.recalcul();
 
 	});
+	$('#menuBox #attack').on('click',function(){
+		$('#deplacement_layer td').css('background','');
+		that.choixCible = true;	
+		that.choixChemin = false;	
+		tir = new Tir(units[that.selectedUnitID]);
+		tir.getPortee();
+		tir.getCibles();
+		warfog.recalcul();
+
+	});
+	$('#menuBox #cancel').on('click',function(){
+		$('#menuBox').css('display', 'none');
+		deplacement.cancel();
+		that.choixCible = false;
+		that.choixChemin = false;
+		game.loadLastCanvas();
+
+	});
+
 	if ( typeof Game.initialized == "undefined" ) {
 		Game.prototype.afficherCarte = function() {
 			this.context.drawImage(this.image, 0, 0);
@@ -106,10 +130,10 @@
 			var imgd = this.context.getImageData(16*x, 16*y, 16, 16);
 			var pix = imgd.data;
 			for (var i = 0, n = pix.length; i < n; i += 4) {
-				pix[i ] = pix[i]+50; 
-				pix[i+1] = pix[i+1]+50; 	
-				pix[i+2] = pix[i+2]+50; 	
-				pix[i+3] = 150; 	
+				pix[i ] = pix[i]+40; 
+				pix[i+1] = pix[i+1]+60; 	
+				pix[i+2] = pix[i+2]+60; 	
+				pix[i+3] = 255; 	
 			}
 			this.context.putImageData(imgd, 16*x, 16*y);
 		}
@@ -132,6 +156,9 @@
 			else{
 				return false;
 			}
+		}
+		Game.prototype.isVisible = function() {
+			return $(units[unitsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]]].elem).is(':visible');
 		}
 		Game.prototype.isUnit = function() {
 			if(unitsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]] !== undefined){
