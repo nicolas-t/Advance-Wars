@@ -1,6 +1,7 @@
 ﻿function Deplacement(unit) {
 	this.unit = unit;
 	route = [];
+	portee = [];
 	cheminChoisi = [this.unit.x+'_'+this.unit.y];
 	positionAvantConfirme = [];
 	
@@ -12,18 +13,24 @@
 					var v = unitsMap[newX+'_'+newY];
 					if((v == undefined) || (v !== undefined && (units[v].team.id == this.unit.team.id))){
 						var arr = $.extend(true, [], cheminparcouru);
+						portee[newX+'_'+newY] = [newX, newY];
 						arr.push(newX+'_'+newY);
 						this.deplacementQuatreDirection(newX, newY, k+this.unit.spec.c_avancement[map[nom_map][newX+'_'+newY]], arr);
 					}
-					$('#deplacement_'+newX+'_'+newY).css('background','white');
-
 				}
 			}
 			else{
 				route.push(cheminparcouru);
 			}
 		}
-		
+		Deplacement.prototype.afficherPorteeDeplacement = function() {
+			game.saveCanvas();
+			for(i in portee)
+			{
+				game.porteeDeplacementVisu(portee[i][0], portee[i][1]);
+				//$('#deplacement_'+newX+'_'+newY).css('background','white');
+			}
+		}
 		Deplacement.prototype.deplacementQuatreDirection = function(x,y,k,cheminparcouru) {
 			if((k<this.unit.spec.deplacement) && (cheminparcouru.length <= this.unit.spec.essence))
 			{
@@ -179,6 +186,7 @@
 		Deplacement.prototype.getPortee = function() {
 			$('#deplacement_layer td').css('background','');
 			this.deplacementQuatreDirection(this.unit.x,this.unit.y,0,[this.unit.x+'_'+this.unit.y]);
+			this.afficherPorteeDeplacement();
 		}
 		Deplacement.prototype.findChemin = function(destX,destY) {
 			$('#trace_layer td').css('background', '');
@@ -210,7 +218,7 @@
 					this.unit.updateEssence(j-1);
 				}
 				else{
-					position = $('#'+cheminChoisi[j]).position();
+					position = $('#over_'+cheminChoisi[j]).position();
 					 e.animate({
 						"top" : position.top,
 						"left": position.left
@@ -227,12 +235,11 @@
 			}
 		}
 		Deplacement.prototype.confirme = function() {
-			$('#deplacement_layer td').css('background','');
 			this.unit.updateActive(false);
 		}
 		Deplacement.prototype.cancel = function() {
 			this.unit.updatePosition(this.positionAvantConfirme);
-			var position = $('#'+this.positionAvantConfirme[0]+'_'+this.positionAvantConfirme[1]).position();
+			var position = $('#over_'+this.positionAvantConfirme[0]+'_'+this.positionAvantConfirme[1]).position();
 			$('#deplacement_layer td').css('background','');
 			$("#unit_"+this.unit.id).css({'top' : position.top,'left':position.left});
 		}
