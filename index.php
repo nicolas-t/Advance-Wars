@@ -17,10 +17,9 @@
 	<script src="js/tir.js"></script>
 	<script src="js/fonctions.js"></script>
 	<script src="js/game.js"></script>
+	<script src="js/warfog.js"></script>
 	<script>
-	function tri_nombres(a,b){
-	return a-b; 
-}
+	function tri_nombres(a,b){return a-b;}
 	</script>
 
 
@@ -57,7 +56,7 @@
 		<table id="deplacement_layer" style="position:absolute;opacity:0.6;" border="0" cellspacing="0" cellpadding="0">
 			<?php echo $deplacement_layer; ?>
 		</table>
-		<table id="trace_layer" style="position:absolute;opacity:1;" border="0" cellspacing="0" cellpadding="0">
+		<table id="trace_layer" style="position:absolute;;" border="0" cellspacing="0" cellpadding="0">
 			<?php echo $trace_layer; ?>
 		</table>
 		<table id="over_layer" style="position:absolute;opacity:0;z-index:100;" border="0" cellspacing="0" cellpadding="0">
