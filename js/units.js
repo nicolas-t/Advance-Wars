@@ -41,9 +41,13 @@ function Unit(id, team, type, x, y, active, spec) {
 	
 	if ( typeof Unit.initialized == "undefined" ) {
 		Unit.prototype.updatePosition = function(newCoord) {
+			// on supprime l'ancienne position
+			var v = $.inArray(this.x+'_'+this.y, unitsMap);
+			unitsMap.splice(v,1);
+			// on ajoute la nouvelle position
 			this.x = newCoord[0];
 			this.y = newCoord[1];
-			unitsMap[selectedUnitID] = newCoord[0]+'_'+newCoord[1];
+			unitsMap[newCoord[0]+'_'+newCoord[1]] = this.id;
 		}
  		Unit.prototype.updateEssence = function(value) {
 			this.spec.essence = this.spec.essence - value;
@@ -72,6 +76,7 @@ function Unit(id, team, type, x, y, active, spec) {
 var units = new Array();
 var teams = new Array();
 var unitsMap = new Array();		
+var batsMap = new Array();		
 
 $(document).ready(function(){
 	//def Teams :
@@ -85,6 +90,7 @@ $(document).ready(function(){
 
 	for(j=0;j<units.length;j++)
 	{
-		unitsMap[j] = units[j].x+'_'+units[j].y;
+		unitsMap[units[j].x+'_'+units[j].y] = j;
 	}
+
 });
