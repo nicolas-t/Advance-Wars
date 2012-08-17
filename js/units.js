@@ -28,8 +28,8 @@ function Unit(id, team, type, x, y, active, spec) {
 	this.active = active;
 	this.spec = spec;
 	
-	pictoEssence = false;
-	pictoVie = false;
+	this.pictoEssence = false;
+	this.pictoVie = false;
 	
 	this.elem = document.createElement("div");
 	
@@ -58,19 +58,21 @@ function Unit(id, team, type, x, y, active, spec) {
 			if(this.spec.essence<=0){
 				this.updateActive(false);
 			}
-			if(this.spec.essence<=10 && !pictoEssence){
+			if(this.spec.essence<=10 && !this.pictoEssence){
 				$(this.elem).append('<img src="images/pictos/essence.gif"/>');
-				pictoEssence = true;
+				this.pictoEssence = true;
 
 			}
 		}
  		Unit.prototype.updateVie = function() {
+
 			if(this.spec.vie<=0){
 				//mort
 			}
-			if(this.spec.vie<10 && !pictoVie){
+			if(this.spec.vie<10 && !this.pictoVie){
+
 				$(this.elem).append('<div class="petitsChiffres n_'+this.spec.vie+'"></div>');
-				pictoVie = true;
+				this.pictoVie = true;
 			}
 		}
 		Unit.prototype.updateActive = function(newValue) {
