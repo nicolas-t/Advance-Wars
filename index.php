@@ -28,24 +28,20 @@
 			$maxY = 10;
 			$maxX = 15;
 			$fog_layer="";
-			$map_layer="";
 			$deplacement_layer = "";
 			$trace_layer = "";
 			$over_layer = "";
 			for ($y=0; $y<=$maxY; $y++){
 				$fog_layer.= '<tr>';
-				$map_layer.= '<tr>';
 				$deplacement_layer.= '<tr>';
 				$trace_layer.= '<tr>';
 				$over_layer.= '<tr>';
 					for ($x=0; $x<=$maxX; $x++){
-						$map_layer.= '<td id="'.$x.'_'.$y.'"></td>';
 						$fog_layer.= '<td id="fog_'.$x.'_'.$y.'"></td>';
 						$deplacement_layer.= '<td id="deplacement_'.$x.'_'.$y.'"></td>';
 						$trace_layer.= '<td id="trace_'.$x.'_'.$y.'"></td>';
 						$over_layer.= '<td id="over_'.$x.'_'.$y.'"></td>';
 					}
-					$map_layer.= '</tr>';
 					$fog_layer.= '</tr>';
 					$deplacement_layer.= '</tr>';
 					$trace_layer.= '</tr>';
@@ -53,9 +49,8 @@
 					
 				}
 			?>
-		<table id="map_layer" style="position:absolute;background:url(maps/hip.gif)" border="0" cellspacing="0" cellpadding="0">
-			<?php echo $map_layer; ?>
-		</table>
+		<img id="canvasSource" src="maps/hip.gif" style="display:none;position:absolute;" />
+		<canvas id="canvasMap" width="256" height="176" style="position:absolute;"></canvas>
 		<table id="fog_layer" style="position:absolute;opacity:0.0;background:#22489d; " border="0" cellspacing="0" cellpadding="0">
 			<?php echo $fog_layer; ?>
 		</table>
