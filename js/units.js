@@ -27,8 +27,12 @@ function Unit(id, team, type, x, y, active, spec) {
 	this.y = y;
 	this.active = active;
 	this.spec = spec;
+	
+	pictoEssence = false;
+	pictoVie = false;
+	
 	this.elem = document.createElement("div");
-
+	
 	//on créé l'element DOM dans l'objet
 	document.getElementById("body").appendChild(this.elem);
 	var position = $('#over_'+this.x+'_'+this.y).position();
@@ -42,8 +46,8 @@ function Unit(id, team, type, x, y, active, spec) {
 	if ( typeof Unit.initialized == "undefined" ) {
 		Unit.prototype.updatePosition = function(newCoord) {
 			// on supprime l'ancienne position
-			var v = $.inArray(this.x+'_'+this.y, unitsMap);
-			unitsMap.splice(v,1);
+			delete unitsMap[this.x+'_'+this.y];
+
 			// on ajoute la nouvelle position
 			this.x = newCoord[0];
 			this.y = newCoord[1];
@@ -54,8 +58,19 @@ function Unit(id, team, type, x, y, active, spec) {
 			if(this.spec.essence<=0){
 				this.updateActive(false);
 			}
-			if(this.spec.essence<=10){
-				$(this.elem).html('<img src="images/pictos/essence.gif"/>');
+			if(this.spec.essence<=10 && !pictoEssence){
+				$(this.elem).append('<img src="images/pictos/essence.gif"/>');
+				pictoEssence = true;
+
+			}
+		}
+ 		Unit.prototype.updateVie = function() {
+			if(this.spec.vie<=0){
+				//mort
+			}
+			if(this.spec.vie<10 && !pictoVie){
+				$(this.elem).append('<div class="petitsChiffres n_'+this.spec.vie+'"></div>');
+				pictoVie = true;
 			}
 		}
 		Unit.prototype.updateActive = function(newValue) {
@@ -87,6 +102,7 @@ $(document).ready(function(){
 	units[0] = new Unit(0, teams[0], 'tank', 8, 8, true, $.extend(true, {}, BDD.Unites.Tank));
 	units[1] = new Unit(1, teams[1], 'tank', 7, 4, true, $.extend(true, {}, BDD.Unites.Tank));
 	units[2] = new Unit(2, teams[1], 'tank', 5, 4, true, $.extend(true, {}, BDD.Unites.Tank));
+	units[3] = new Unit(3, teams[1], 'infantry', 7, 6, true, $.extend(true, {}, BDD.Unites.Infantry));
 
 	for(j=0;j<units.length;j++)
 	{
