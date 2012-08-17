@@ -1,7 +1,6 @@
 ﻿var maxX = 15;
 var maxY = 10;
-var myTeam = 0;
-
+var myTeam = 1;
 
 function getXY(s){
 	l=s.split('_').reverse();
@@ -20,4 +19,7 @@ $(document).ready(function(){
 	game = new Game(map[nom_map], myTeam);
 	game.afficherCarte();
 	
+	warfog = new Warfog(teams[myTeam]);
+	warfog.complet();
+	warfog.afficherVue();
 });
