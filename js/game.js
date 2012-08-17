@@ -45,7 +45,7 @@
 			// c'est la map
 			if(that.choixChemin)
 			{
-				if(that.map[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]['c_avancement'][units[that.selectedUnitID].type])
+				if(units[that.selectedUnitID].spec.c_avancement[that.map[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]])
 				{
 					if(deplacement.pointValide(that.caseSurvolee[0],that.caseSurvolee[1])){
 						deplacement.deplacementVisuel();
@@ -88,9 +88,11 @@
 	});
 	if ( typeof Game.initialized == "undefined" ) {
 		Game.prototype.afficherCarte = function() {
+			/*
 			$('#map_layer td').each(function(index) {
 			   $(this).css('background-image','url("images/'+that.map[$(this).attr('id')]["sprite"]+'")'); 
 			});
+			*/
 		}
 		Game.prototype.placementCurseur = function(e) {
 			position = $(e).position();

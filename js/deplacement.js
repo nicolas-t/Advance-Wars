@@ -7,13 +7,13 @@
 	if ( typeof Deplacement.initialized == "undefined" ) {
 		//function privées
 		Deplacement.prototype.calculPorteeDeplacement = function(oldX, oldY, newX,newY,k,cheminparcouru) {
-			if(map[nom_map][newX+'_'+newY]['c_avancement'][this.unit.type]){
+			if(this.unit.spec.c_avancement[map[nom_map][newX+'_'+newY]]){
 				if($.inArray(newX+'_'+newY, cheminparcouru) == -1){
 					var v = unitsMap[newX+'_'+newY];
 					if((v == undefined) || (v !== undefined && (units[v].team.id == this.unit.team.id))){
 						var arr = $.extend(true, [], cheminparcouru);
 						arr.push(newX+'_'+newY);
-						this.deplacementQuatreDirection(newX, newY, k+map[nom_map][newX+'_'+newY]['c_avancement'][this.unit.type], arr);
+						this.deplacementQuatreDirection(newX, newY, k+this.unit.spec.c_avancement[map[nom_map][newX+'_'+newY]], arr);
 					}
 					$('#deplacement_'+newX+'_'+newY).css('background','white');
 
