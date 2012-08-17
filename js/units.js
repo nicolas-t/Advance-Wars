@@ -102,7 +102,7 @@ $(document).ready(function(){
 	units[0] = new Unit(0, teams[0], 'tank', 8, 8, true, $.extend(true, {}, BDD.Unites.Tank));
 	units[1] = new Unit(1, teams[1], 'tank', 7, 4, true, $.extend(true, {}, BDD.Unites.Tank));
 	units[2] = new Unit(2, teams[1], 'tank', 5, 4, true, $.extend(true, {}, BDD.Unites.Tank));
-	units[3] = new Unit(3, teams[1], 'infantry', 7, 6, true, $.extend(true, {}, BDD.Unites.Infantry));
+	units[3] = new Unit(3, teams[0], 'infantry', 7, 6, true, $.extend(true, {}, BDD.Unites.Infantry));
 
 	for(j=0;j<units.length;j++)
 	{
