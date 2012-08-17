@@ -31,7 +31,7 @@ function Unit(id, team, type, x, y, active, spec) {
 
 	//on créé l'element DOM dans l'objet
 	document.getElementById("body").appendChild(this.elem);
-	var position = $('#'+this.x+'_'+this.y).position();
+	var position = $('#over_'+this.x+'_'+this.y).position();
 	$(this.elem).attr('id', 'unit_'+id).addClass('units').css({
 		'background': 'url(images/units/'+this.team.color+'/'+this.type+'.gif)',
 		'left': position.left,
