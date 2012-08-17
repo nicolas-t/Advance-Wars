@@ -7,6 +7,11 @@
 	this.choixCible = false;
 	var that = this;
 	
+	this.canvasSave = '';
+	this.canvas = document.getElementById("canvasMap");
+	this.image = document.getElementById("canvasSource");
+	this.context = this.canvas.getContext("2d");
+	
 	$('#over_layer td').on('mouseenter',function(){
 		that.caseSurvolee = getXY($(this).attr('id'));
 		that.placementCurseur(this);
@@ -84,15 +89,29 @@
 			deplacement.cancel();
 			that.choixCible = false;
 		}
+			game.loadLastCanvas();
 
 	});
 	if ( typeof Game.initialized == "undefined" ) {
 		Game.prototype.afficherCarte = function() {
-			/*
-			$('#map_layer td').each(function(index) {
-			   $(this).css('background-image','url("images/'+that.map[$(this).attr('id')]["sprite"]+'")'); 
-			});
-			*/
+			this.context.drawImage(this.image, 0, 0);
+		}
+		Game.prototype.saveCanvas = function() {
+			this.canvasSave = $.extend(true, {}, this.context.getImageData(0, 0, 256, 176));
+		}
+		Game.prototype.loadLastCanvas = function() {
+			this.context.putImageData(this.canvasSave, 0, 0);
+		}
+		Game.prototype.porteeDeplacementVisu = function(x,y) {
+			var imgd = this.context.getImageData(16*x, 16*y, 16, 16);
+			var pix = imgd.data;
+			for (var i = 0, n = pix.length; i < n; i += 4) {
+				pix[i ] = pix[i]+50; 
+				pix[i+1] = pix[i+1]+50; 	
+				pix[i+2] = pix[i+2]+50; 	
+				pix[i+3] = 150; 	
+			}
+			this.context.putImageData(imgd, 16*x, 16*y);
 		}
 		Game.prototype.placementCurseur = function(e) {
 			position = $(e).position();
