@@ -183,7 +183,8 @@ var BDD = {
 			deplacement : 10,
 			porteeTir : {min : 2, max : 4},
 			vue : 2,
-			attaque : {infanterie : 75, tank : 50, bateau : 40, helico : 20}
+			attaque : {infanterie : 75, tank : 50, bateau : 40, helico : 20},
+			c_avancement : {'route' : 1, 'foret' : 2, 'plaine' : 2, 'plage' : 0, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
 		}
     }
 }
