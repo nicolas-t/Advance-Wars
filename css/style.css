@@ -30,8 +30,41 @@
 	margin-top:0px;
 	position:absolute;
 	z-index:10;
+	display:none;
 }
 
 #cursor, .units, td{
 	cursor: none;
+}
+.petitsChiffres{
+	width:5px;
+	height:8px;
+	background:url(../images/pictos/petitsChiffres.png);
+}
+.n_1{
+	background-position : -6px;
+}
+ .n_2{
+	background-position : -12px;
+}
+ .n_3{
+	background-position : -18px ;
+}
+ .n_4{
+	background-position : -24px;
+}
+ .n_5{
+	background-position : -30px;
+}
+ .n_6{
+	background-position : -36px;
+}
+ .n_7{
+	background-position : -42px;
+}
+.n_8{
+	background-position : -48px;
+}
+.n_9{
+	background-position : -54px;
 }
