@@ -86,7 +86,7 @@
 			for(var i=0; i < this.team.units.length; i++){
 			
 				var x_y = units[this.team.units[i]].x+'_'+units[this.team.units[i]].y;
-				if(units[this.team.units[i]].type == 'infantry' && map['hip'][x_y] == 'montagne'){vue = 5;}
+				if(map['hip'][x_y] == 'montagne'){vue = 5;}
 				else {vue = units[this.team.units[i]].spec.vue;}
 				
 				this.vueQuatresDirections(units[this.team.units[i]].x, units[this.team.units[i]].y, 0, vue);
