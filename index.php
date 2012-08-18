@@ -73,7 +73,6 @@
 		
 		</div>
 		<div id="jourBox" style="font-size:12px;position:absolute; left:260px;top:70px;width:135px;padding:10px; height:35px; border:1px solid silver;">
-			<a href="#" id="nouveauJourRouge">Nouveau jour rouge</a><br />
 			<a href="#" id="nouveauJourBleu">Nouveau jour bleu</a><br />
 		</div>
 		<div id="degatsBox" style="font-size:12px;position:absolute; left:260px;top:135px;width:135px;padding:10px; height:20px; border:1px solid silver;">
