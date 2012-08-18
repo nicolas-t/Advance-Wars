@@ -41,23 +41,22 @@
 		}
 		Warfog.prototype.afficherVue = function() {
 			this.getVue();
-			//this.adversairesVisibles();
 			for(var i=0; i < this.vue.length; i++){
 				if(unitsMap[this.vue[i]] !== undefined){
-					//console.log(units[unitsMap[this.vue[i]]].elem);
 					$(units[unitsMap[this.vue[i]]].elem).css('display', 'block');
 				}
 				this.debrouille(getXY(this.vue[i]));
 			}
 		}	
 		Warfog.prototype.calculPorteeVue = function(oldX, oldY, newX, newY, k, lim) {
-			if((map['hip'][newX+'_'+newY] != 'foret') || ((map['hip'][newX+'_'+newY] == 'foret') && (k==0)))
+			if((map['hip'][newX+'_'+newY] != 'foret') || ((map['hip'][newX+'_'+newY] == 'foret') && (k==0) ) || ((units[unitsMap[newX+'_'+newY]] !== undefined) && (units[unitsMap[newX+'_'+newY]].team.id == this.team.id)))
 			{
 				if($.inArray(newX+'_'+newY, this.vue) == -1){
 					this.vue.push(newX+'_'+newY);
 				}
 		
 			}
+
 			this.vueQuatresDirections(newX, newY, k+1, lim);
 		}		
 		Warfog.prototype.vueQuatresDirections = function(x, y, k, lim) {
@@ -85,7 +84,12 @@
 		Warfog.prototype.getVue = function() {
 			this.vue = [];
 			for(var i=0; i < this.team.units.length; i++){
-				this.vueQuatresDirections(units[this.team.units[i]].x, units[this.team.units[i]].y, 0, units[this.team.units[i]].spec.vue);
+			
+				var x_y = units[this.team.units[i]].x+'_'+units[this.team.units[i]].y;
+				if(units[this.team.units[i]].type == 'infantry' && map['hip'][x_y] == 'montagne'){vue = 5;}
+				else {vue = units[this.team.units[i]].spec.vue;}
+				
+				this.vueQuatresDirections(units[this.team.units[i]].x, units[this.team.units[i]].y, 0, vue);
 			}
 		}
 		Warfog.initialized = true;
