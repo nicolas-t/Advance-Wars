@@ -1,230 +1,299 @@
 decors = new Array();
 
 decors['plaine']= new Array();
-decors['plaine']['c_avancement']=new Array();
-decors['plaine']['c_avancement']['infanterie']=2;
-decors['plaine']['c_avancement']['tank']=2;
-decors['plaine']['c_avancement']['bateau']=0;
-decors['plaine']['c_avancement']['helico']=1;
 decors['plaine']['c_defense']=1;
-decors['plaine']['sprite']='sprites/plaine.jpg';
-	decors['plaine_ombre_montagne'] = $.extend(true, [], decors['plaine']);
-	decors['plaine_ombre_montagne']['sprite']='sprites/plaine_ombre_montagne.jpg';
-	decors['plaine_sommet_montagne'] = $.extend(true, [], decors['plaine']);
-	decors['plaine_sommet_montagne']['sprite']='sprites/plaine_sommet_montagne.jpg';
-
 	
 decors['plage']= new Array();
-decors['plage']['c_avancement']=new Array();
-decors['plage']['c_avancement']['infanterie']=1;
-decors['plage']['c_avancement']['tank']=0;
-decors['plage']['c_avancement']['bateau']=0;
-decors['plage']['c_avancement']['helico']=1;
 decors['plage']['c_defense']=1;
-decors['plage']['sprite']='sprites/plage.jpg';
-	decors['plage_bord_bas']= $.extend(true, [], decors['plage']);
-	decors['plage_bord_bas']['sprite']='sprites/plage_bord_bas.jpg';
-	decors['plage_bord_droite']= $.extend(true, [], decors['plage']);
-	decors['plage_bord_droite']['sprite']='sprites/plage_bord_droite.jpg';
-	decors['plage_bord_gauche']= $.extend(true, [], decors['plage']);
-	decors['plage_bord_gauche']['sprite']='sprites/plage_bord_gauche.jpg';
-	decors['plage_bord_haut']= $.extend(true, [], decors['plage']);
-	decors['plage_bord_haut']['sprite']='sprites/plage_bord_haut.jpg';
-	decors['plage_coin_bas_droite']= $.extend(true, [], decors['plage']);
-	decors['plage_coin_bas_droite']['sprite']='sprites/plage_coin_bas_droite.jpg';
-	decors['plage_coin_bas_gauche']= $.extend(true, [], decors['plage']);
-	decors['plage_coin_bas_gauche']['sprite']='sprites/plage_coin_bas_gauche.jpg';
-	decors['plage_coin_haut_droite']= $.extend(true, [],decors['plage'] );
-	decors['plage_coin_haut_droite']['sprite']='sprites/plage_coin_haut_droite.jpg';
-	decors['plage_coin_haut_gauche']= $.extend(true, [], decors['plage']);
-	decors['plage_coin_haut_gauche']['sprite']='sprites/plage_coin_haut_gauche.jpg';
-	
 	
 decors['montagne']= new Array();
-decors['montagne']['c_avancement']=new Array();
-decors['montagne']['c_avancement']['infanterie']=3;
-decors['montagne']['c_avancement']['tank']=0;
-decors['montagne']['c_avancement']['bateau']=0;
-decors['montagne']['c_avancement']['helico']=1;
 decors['montagne']['c_defense']=3;
-decors['montagne']['sprite']='sprites/mont.jpg';
-	decors['montagne_petite_sommet']= $.extend(true, [], decors['montagne']);
-	decors['montagne_petite_sommet']['sprite']='sprites/montagne_petite_sommet.jpg';
-	decors['montagne_sommet_montagne']= $.extend(true, [],decors['montagne'] );
-	decors['montagne_sommet_montagne']['sprite']='sprites/montagne_sommet_montagne.jpg';
-	decors['montagne_grande']= $.extend(true, [], decors['montagne']);
-	decors['montagne_grande']['sprite']='sprites/montagne_grande.jpg';
 
 decors['mer']= new Array();
-decors['mer']['c_avancement']=new Array();
-decors['mer']['c_avancement']['infanterie']=0;
-decors['mer']['c_avancement']['tank']=0;
-decors['mer']['c_avancement']['bateau']=1;
-decors['mer']['c_avancement']['helico']=1;
 decors['mer']['c_defense']=1;
-decors['mer']['sprite']='sprites/mer.jpg';
-	decors['mer_coin_bas_droite']=$.extend(true, [], decors['mer']);
-	decors['mer_coin_bas_droite']['sprite']='sprites/mer_coin_bas_droite.jpg';
-	decors['mer_coin_bas_gauche']=$.extend(true, [], decors['mer']);
-	decors['mer_coin_bas_gauche']['sprite']='sprites/mer_coin_bas_gauche.jpg';
-	decors['mer_coin_haut_droite']=$.extend(true, [], decors['mer']);
-	decors['mer_coin_haut_droite']['sprite']='sprites/mer_coin_haut_droite.jpg';
-	decors['mer_coin_haut_gauche']=$.extend(true, [], decors['mer']);
-	decors['mer_coin_haut_gauche']['sprite']='sprites/mer_coin_haut_gauche.jpg';
-
 
 decors['lac']= new Array();
-decors['lac']['c_avancement']=new Array();
-decors['lac']['c_avancement']['infanterie']=2;
-decors['lac']['c_avancement']['tank']=0;
-decors['lac']['c_avancement']['bateau']=1;
-decors['lac']['c_avancement']['helico']=1;
 decors['lac']['c_defense']=2;
-decors['lac']['sprite']='sprites/lac.jpg';
-	decors['lac_bas_droite']= $.extend(true, [], decors['lac']);
-	decors['lac_bas_droite']['sprite']='sprites/lac_bas_droite.jpg';
-	decors['lac_bas_gauche']=$.extend(true, [],decors['lac'] );
-	decors['lac_bas_gauche']['sprite']='sprites/lac_bas_gauche.jpg';
-	decors['lac_bas']= $.extend(true, [], decors['lac']);
-	decors['lac_bas']['sprite']='sprites/lac_bas.jpg';
-	decors['lac_gauche']= $.extend(true, [], decors['lac']);
-	decors['lac_gauche']['sprite']='sprites/lac_gauche.jpg';
-	decors['lac_haut_droite']= $.extend(true, [], decors['lac']);
-	decors['lac_haut_droite']['sprite']='sprites/lac_haut_droite.jpg';
-	decors['lac_haut_gauche']= $.extend(true, [],decors['lac'] );
-	decors['lac_haut_gauche']['sprite']='sprites/lac_haut_gauche.jpg';
-	decors['lac_haut']= $.extend(true, [],decors['lac'] );
-	decors['lac_haut']['sprite']='sprites/lac_haut.jpg';
-	
+
 decors['riviere']= new Array();
-decors['riviere']['c_avancement']=new Array();
-decors['riviere']['c_avancement']['infanterie']=2;
-decors['riviere']['c_avancement']['tank']=0;
-decors['riviere']['c_avancement']['bateau']=0;
-decors['riviere']['c_avancement']['helico']=1;
 decors['riviere']['c_defense']=2;
-decors['riviere']['sprite']='sprites/riviere.jpg';
-	decors['riviere_h_droite']= $.extend(true, [], decors['riviere']);
-	decors['riviere_h_droite']['sprite']='sprites/riviere_h_droite.jpg';
-	decors['riviere_h_gauche']=$.extend(true, [], decors['riviere']);
-	decors['riviere_h_gauche']['sprite']='sprites/riviere_h_gauche.jpg';
-	decors['riviere_h_milieu']= $.extend(true, [], decors['riviere']);
-	decors['riviere_h_milieu']['sprite']='sprites/riviere_h_milieu.jpg';
-	decors['riviere_trou']= $.extend(true, [], decors['riviere']);
-	decors['riviere_trou']['sprite']='sprites/riviere_trou.jpg';
-	decors['riviere_v_bas']= $.extend(true, [], decors['riviere']);
-	decors['riviere_v_bas']['sprite']='sprites/riviere_v_bas.jpg';
-	decors['riviere_v_haut']= $.extend(true, [], decors['riviere']);
-	decors['riviere_v_haut']['sprite']='sprites/riviere_v_haut.jpg';
-	decors['riviere_v_milieu']= $.extend(true, [], decors['riviere']);
-	decors['riviere_v_milieu']['sprite']='sprites/riviere_v_milieu.jpg';
-	
 
 decors['foret']= new Array();
-decors['foret']['c_avancement']=new Array();
-decors['foret']['c_avancement']['infanterie']=2;
-decors['foret']['c_avancement']['tank']=2;
-decors['foret']['c_avancement']['bateau']=0;
-decors['foret']['c_avancement']['helico']=1;
 decors['foret']['c_defense']=2;
-decors['foret']['sprite']='sprites/foret.jpg';
-	decors['foret_grosse_bas_droite']=$.extend(true, [], decors['foret']);
-	decors['foret_grosse_bas_droite']['sprite']='sprites/foret_grosse_bas_droite.jpg';
-	decors['foret_grosse_bas_gauche']=$.extend(true, [], decors['foret']);
-	decors['foret_grosse_bas_gauche']['sprite']='sprites/foret_grosse_bas_gauche.jpg';
-	decors['foret_grosse_haut_droite']=$.extend(true, [], decors['foret']);
-	decors['foret_grosse_haut_droite']['sprite']='sprites/foret_grosse_haut_droite.jpg';
-	decors['foret_grosse_haut_gauche']=$.extend(true, [], decors['foret']);
-	decors['foret_grosse_haut_gauche']['sprite']='sprites/foret_grosse_haut_gauche.jpg';
 
 decors['route']= new Array();
-decors['route']['c_avancement']=new Array();
-decors['route']['c_avancement']['infanterie']=1;
-decors['route']['c_avancement']['tank']=1;
-decors['route']['c_avancement']['bateau']=0;
-decors['route']['c_avancement']['helico']=1;
 decors['route']['c_defense']=0;
-decors['route']['sprite']='sprites/route.jpg';
-	decors['route_coin_bas_droite']= $.extend(true, [], decors['route']);
-	decors['route_coin_bas_droite']['sprite']='sprites/route_coin_bas_droite.jpg';
-	decors['route_coin_bas_gauche']= $.extend(true, [], decors['route']);
-	decors['route_coin_bas_gauche']['sprite']='sprites/route_coin_bas_gauche.jpg';
-	decors['route_coin_haut_droite']= $.extend(true, [], decors['route']);
-	decors['route_coin_haut_droite']['sprite']='sprites/route_coin_haut_droite.jpg';
-	decors['route_coin_haut_gauche']= $.extend(true, [], decors['route']);
-	decors['route_coin_haut_gauche']['sprite']='sprites/route_coin_haut_gauche.jpg';
-	decors['route_h']= $.extend(true, [], decors['route']);
-	decors['route_h']['sprite']='sprites/route_h.jpg';
-	decors['route_v']= $.extend(true, [], decors['route']);
-	decors['route_v']['sprite']='sprites/route_v.jpg';
 
-
-unites = new Array();
-
-unites['infanterie'] = new Array();
-unites['infanterie']['vie'] = 10;
-unites['infanterie']['attaque'] = new Array();
-unites['infanterie']['attaque']['infanterie'] = 50;
-unites['infanterie']['attaque']['tank'] = 15;
-unites['infanterie']['attaque']['bateau'] = 10;
-unites['infanterie']['attaque']['helico'] = 0;
-unites['infanterie']['munitions'] = 80;
-unites['infanterie']['essence'] = 10000;
-unites['infanterie']['deplacement'] = 3;
-unites['infanterie']['portee_tir'] = 1;
-unites['infanterie']['vue'] = 2;
 
 var BDD = {
     Unites: {
-		Tank: {
-			cout : 7000,
-			vie : 10,
-			munition : 50,
-			essence : 60,
-			deplacement : 6,
-			porteeTir : {min : 0, max : 1},
-			vue : 3,
-			attaque : {infanterie : 75, tank : 50, bateau : 40, helico : 20},
-			c_avancement : {'route' : 1, 'foret' : 2, 'plaine' : 2, 'plage' : 0, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
-		},
 		Infantry: {
 			cout : 1000,
 			vie : 10,
-			munition : 9999,
+			munition : {primAmmo : '', secAmmo : 0},
 			essence : 99,
 			deplacement : 3,
 			porteeTir : {min : 0, max : 1},
 			vue : 2,
-			attaque : {infanterie : 75, tank : 50, bateau : 40, helico : 20},
-			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 3, 'mer' : 0, 'lac' : 0}
-		}
+			attaque :{
+			   primAmmo : {infantry : 55, bazooka : 45, recon : 12, vtb : 14, tank : 5, tankM : 1 , neoTank : 1, dca : 5, artillery :15, aAir : 26, lMiss : 25,  cuirasse : 0, sub : 0, destr : 0, barge : 0, helico : 7, chass :0 , bomba : 0, heliTrans :30 },
+			    secAmmo : {infantry : 55, bazooka : 45, recon : 12, vtb : 14, tank : 5, tankM : 1 , neoTank : 1, dca : 5, artillery :15, aAir : 26, lMiss : 25,  cuirasse : 0, sub : 0, destr : 0, barge : 0, helico : 7, chass :0 , bomba : 0, heliTrans :30 }
+			    },
+			c_avancement : {'route' : 1, 'foret' : 2, 'plaine' : 2, 'plage' : 0, 'montagne' : 2, 'mer' : 0, 'lac' : 0}
+		},
+		Bazooka: {
+			cout : 3000,
+			vie : 10,
+			munition : {primAmmo: 3, secAmmo :'' },
+			essence : 99,
+			deplacement : 2,
+			porteeTir : {min : 0, max : 1},
+			vue : 2,
+			attaque : {
+			   primAmmo : {infantry : 65, bazooka : 55, tank : 55, tankM : 15 , neoTank : 15, recon : 85, dca : 65, aAir : 85, artillery :70,  lMiss : 85, vtb : 75,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :35, helico : 9, chass :0 , bomba : 0 },
+			    secAmmo : {infantry : 65, bazooka : 55, tank : 6, tankM : 1 , neoTank : 1, recon : 18, dca : 6, aAir : 35, artillery :32,  lMiss : 35, vtb : 20,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :35, helico : 9, chass :0 , bomba : 0}
+			},
+			c_avancement : {'route' : 1, 'foret' : 2, 'plaine' : 2, 'plage' : 0, 'montagne' : 2, 'mer' : 0, 'lac' : 0}
+		},
+		Tank: {
+			cout : 7000,
+			vie : 10,
+			munition : {primAmmo: 9, secAmmo : ''},
+			essence : 70,
+			deplacement : 6,
+			porteeTir : {min : 0, max : 1},
+			vue : 3,
+			attaque : {
+			   primAmmo : {infantry : 75, bazooka : 70, tank : 55, tankM : 15 , neoTank : 15, recon : 85, dca : 65, aAir : 85, artillery :70,  lMiss : 85, vtb : 75,  barge : 10, destr : 5,  sub : 1, cuirasse : 1,heliTrans :40, helico : 10, chass :0 , bomba : 0 },
+			    secAmmo : {infantry : 75, bazooka : 70, tank : 6, tankM : 1 , neoTank : 1, recon : 40, dca : 6, aAir : 30, artillery :45,  lMiss : 55, vtb : 45,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :40, helico : 10, chass :0 , bomba : 0}
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
+		},
+		TankM: {
+			cout : 16000,
+			vie : 10,
+			munition :{primAmmo: 8, secAmmo :'' },
+			essence : 50,
+			deplacement : 5,
+			porteeTir : {min : 0, max : 1},
+			vue : 1,
+			attaque : {
+			   primAmmo : {infantry : 105, bazooka : 95, tank : 85, tankM : 55 , neoTank : 45, recon : 105, dca : 105, aAir : 105, artillery :100,  lMiss : 105, vtb : 105,  barge : 35, destr : 45,  sub : 10, cuirasse : 10,heliTrans :45, helico : 12, chass :0 , bomba : 0 },
+			    secAmmo : {infantry : 105, bazooka : 95, tank : 8, tankM : 1 , neoTank : 1, recon : 45, dca : 7, aAir : 35, artillery :45,  lMiss : 55, vtb : 45,  barge : 0, destr : 0,  sub : 0, cuirasse : 0, heliTrans :45, helico : 12, chass :0 , bomba : 0 }
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
+		},
+		NeoTank: {
+			cout : 22000,
+			vie : 10,
+			munition :{primAmmo: 9, secAmmo :'' },
+			essence : 99,
+			deplacement : 6,
+			porteeTir : {min : 0, max : 1},
+			vue : 1,
+			attaque : {
+			   primAmmo : {infantry : 125, bazooka : 115, tank : 105, tankM : 75 , neoTank : 55, recon : 125, dca : 115, aAir : 125, artillery :115,  lMiss : 125, vtb : 125,  barge : 50, destr : 50,  sub : 15, cuirasse : 15, heliTrans : 55, helico : 22, chass :0 , bomba : 0 },
+			    secAmmo : {infantry : 125, bazooka : 115, tank : 10, tankM : 1 , neoTank : 1, recon : 65, dca : 17, aAir : 55, artillery :65,  lMiss : 75, vtb : 65,  barge : 0, destr : 0,  sub : 0, cuirasse : 0, heliTrans :55, helico : 22, chass :0 , bomba : 0 }
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
+		},
+		Recon: {
+			cout : 4000,
+			vie : 10,
+			munition :{primAmmo: '', secAmmo : 0},
+			essence : 80,
+			deplacement : 8,
+			porteeTir : {min : 0, max : 1},
+			vue : 5,
+			attaque : {
+			   primAmmo : {infantry : 70, bazooka : 65, tank : 6, tankM : 1 , neoTank : 1, recon : 35, dca : 4, aAir : 28, artillery :45,  lMiss : 55, vtb : 45,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :35, helico : 10, chass :0 , bomba : 0 },
+			    secAmmo : {infantry : 70, bazooka : 65, tank : 6, tankM : 1 , neoTank : 1, recon : 35, dca : 4, aAir : 28, artillery :45,  lMiss : 55, vtb : 45,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :35, helico : 10, chass :0 , bomba : 0 }
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
+		},
+		Dca: {
+			cout : 8000,
+			vie : 10,
+			munition :{primAmmo: 9, secAmmo : 0},
+			essence : 60,
+			deplacement : 6,
+			porteeTir : {min : 0, max : 1},
+			vue : 2,
+			attaque : {
+			   primAmmo : {infantry : 105, bazooka : 105, tank : 25, tankM : 10 , neoTank : 5, recon : 60, dca : 45, aAir : 55, artillery :50,  lMiss : 55, vtb : 50,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :120, helico : 120, chass :65 , bomba : 75},
+			    secAmmo : {infantry : 105, bazooka : 105, tank : 25, tankM : 10 , neoTank : 5, recon : 60, dca : 45, aAir : 55, artillery :50,  lMiss : 55, vtb : 50,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :120, helico : 120, chass :65 , bomba : 75}
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
+		},
+		AAir: {
+			cout : 12000,
+			vie : 10,
+			munition :{primAmmo:6, secAmmo :0},
+			essence : 50,
+			deplacement : 4,
+			porteeTir : {min : 3, max : 5},
+			vue : 5,
+			attaque : {
+			   primAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :120, helico : 120, chass :100 , bomba : 100},
+			    secAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :120, helico : 120, chass :100 , bomba : 100}
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
+		},
+		Artillery: {
+			cout : 6000,
+			vie : 10,
+			munition :{primAmmo: 9, secAmmo : 0},
+			essence : 50,
+			deplacement : 5,
+			porteeTir : {min : 2, max : 3},
+			vue : 1,
+			attaque : {
+			   primAmmo : {infantry : 90, bazooka : 85, tank : 70, tankM : 45 , neoTank : 40, recon : 80, dca : 75, aAir : 80, artillery :75,  lMiss : 80, vtb : 70,  barge : 55, destr : 65,  sub : 60, cuirasse : 40,heliTrans :0, helico : 0, chass :0 , bomba : 0},
+			    secAmmo : {infantry : 90, bazooka : 85, tank : 70, tankM : 45 , neoTank : 40, recon : 80, dca : 75, aAir : 80, artillery :75,  lMiss : 80, vtb : 70,  barge : 55, destr : 65,  sub : 60, cuirasse : 40,heliTrans :0, helico : 0, chass :0 , bomba : 0}
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
+		},
+		LMiss: {
+			cout : 15000,
+			vie : 10,
+			munition :{primAmmo: 6, secAmmo : 0},
+			essence : 50,
+			deplacement : 5,
+			porteeTir : {min : 3, max : 5},
+			vue : 1,
+			attaque : {
+			   primAmmo : {infantry : 95, bazooka : 90, tank : 80, tankM : 55 , neoTank : 50, recon : 90, dca : 85, aAir : 90, artillery :80,  lMiss : 85, vtb : 80,  barge : 60, destr : 85,  sub : 85, cuirasse : 55,heliTrans :0, helico : 0, chass :0 , bomba : 0},
+			    secAmmo : {infantry : 95, bazooka : 90, tank : 80, tankM : 55 , neoTank : 50, recon : 90, dca : 85, aAir : 90, artillery :80,  lMiss : 85, vtb : 80,  barge : 60, destr : 85,  sub : 85, cuirasse : 55,heliTrans :0, helico : 0, chass :0 , bomba : 0}
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
+		},
+		Vtb: {
+			cout : 5000,
+			vie : 10,
+			munition :{primAmmo: 0, secAmmo : 0},
+			essence : 70,
+			deplacement : 6,
+			porteeTir : {min : 0, max : 0},
+			vue : 1,
+			attaque : {
+			   primAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :0, helico : 0, chass :0 , bomba : 0},
+			    secAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :0, helico : 0, chass :0 , bomba : 0}
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
+		},
+		Barge: {
+			cout : 12000,
+			vie : 10,
+			munition :{primAmmo: 0, secAmmo : 0},
+			essence : 99,
+			deplacement : 6,
+			porteeTir : {min : 0, max : 0},
+			vue : 1,
+			attaque : {
+			   primAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :0, helico : 0, chass :0 , bomba : 0},
+			    secAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :0, helico : 0, chass :0 , bomba : 0}
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
+		},
+		Destr: {
+			cout : 18000,
+			vie : 10,
+			munition : {primAmmo: 9, secAmmo : 0},
+			essence : 99,
+			deplacement : 6,
+			porteeTir : {min : 0, max : 1},
+			vue : 3,
+			attaque : {
+			   primAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 90, cuirasse : 0,heliTrans :115, helico : 115, chass :55 , bomba : 65},
+			    secAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 90, cuirasse : 0,heliTrans :115, helico : 115, chass :55 , bomba : 65}
+			},
+			c_avancement : {'route' : 0, 'foret' : 0, 'plaine' : 0, 'plage' : 0, 'montagne' : 0, 'mer' : 1, 'lac' : 1}
+		},
+		Sub: {
+			cout : 22000,
+			vie : 10,
+			munition : {primAmmo: 6, secAmmo : 0},
+			essence : 60,
+			deplacement : 5,
+			porteeTir : {min : 0, max : 1},
+			vue : 5,
+			attaque : {
+			   primAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 95, destr : 25,  sub : 55, cuirasse : 55, heliTrans :0, helico : 0, chass :0 , bomba : 0},
+			    secAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 95, destr : 25,  sub : 55, cuirasse : 55, heliTrans :0, helico : 0, chass :0 , bomba : 0}
+			},
+			c_avancement : {'route' : 0, 'foret' : 0, 'plaine' : 0, 'plage' : 0, 'montagne' : 0, 'mer' : 1, 'lac' : 1}
+		},
+		Cuirasse: {
+			cout : 28000,
+			vie : 10,
+			munition :{primAmmo: 9, secAmmo : 0},
+			essence : 99,
+			deplacement : 5,
+			porteeTir : {min : 2, max : 6},
+			vue : 2,
+			attaque : {
+			   primAmmo : {infantry : 95, bazooka : 90, tank : 80, tankM : 55 , neoTank : 50, recon : 90, dca : 85, aAir : 90, artillery :80,  lMiss : 85, vtb : 80,  barge : 95, destr : 95,  sub : 95, cuirasse : 50, heliTrans :0, helico : 0, chass :0 , bomba : 0},
+			    secAmmo : {infantry : 95, bazooka : 90, tank : 80, tankM : 55 , neoTank : 50, recon : 90, dca : 85, aAir : 90, artillery :80,  lMiss : 85, vtb : 80,  barge : 95, destr : 95,  sub : 95, cuirasse : 50, heliTrans :0, helico : 0, chass :0 , bomba : 0}
+			},
+			c_avancement : {'route' : 0, 'foret' : 0, 'plaine' : 0, 'plage' : 0, 'montagne' : 0, 'mer' : 1, 'lac' : 1}
+		},
+		HeliTrans: {
+			cout : 5000,
+			vie : 10,
+			munition :{primAmmo: 0, secAmmo : 0},
+			essence : 50,
+			deplacement : 6,
+			porteeTir : {min : 0, max : 0},
+			vue : 2,
+			attaque : {
+			   primAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :0, helico : 0, chass :0 , bomba : 0},
+			    secAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :0, helico : 0, chass :0 , bomba : 0}
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 1, 'mer' : 1, 'lac' : 1}
+		},
+		Helico: {
+			cout : 9000,
+			vie : 10,
+			munition :{primAmmo: 6, secAmmo : ''},
+			essence : 99,
+			deplacement : 6,
+			porteeTir : {min : 0, max : 1},
+			vue : 3,
+			attaque : {
+			   primAmmo : {infantry : 75, bazooka : 75, tank : 55, tankM : 25 , neoTank : 20, recon : 55, dca : 25, aAir : 65, artillery :65,  lMiss : 65, vtb : 60,  barge : 25, destr : 55,  sub : 25, cuirasse : 25, heliTrans :95, helico : 65, chass :0 , bomba : 0},
+			    secAmmo : {infantry : 75, bazooka : 75, tank : 6, tankM : 1 , neoTank : 1, recon : 30, dca : 6, aAir : 35, artillery :25,  lMiss : 35, vtb : 20,  barge : 0, destr : 0,  sub : 0, cuirasse : 0, heliTrans :95, helico : 65, chass :0 , bomba : 0}
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 1, 'mer' : 1, 'lac' : 1}
+		},
+		Chass: {
+			cout : 20000,
+			vie : 10,
+			munition :{primAmmo: 9, secAmmo : 0},
+			essence : 99,
+			deplacement : 9,
+			porteeTir : {min : 0, max : 1},
+			vue : 2,
+			attaque : {
+			   primAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :100, helico : 100, chass :55 , bomba : 100},
+			    secAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :100, helico : 100, chass :55 , bomba : 100}
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 1, 'mer' : 1, 'lac' : 1}
+		},
+		Bomba: {
+			cout : 22000,
+			vie : 10,
+			munition :{primAmmo: 9, secAmmo : 0},
+			essence : 99,
+			deplacement : 7,
+			porteeTir : {min : 0, max : 1},
+			vue : 2,
+			attaque : {
+			   primAmmo : {infantry : 110, bazooka : 110, tank : 105, tankM : 95 , neoTank : 90, recon : 105, dca : 95, aAir : 105, artillery :105,  lMiss : 105, vtb : 105,  barge : 95, destr : 85,  sub : 95, cuirasse : 75,heliTrans :0, helico : 0, chass :0 , bomba : 0},
+			    secAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :100, helico : 100, chass :55 , bomba : 100}
+			},
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 1, 'mer' : 1, 'lac' : 1}
+		},
+		
     }
 }
-
-unites['bateau'] = new Array();
-unites['bateau']['vie'] = 10;
-unites['bateau']['attaque'] = new Array();
-unites['bateau']['attaque']['infanterie'] = 80;
-unites['bateau']['attaque']['tank'] = 40;
-unites['bateau']['attaque']['bateau'] = 50;
-unites['bateau']['attaque']['helico'] = 30;
-unites['bateau']['munitions'] = 60;
-unites['bateau']['essence'] = 100;
-unites['bateau']['deplacement'] = 3;
-unites['bateau']['portee_tir'] = 1;
-unites['bateau']['vue'] = 1;
-
-
-unites['helico'] = new Array();
-unites['helico']['vie'] = 10;
-unites['helico']['attaque'] = new Array();
-unites['helico']['attaque']['infanterie'] = 85;
-unites['helico']['attaque']['tank'] = 45;
-unites['helico']['attaque']['bateau'] = 65;
-unites['helico']['attaque']['helico'] = 50;
-unites['helico']['munitions'] = 60;
-unites['helico']['essence'] = 140;
-unites['helico']['deplacement'] = 8;
-unites['helico']['portee_tir'] = 1;
-unites['helico']['vue'] = 4;
 
