@@ -127,12 +127,12 @@
 					else{sensA="b";}
 					
 					if(coord2[0] == coord3[0]){
-						elem.css('background','url(images/trace_layer/ligne_v.gif)');
+						elem.attr('class', 'traceSprite trace_ligne_v');
 					}
 					else if(coord2[1] == coord3[1]){
 						if(coord2[0]>coord3[0]){sensB="d";}
 						else{sensB="g";}
-						elem.css('background','url(images/trace_layer/virage_'+sensA+'_'+sensB+'.gif)');
+						elem.attr('class', 'traceSprite trace_virage_'+sensA+'_'+sensB);
 					}
 				}
 				else if(coord1[1] == coord2[1]){// y constant : horizontal
@@ -141,12 +141,12 @@
 					else{sensA="d";	}
 					
 					if(coord2[1] == coord3[1]){
-							elem.css('background','url(images/trace_layer/ligne_h.gif)');
+						elem.attr('class', 'traceSprite trace_ligne_h');
 					}
 					else if(coord2[0] == coord3[0]){
 						if(coord2[1]>coord3[1]){sensB="b";}
 						else{sensB="h";}
-						elem.css('background','url(images/trace_layer/virage_'+sensB+'_'+sensA+'.gif)');
+						elem.attr('class', 'traceSprite trace_virage_'+sensB+'_'+sensA);
 					}
 				}
 			}
@@ -159,39 +159,39 @@
 			inverse['g'] = 'd';
 			inverse['d'] = 'g';
 			if(sensB) {
-				lastElem.css('background','url(images/trace_layer/fleche_'+inverse[sensB]+'.gif)');
+				lastElem.attr('class', 'traceSprite trace_fleche_'+inverse[sensB]);
 			}
 			else if(sensA){
-				lastElem.css('background','url(images/trace_layer/fleche_'+sensA+'.gif)');
+				lastElem.attr('class', 'traceSprite trace_fleche_'+sensA);
 			}
 			else{// trajet d'une case...
 				origX = this.unit.x;
 				origY = this.unit.y;
 
 				if((destX == origX) && (destY > origY)){
-					lastElem.css('background','url(images/trace_layer/fleche_b.gif)');
+					lastElem.attr('class', 'traceSprite trace_fleche_b');
 				}
 				else if((destX == origX) && (destY < origY)){
-					lastElem.css('background','url(images/trace_layer/fleche_h.gif)');
+					lastElem.attr('class', 'traceSprite trace_fleche_h');
 				}
 				else if((destY == origY) && (destX > origX)){
-					lastElem.css('background','url(images/trace_layer/fleche_d.gif)');
+					lastElem.attr('class', 'traceSprite trace_fleche_d');
 				}
 				else if((destY == origY) && (destX < origX)){
-					lastElem.css('background','url(images/trace_layer/fleche_g.gif)');
+					lastElem.attr('class', 'traceSprite trace_fleche_g');
 				}
 			}
 
 		}		
 		//functions publiques
 		Deplacement.prototype.getPortee = function() {
-			$('#deplacement_layer td').css('background','');
+			$('#deplacement_layer td').attr('background','');//?
 			this.deplacementQuatreDirection(this.unit.x,this.unit.y,0,[this.unit.x+'_'+this.unit.y]);
 			portee[this.unit.x+'_'+this.unit.y] = [this.unit.x, this.unit.y];
 			this.afficherPorteeDeplacement();
 		}
 		Deplacement.prototype.findChemin = function(destX,destY) {
-			$('#trace_layer td').css('background', '');
+			$('#trace_layer td').attr('class', '');
 			var trajetPassantPar = this.trajetCommencantPar(cheminChoisi,route,destX+'_'+destY);
 			if( trajetPassantPar !== undefined ) {
 				var w = $.inArray(destX+'_'+destY, trajetPassantPar );
@@ -214,7 +214,8 @@
 			for(j=0;j<=cheminChoisi_length;j++)
 			{
 				if((unitsMap[cheminChoisi[j]] !== undefined &&$(units[unitsMap[cheminChoisi[j]]].elem).is(':hidden'))){
-					$('#trace_layer td').css('background', '');
+					$('#trace_layer td').attr('class','');	
+
 					this.positionAvantConfirme = [this.unit.x, this.unit.y];
 					this.unit.updatePosition(getXY(cheminChoisi[j-1]));
 					this.unit.updateEssence(j-1);
@@ -222,7 +223,7 @@
 					return false;
 				}
 				if((j == cheminChoisi_length)){
-					$('#trace_layer td').css('background', '');
+					$('#trace_layer td').attr('class','');	
 					this.positionAvantConfirme = [this.unit.x, this.unit.y];
 					this.unit.updatePosition(getXY(cheminChoisi[j-1]));
 					this.unit.updateEssence(j-1);
@@ -236,7 +237,7 @@
 					  { queue: true, duration: 60, complete : /*efface le tracé rouge*/
 						  (function(z){
 								return function() {
-									$('#trace_'+z).css('background', '');
+									$('#trace_'+z).attr('class', '');
 								}
 						  })(cheminChoisi[j])
 					  }

@@ -68,3 +68,40 @@
 .n_9{
 	background-position : -54px;
 }
+
+.traceSprite{
+	width:16px;
+	height:16px;
+	background:url(../images/trace_layer/sprite.gif);
+}
+.trace_virage_b_d{
+	background-position : 0px;
+}
+.trace_virage_h_d{
+	background-position : -16px;
+}
+.trace_virage_b_g{
+	background-position : -32px;
+}
+.trace_virage_h_g{
+	background-position : -48px;
+}
+.trace_ligne_h{
+	background-position : -64px;
+}
+.trace_ligne_v{
+	background-position : -80px;
+}
+.trace_fleche_b{
+	background-position : -96px;
+}
+.trace_fleche_d{
+	background-position : -112px;
+}
+.trace_fleche_h{
+	background-position : -128px;
+}
+.trace_fleche_g{
+	background-position : -144px;
+}
+
