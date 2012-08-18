@@ -44,6 +44,12 @@ function Unit(id, team, type, x, y, active, spec) {
 
 	
 	if ( typeof Unit.initialized == "undefined" ) {
+	
+		Unit.prototype.detruireUnite = function() {
+			$(this.elem).remove();
+			delete unitsMap[this.x+'_'+this.y];
+			delete units[this.id];
+		}
 		Unit.prototype.updatePosition = function(newCoord) {
 			// on supprime l'ancienne position
 			delete unitsMap[this.x+'_'+this.y];
@@ -64,10 +70,14 @@ function Unit(id, team, type, x, y, active, spec) {
 
 			}
 		}
- 		Unit.prototype.updateVie = function() {
-
+ 		Unit.prototype.updateAmmo = function(value) {
+			// a faire
+		}
+	
+ 		Unit.prototype.updateVie = function(value) {
+			this.spec.vie = this.spec.vie - value;
 			if(this.spec.vie<=0){
-				//mort
+				this.detruireUnite();
 			}
 			if(this.spec.vie<10 && !this.pictoVie){
 
@@ -97,14 +107,14 @@ var batsMap = new Array();
 
 $(document).ready(function(){
 	//def Teams :
-	teams[0] = new Team(0, 'red', 'Max');
-	teams[1] = new Team(1, 'blue', 'Jeanne');
+	teams[0] = new Team(0, 'blue', 'Max');
+	teams[1] = new Team(1, 'red', 'Jeanne');
 	//def Units
 						
-	units[0] = new Unit(0, teams[1], 'tank', 12, 10, true, $.extend(true, {}, BDD.Unites.Tank));
-	units[1] = new Unit(1, teams[1], 'tank', 7, 4, true, $.extend(true, {}, BDD.Unites.Tank));
-	units[2] = new Unit(2, teams[1], 'tank', 5, 4, true, $.extend(true, {}, BDD.Unites.Tank));
-	units[3] = new Unit(3, teams[1], 'infantry', 7, 6, true, $.extend(true, {}, BDD.Unites.Infantry));
+	units[0] = new Unit(0, teams[1], 'tank', 7, 4, true, $.extend(true, {}, BDD.Unites.Tank));
+	units[1] = new Unit(1, teams[1], 'infantry', 6, 5, true, $.extend(true, {}, BDD.Unites.Infantry));
+	units[2] = new Unit(2, teams[1], 'bazooka', 8, 5, true, $.extend(true, {}, BDD.Unites.Bazooka));
+	units[3] = new Unit(3, teams[0], 'infantry', 7, 5, true, $.extend(true, {}, BDD.Unites.Infantry));
 
 	for(j=0;j<units.length;j++)
 	{
