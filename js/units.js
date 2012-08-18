@@ -48,6 +48,8 @@ function Unit(id, team, type, x, y, active, spec) {
 		Unit.prototype.detruireUnite = function() {
 			$(this.elem).remove();
 			delete unitsMap[this.x+'_'+this.y];
+			var v = $.inArray(this.id, this.team.units);
+			this.team.units.splice(v,1);
 			delete units[this.id];
 		}
 		Unit.prototype.updatePosition = function(newCoord) {
@@ -75,15 +77,22 @@ function Unit(id, team, type, x, y, active, spec) {
 		}
 	
  		Unit.prototype.updateVie = function(value) {
+			var ancienne_valeur = this.spec.vie;
 			this.spec.vie = this.spec.vie - value;
-			if(this.spec.vie<=0){
+			if(this.spec.vie<=9){
 				this.detruireUnite();
 			}
-			if(this.spec.vie<10 && !this.pictoVie){
+			else if(this.spec.vie<100 && !this.pictoVie){
 
-				$(this.elem).append('<div class="petitsChiffres n_'+this.spec.vie+'"></div>');
+				$(this.elem).append('<div id="pictoVie_'+this.id+'" class="petitsChiffres n_'+Math.floor(this.spec.vie/10)+'"></div>');
 				this.pictoVie = true;
 			}
+			else if(this.spec.vie<100 && this.pictoVie){
+				$('#pictoVie_'+this.id).removeClass('n_'+Math.floor(ancienne_valeur/10)).addClass('n_'+Math.floor(this.spec.vie/10));
+				this.pictoVie = true;
+			}
+			console.log(this.team.color +' -> '+ this.spec.vie);
+
 		}
 		Unit.prototype.updateActive = function(newValue) {
 			this.active = newValue;
@@ -112,9 +121,11 @@ $(document).ready(function(){
 	//def Units
 						
 	units[0] = new Unit(0, teams[1], 'tank', 7, 4, true, $.extend(true, {}, BDD.Unites.Tank));
-	units[1] = new Unit(1, teams[1], 'infantry', 6, 5, true, $.extend(true, {}, BDD.Unites.Infantry));
+	units[1] = new Unit(1, teams[1], 'infantry', 5, 5, true, $.extend(true, {}, BDD.Unites.Infantry));
 	units[2] = new Unit(2, teams[1], 'bazooka', 8, 5, true, $.extend(true, {}, BDD.Unites.Bazooka));
 	units[3] = new Unit(3, teams[0], 'infantry', 7, 5, true, $.extend(true, {}, BDD.Unites.Infantry));
+	units[4] = new Unit(4, teams[0], 'tank', 5, 8, true, $.extend(true, {}, BDD.Unites.Tank));
+	units[5] = new Unit(5, teams[0], 'tank', 7, 2, true, $.extend(true, {}, BDD.Unites.Tank));
 
 	for(j=0;j<units.length;j++)
 	{
