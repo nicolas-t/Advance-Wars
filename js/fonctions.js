@@ -1,6 +1,6 @@
 ﻿var maxX = 15;
 var maxY = 10;
-var myTeam = 1;
+var myTeam = 0;
 
 function getXY(s){
 	l=s.split('_').reverse();
