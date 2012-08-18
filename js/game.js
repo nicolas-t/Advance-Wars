@@ -1,5 +1,4 @@
-﻿// fucking messy
-// fichier à ranger ... vraiment
+﻿// fichier à ranger ... vraiment
 
 function Game(map, team) {
 	this.map = map;
@@ -17,72 +16,46 @@ function Game(map, team) {
 	
 
 	
-	$('#over_layer td').on('mouseenter',function(){
+	$('#over_layer td')
+	.on('mouseenter',function(){
 		that.caseSurvolee = getXY($(this).attr('id'));
 		that.placementCurseur(this);
 		
 		if(that.choixCible){
 			that.choixCurseur(this);
-
 		}
 		if(that.choixChemin){
 			deplacement.findChemin(that.caseSurvolee[0],that.caseSurvolee[1]);
-			return false;// ?
 		}
-	});
-	$('#over_layer td').on('click',function(){
-		// code en vrac... rangement prévu.... plus tard...
-		
-		if(that.isUnit()){
-			// c'est une unité;
-			if(that.choixCible && !that.isAllie()){
+	})
+	.on('click',function(){		
+		if(that.choixChemin){
+			if(deplacement.pointValide(that.caseSurvolee[0],that.caseSurvolee[1]))
+			{
+				deplacement.deplacementVisuel();
+				that.choixChemin = false;
+			}
+		}
+		else if(that.choixCible){
+			if(tir.isCible(caseSurvolee))
+			{
 				tir.faireFeu(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]]);
+				that.choixCible = false;
 			}
-			else if(!that.isAllie() && !that.isVisible()){
-				//ca c'est pareil que plus bas
-				if(units[that.selectedUnitID].spec.c_avancement[that.map[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]])
-				{
-					if(deplacement.pointValide(that.caseSurvolee[0],that.caseSurvolee[1])){
-						deplacement.deplacementVisuel();
-						that.choixChemin = false;
-					}
-				}
-			}
-			else{
-				if($('#menuBox').is(':hidden')){
-					that.selectedUnitID = unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]];
-					
-					if(units[that.selectedUnitID].active && units[that.selectedUnitID].team.id == that.team){
-						deplacement = new Deplacement(units[that.selectedUnitID]);
-						$('#menuBox').css('display', 'block');
-						deplacement.getPortee();
-						that.choixChemin = true;
-					}
-				}
-			}
-		}
-		else if(that.isBat()){
-			// c'est un batiment
 		}
 		else{
-			// c'est la map
-			if(that.choixChemin)
+			if(that.isActive() && that.isAllie() && $('#menuBox').is(':hidden'))
 			{
-				// c'est pareil que ça !
-				if(units[that.selectedUnitID].spec.c_avancement[that.map[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]])
-				{
-					if(deplacement.pointValide(that.caseSurvolee[0],that.caseSurvolee[1])){
-						deplacement.deplacementVisuel();
-						that.choixChemin = false;
-					}
-				}
+				$('#menuBox').css('display', 'block');
+				
+				that.selectedUnitID = unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]];
+				deplacement = new Deplacement(units[that.selectedUnitID]);
+				deplacement.getPortee();
+				that.choixChemin = true;
 			}
 		}
 	});
-
-	$('#jourBox	#nouveauJourRouge').click(function(){
-		teams[1].nouveauJour();
-	});
+	
 	$('#jourBox	#nouveauJourBleu').click(function(){
 		teams[0].nouveauJour();
 	});
@@ -158,9 +131,7 @@ function Game(map, team) {
 				return false;
 			}
 		}
-		Game.prototype.isVisible = function() {
-			return $(units[unitsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]]].elem).is(':visible');
-		}
+
 		Game.prototype.isUnit = function() {
 			if(unitsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]] !== undefined){
 				return true;
@@ -168,6 +139,9 @@ function Game(map, team) {
 			else{
 				return false;
 			}
+		}
+		Game.prototype.isActive = function() {
+			return units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].active;
 		}
 		Game.prototype.isBat = function() {
 			if(batsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]] !== undefined){
