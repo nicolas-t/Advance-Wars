@@ -29,7 +29,7 @@ var BDD = {
     Unites: {
 		Infantry: {
 			cout : 1000,
-			vie : 10,
+			vie : 100,
 			munition : {primAmmo : 'inf', secAmmo : 0},
 			essence : 99,
 			deplacement : 3,
@@ -43,7 +43,7 @@ var BDD = {
 		},
 		Bazooka: {
 			cout : 3000,
-			vie : 10,
+			vie : 100,
 			munition : {primAmmo: 3, secAmmo : 'inf' },
 			essence : 99,
 			deplacement : 2,
@@ -57,7 +57,7 @@ var BDD = {
 		},
 		Tank: {
 			cout : 7000,
-			vie : 10,
+			vie : 100,
 			munition : {primAmmo: 9, secAmmo : 'inf'},
 			essence : 70,
 			deplacement : 6,
@@ -71,7 +71,7 @@ var BDD = {
 		},
 		TankM: {
 			cout : 16000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo: 8, secAmmo : 'inf' },
 			essence : 50,
 			deplacement : 5,
@@ -85,7 +85,7 @@ var BDD = {
 		},
 		NeoTank: {
 			cout : 22000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo: 9, secAmmo : 'inf' },
 			essence : 99,
 			deplacement : 6,
@@ -99,7 +99,7 @@ var BDD = {
 		},
 		Recon: {
 			cout : 4000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo: 'inf', secAmmo : 0},
 			essence : 80,
 			deplacement : 8,
@@ -113,7 +113,7 @@ var BDD = {
 		},
 		Dca: {
 			cout : 8000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo: 9, secAmmo : 0},
 			essence : 60,
 			deplacement : 6,
@@ -127,7 +127,7 @@ var BDD = {
 		},
 		AAir: {
 			cout : 12000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo:6, secAmmo :0},
 			essence : 50,
 			deplacement : 4,
@@ -141,7 +141,7 @@ var BDD = {
 		},
 		Artillery: {
 			cout : 6000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo: 9, secAmmo : 0},
 			essence : 50,
 			deplacement : 5,
@@ -155,7 +155,7 @@ var BDD = {
 		},
 		LMiss: {
 			cout : 15000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo: 6, secAmmo : 0},
 			essence : 50,
 			deplacement : 5,
@@ -169,7 +169,7 @@ var BDD = {
 		},
 		Vtb: {
 			cout : 5000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo: 0, secAmmo : 0},
 			essence : 70,
 			deplacement : 6,
@@ -183,7 +183,7 @@ var BDD = {
 		},
 		Barge: {
 			cout : 12000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo: 0, secAmmo : 0},
 			essence : 99,
 			deplacement : 6,
@@ -197,7 +197,7 @@ var BDD = {
 		},
 		Destr: {
 			cout : 18000,
-			vie : 10,
+			vie : 100,
 			munition : {primAmmo: 9, secAmmo : 0},
 			essence : 99,
 			deplacement : 6,
@@ -211,7 +211,7 @@ var BDD = {
 		},
 		Sub: {
 			cout : 22000,
-			vie : 10,
+			vie : 100,
 			munition : {primAmmo: 6, secAmmo : 0},
 			essence : 60,
 			deplacement : 5,
@@ -225,7 +225,7 @@ var BDD = {
 		},
 		Cuirasse: {
 			cout : 28000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo: 9, secAmmo : 0},
 			essence : 99,
 			deplacement : 5,
@@ -239,7 +239,7 @@ var BDD = {
 		},
 		HeliTrans: {
 			cout : 5000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo: 0, secAmmo : 0},
 			essence : 50,
 			deplacement : 6,
@@ -253,7 +253,7 @@ var BDD = {
 		},
 		Helico: {
 			cout : 9000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo: 6, secAmmo : 'inf'},
 			essence : 99,
 			deplacement : 6,
@@ -267,7 +267,7 @@ var BDD = {
 		},
 		Chass: {
 			cout : 20000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo: 9, secAmmo : 0},
 			essence : 99,
 			deplacement : 9,
@@ -281,7 +281,7 @@ var BDD = {
 		},
 		Bomba: {
 			cout : 22000,
-			vie : 10,
+			vie : 100,
 			munition :{primAmmo: 9, secAmmo : 0},
 			essence : 99,
 			deplacement : 7,
