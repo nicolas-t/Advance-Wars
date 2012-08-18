@@ -24,7 +24,7 @@
 			for(var i =0; i < this.portee.length; i++){
 				var v = unitsMap[this.portee[i]];
 				if((v !== undefined) && (units[v].team.id != this.unit.team.id ) ){
-					this.cibles.push(this.portee[i][i]);
+					this.cibles.push(this.portee[i]);
 					this.degats[this.cases['max'][i]] = this.calculerDegats(this.unit, units[v]);
 
 					$('#deplacement_'+this.portee[i]).css('background','blue');
@@ -97,7 +97,7 @@
 			$('#wait').trigger('click');
 			$('#cursor').attr('class', 'cursorSelect');
 		}
-		Tir.prototype.isCible = function() {
+		Tir.prototype.isCible = function(caseSurvolee) {
 			if($.inArray(caseSurvolee[0]+'_'+caseSurvolee[1], this.cibles)>=0){
 				return true;
 			}

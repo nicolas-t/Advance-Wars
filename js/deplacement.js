@@ -87,7 +87,7 @@
 		}
 		Deplacement.prototype.pointValide = function(x,y) {
 			// case dans le chemin, et arpentable par l'unité
-			if($.inArray(x+'_'+y , cheminChoisi)>=0 && units[that.selectedUnitID].spec.c_avancement[that.map[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]]){
+			if($.inArray(x+'_'+y , cheminChoisi)>=0 && units[game.selectedUnitID].spec.c_avancement[game.map[game.caseSurvolee[0]+'_'+game.caseSurvolee[1]]]){
 				return true;
 			}
 			else{

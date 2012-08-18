@@ -37,14 +37,14 @@ function Game(map, team) {
 			}
 		}
 		else if(that.choixCible){
-			if(tir.isCible(caseSurvolee))
+			if(tir.isCible(that.caseSurvolee))
 			{
 				tir.faireFeu(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]]);
 				that.choixCible = false;
 			}
 		}
 		else{
-			if(that.isActive() && that.isAllie() && $('#menuBox').is(':hidden'))
+			if(that.isUnit() && that.isAllie() && that.isActive() && $('#menuBox').is(':hidden'))
 			{
 				$('#menuBox').css('display', 'block');
 				
