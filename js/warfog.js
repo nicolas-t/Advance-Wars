@@ -26,13 +26,17 @@
 			}
 			game.context.putImageData(imgd, 16*coord[0], 16*coord[1]);
 		}
-		Warfog.prototype.adversairesVisibles = function() {
+		Warfog.prototype.getAdversairesVisibles = function() {
 			for(var i=0; i < teams.length; i++){
-				if(i != this.team.id){
 					for(var j=0; j < teams[i].units.length; j++){
-						console.log(teams[i].units[j]);
+						if(($.inArray(units[teams[i].units[j]].x+'_'+units[teams[i].units[j]].y, this.vue) >= 0) || i == this.team.id){
+							$(units[teams[i].units[j]].elem).css('display', 'block');
+						}
+						else{
+							$(units[teams[i].units[j]].elem).css('display', 'none');
+						}					
 					}
-				}
+				
 			}
 		}
 		Warfog.prototype.recalcul = function() {
@@ -41,9 +45,10 @@
 		}
 		Warfog.prototype.afficherVue = function() {
 			this.getVue();
+			this.getAdversairesVisibles();
 			for(var i=0; i < this.vue.length; i++){
 				if(unitsMap[this.vue[i]] !== undefined){
-					$(units[unitsMap[this.vue[i]]].elem).css('display', 'block');
+					//$(units[unitsMap[this.vue[i]]].elem).css('display', 'block');
 				}
 				this.debrouille(getXY(this.vue[i]));
 			}
