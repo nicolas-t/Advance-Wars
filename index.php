@@ -48,7 +48,7 @@
 					
 				}
 			?>
-		<img id="canvasSource" src="maps/hip.gif" style="display:none;position:absolute;" />
+		<img id="canvasSource" src="maps/hip.gif" style="position:absolute;" />
 		<canvas id="canvasMap" width="256" height="176" style="position:absolute;">Votre navigateur ne supporte pas les Canvas.</canvas>
 		<table id="fog_layer" style="position:absolute;opacity:0.0;background:#22489d; " border="0" cellspacing="0" cellpadding="0">
 			<?php echo $fog_layer; ?>
