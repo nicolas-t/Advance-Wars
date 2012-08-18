@@ -5,6 +5,7 @@
 	this.cases['min']=[];
 	this.portee = [];
 	this.cibles = [];
+	this.degats = [];
 	$('.cible').removeClass('cible');
 
 	if ( typeof Tir.initialized == "undefined" ) {
@@ -24,6 +25,8 @@
 				var v = unitsMap[this.portee[i]];
 				if((v !== undefined) && (units[v].team.id != this.unit.team.id ) ){
 					this.cibles.push(this.portee[i][i]);
+					this.degats[this.cases['max'][i]] = this.calculerDegats(units[v]);
+
 					$('#deplacement_'+this.portee[i]).css('background','blue');
 					$('#over_'+this.portee[i]).addClass('cible');
 				}
@@ -36,6 +39,7 @@
 			}
 			this.porteeQuatresDirections(newX, newY, k+1, lim, arr);
 		}
+
 		Tir.prototype.porteeQuatresDirections = function(x, y, k, lim, arr) {
 			if(k<lim)
 			{
@@ -58,6 +62,35 @@
 
 				}
 			}
+		}
+		Tir.prototype.calculerDegats = function(adversaire) {
+
+			if(this.unit.spec.munition.primAmmo>0 || this.unit.spec.munition.primAmmo == 'inf'){
+				var i = this.unit.spec.attaque.primAmmo[adversaire.type];
+			}
+			else if(this.unit.spec.munition.secAmmo>0 || this.unit.spec.munition.secAmmo == 'inf'){
+				var i = this.unit.spec.attaque.secAmmo[adversaire.type];
+			}
+			else{
+				// plus de munition
+				var i = 0;
+			}
+			
+			var b = 100;
+			var d = 100;
+			var a = this.unit.spec.vie;
+			var h = 10 - adversaire.spec.vie;
+			var r = decors[map['hip'][adversaire.x+'_'+adversaire.y]]['c_defense'];
+			var c = (i * b / d) * a * 0.1;
+			var d = c - (r * ((c * 0.1) - (c * 0.1 * h)));
+			return d;
+
+		}
+		Tir.prototype.faireFeu = function(adversaire) {
+			adversaire.updateVie(Math.round(this.degats[adversaire.x+'_'+adversaire.y] / 10));
+			this.unit.updateAmmo();
+			$('#wait').trigger('click');
+			$('#cursor').attr('class', 'cursorSelect');
 		}
 		Tir.initialized = true;
 	}
