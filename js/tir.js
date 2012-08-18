@@ -25,7 +25,7 @@
 				var v = unitsMap[this.portee[i]];
 				if((v !== undefined) && (units[v].team.id != this.unit.team.id ) ){
 					this.cibles.push(this.portee[i][i]);
-					this.degats[this.cases['max'][i]] = this.calculerDegats(units[v]);
+					this.degats[this.cases['max'][i]] = this.calculerDegats(this.unit, units[v]);
 
 					$('#deplacement_'+this.portee[i]).css('background','blue');
 					$('#over_'+this.portee[i]).addClass('cible');
@@ -63,13 +63,13 @@
 				}
 			}
 		}
-		Tir.prototype.calculerDegats = function(adversaire) {
+		Tir.prototype.calculerDegats = function(attaquant, defend) {
 
-			if(this.unit.spec.munition.primAmmo>0 || this.unit.spec.munition.primAmmo == 'inf'){
-				var i = this.unit.spec.attaque.primAmmo[adversaire.type];
+			if(attaquant.spec.munition.primAmmo>0 || attaquant.spec.munition.primAmmo == 'inf'){
+				var i = this.unit.spec.attaque.primAmmo[defend.type];
 			}
-			else if(this.unit.spec.munition.secAmmo>0 || this.unit.spec.munition.secAmmo == 'inf'){
-				var i = this.unit.spec.attaque.secAmmo[adversaire.type];
+			else if(this.unit.spec.munition.secAmmo>0 || attaquant.spec.munition.secAmmo == 'inf'){
+				var i = attaquant.spec.attaque.secAmmo[defend.type];
 			}
 			else{
 				// plus de munition
@@ -78,17 +78,22 @@
 			
 			var b = 100;
 			var d = 100;
-			var a = this.unit.spec.vie;
-			var h = 10 - adversaire.spec.vie;
-			var r = decors[map['hip'][adversaire.x+'_'+adversaire.y]]['c_defense'];
+			var a = Math.floor(attaquant.spec.vie/10);
+			var h = 10 - Math.floor(defend.spec.vie/10);
+			var r = decors[map['hip'][defend.x+'_'+defend.y]]['c_defense'];
 			var c = (i * b / d) * a * 0.1;
 			var d = c - (r * ((c * 0.1) - (c * 0.1 * h)));
+			if(d<0){d=0;}
 			return d;
 
 		}
 		Tir.prototype.faireFeu = function(adversaire) {
-			adversaire.updateVie(Math.round(this.degats[adversaire.x+'_'+adversaire.y] / 10));
+			// l'attaquant attaque
+			adversaire.updateVie(this.degats[adversaire.x+'_'+adversaire.y]);
 			this.unit.updateAmmo();
+			// le défenseur replique
+			this.unit.updateVie(this.calculerDegats(adversaire, this.unit));
+			adversaire.updateAmmo();
 			$('#wait').trigger('click');
 			$('#cursor').attr('class', 'cursorSelect');
 		}
