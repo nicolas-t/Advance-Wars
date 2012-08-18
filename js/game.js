@@ -23,6 +23,7 @@ function Game(map, team) {
 		
 		if(that.choixCible){
 			that.choixCurseur(this);
+
 		}
 		if(that.choixChemin){
 			deplacement.findChemin(that.caseSurvolee[0],that.caseSurvolee[1]);
@@ -35,7 +36,7 @@ function Game(map, team) {
 		if(that.isUnit()){
 			// c'est une unité;
 			if(that.choixCible && !that.isAllie()){
-				console.log('a l\'attaque');
+				tir.faireFeu(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]]);
 			}
 			else if(!that.isAllie() && !that.isVisible()){
 				//ca c'est pareil que plus bas
@@ -80,10 +81,10 @@ function Game(map, team) {
 	});
 
 	$('#jourBox	#nouveauJourRouge').click(function(){
-		teams[0].nouveauJour();
+		teams[1].nouveauJour();
 	});
 	$('#jourBox	#nouveauJourBleu').click(function(){
-		teams[1].nouveauJour();
+		teams[0].nouveauJour();
 	});
 	
 	//MENU 
@@ -91,7 +92,6 @@ function Game(map, team) {
 		$('#deplacement_layer td').css('background','');
 		$('#menuBox').css('display', 'none');
 		deplacement.confirme();
-		warfog.recalcul();
 		that.choixCible = false;
 		that.choixChemin = false;
 		warfog.recalcul();
@@ -144,6 +144,7 @@ function Game(map, team) {
 		Game.prototype.choixCurseur = function(e) {
 			if($(e).hasClass('cible')){
 				$('#cursor').attr('class', 'cursorFire');
+				$('#degatsBox').html('<img src="images/pictos/degats.gif" /> Dégâts : '+tir.degats[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]+'%');
 			}
 			else{
 				$('#cursor').attr('class', 'cursorSelect');
