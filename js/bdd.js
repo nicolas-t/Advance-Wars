@@ -30,7 +30,7 @@ var BDD = {
 		Infantry: {
 			cout : 1000,
 			vie : 10,
-			munition : {primAmmo : '', secAmmo : 0},
+			munition : {primAmmo : 'inf', secAmmo : 0},
 			essence : 99,
 			deplacement : 3,
 			porteeTir : {min : 0, max : 1},
@@ -44,7 +44,7 @@ var BDD = {
 		Bazooka: {
 			cout : 3000,
 			vie : 10,
-			munition : {primAmmo: 3, secAmmo :'' },
+			munition : {primAmmo: 3, secAmmo : 'inf' },
 			essence : 99,
 			deplacement : 2,
 			porteeTir : {min : 0, max : 1},
@@ -58,7 +58,7 @@ var BDD = {
 		Tank: {
 			cout : 7000,
 			vie : 10,
-			munition : {primAmmo: 9, secAmmo : ''},
+			munition : {primAmmo: 9, secAmmo : 'inf'},
 			essence : 70,
 			deplacement : 6,
 			porteeTir : {min : 0, max : 1},
@@ -72,7 +72,7 @@ var BDD = {
 		TankM: {
 			cout : 16000,
 			vie : 10,
-			munition :{primAmmo: 8, secAmmo :'' },
+			munition :{primAmmo: 8, secAmmo : 'inf' },
 			essence : 50,
 			deplacement : 5,
 			porteeTir : {min : 0, max : 1},
@@ -86,7 +86,7 @@ var BDD = {
 		NeoTank: {
 			cout : 22000,
 			vie : 10,
-			munition :{primAmmo: 9, secAmmo :'' },
+			munition :{primAmmo: 9, secAmmo : 'inf' },
 			essence : 99,
 			deplacement : 6,
 			porteeTir : {min : 0, max : 1},
@@ -100,7 +100,7 @@ var BDD = {
 		Recon: {
 			cout : 4000,
 			vie : 10,
-			munition :{primAmmo: '', secAmmo : 0},
+			munition :{primAmmo: 'inf', secAmmo : 0},
 			essence : 80,
 			deplacement : 8,
 			porteeTir : {min : 0, max : 1},
@@ -254,7 +254,7 @@ var BDD = {
 		Helico: {
 			cout : 9000,
 			vie : 10,
-			munition :{primAmmo: 6, secAmmo : ''},
+			munition :{primAmmo: 6, secAmmo : 'inf'},
 			essence : 99,
 			deplacement : 6,
 			porteeTir : {min : 0, max : 1},
