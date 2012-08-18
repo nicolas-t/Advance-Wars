@@ -51,8 +51,8 @@ function Game(map, team) {
 			else{
 				if($('#menuBox').is(':hidden')){
 					that.selectedUnitID = unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]];
-					if(units[that.selectedUnitID].active){
-						that.team = units[that.selectedUnitID].team.id;
+					
+					if(units[that.selectedUnitID].active && units[that.selectedUnitID].team.id == that.team){
 						deplacement = new Deplacement(units[that.selectedUnitID]);
 						$('#menuBox').css('display', 'block');
 						deplacement.getPortee();
