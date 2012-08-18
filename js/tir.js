@@ -63,24 +63,24 @@
 				}
 			}
 		}
-		Tir.prototype.calculerDegats = function(attaquant, defend) {
+		Tir.prototype.calculerDegats = function(attaquant, defendant) {
 
 			if(attaquant.spec.munition.primAmmo>0 || attaquant.spec.munition.primAmmo == 'inf'){
-				var i = this.unit.spec.attaque.primAmmo[defend.type];
+				var i = this.unit.spec.attaque.primAmmo[defendant.type];
 			}
 			else if(this.unit.spec.munition.secAmmo>0 || attaquant.spec.munition.secAmmo == 'inf'){
-				var i = attaquant.spec.attaque.secAmmo[defend.type];
+				var i = attaquant.spec.attaque.secAmmo[defendant.type];
 			}
 			else{
 				// plus de munition
 				var i = 0;
 			}
 			
-			var b = 100;
-			var d = 100;
+			var b = 100; // CO attaquant bonus attaque
+			var d = 100; // CO defendant bonus defense
 			var a = Math.floor(attaquant.spec.vie/10);
-			var h = 10 - Math.floor(defend.spec.vie/10);
-			var r = decors[map['hip'][defend.x+'_'+defend.y]]['c_defense'];
+			var h = 10 - Math.floor(defendant.spec.vie/10);
+			var r = decors[map['hip'][defendant.x+'_'+defendant.y]]['c_defense'];
 			var c = (i * b / d) * a * 0.1;
 			var d = c - (r * ((c * 0.1) - (c * 0.1 * h)));
 			if(d<0){d=0;}
@@ -96,6 +96,14 @@
 			adversaire.updateAmmo();
 			$('#wait').trigger('click');
 			$('#cursor').attr('class', 'cursorSelect');
+		}
+		Tir.prototype.isCible = function() {
+			if($.inArray(caseSurvolee[0]+'_'+caseSurvolee[1], this.cibles)>=0){
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
 		Tir.initialized = true;
 	}
