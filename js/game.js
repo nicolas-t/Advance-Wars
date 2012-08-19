@@ -7,6 +7,7 @@ function Game(map, team) {
 	this.selectedUnitID = '';
 	this.choixChemin = false;
 	this.choixCible = false;
+	this.choixDepot = false;
 	var that = this;
 	
 	this.canvasSave = '';
@@ -32,8 +33,18 @@ function Game(map, team) {
 		if(that.choixChemin){
 			if(deplacement.pointValide(that.caseSurvolee[0],that.caseSurvolee[1]))
 			{
-				deplacement.deplacementVisuel();
-				that.choixChemin = false;
+				if(that.isUnit()){					
+					if(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport !== undefined && units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport[units[that.selectedUnitID].type] == true){
+						//array ?
+						transport = new Transport(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]],units[that.selectedUnitID]);
+						transport.ajouterVoyageur();
+						$('#menuBox #wait').trigger('click');
+					}
+				}
+				else{
+					deplacement.deplacementVisuel();
+					that.choixChemin = false;
+				}
 			}
 		}
 		else if(that.choixCible){
@@ -41,6 +52,13 @@ function Game(map, team) {
 			{
 				tir.faireFeu(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]]);
 				that.choixCible = false;
+			}
+		}
+		else if(that.choixDepot){
+			if(transport.isDepot(that.caseSurvolee))
+			{
+				transport.deposerVoyageur(that.caseSurvolee);
+				that.choixDepot = false;
 			}
 		}
 		else{
@@ -77,9 +95,13 @@ function Game(map, team) {
 		tir = new Tir(units[that.selectedUnitID]);
 		tir.getPortee();
 		tir.getCibles();
-		warfog.recalcul();
 
 	});
+	$('#menuBox #decharge').on('click',function(){
+		that.choixDepot = true;
+		transport.getDepot();
+	});
+
 	$('#menuBox #cancel').on('click',function(){
 		$('#menuBox').css('display', 'none');
 		deplacement.cancel();
