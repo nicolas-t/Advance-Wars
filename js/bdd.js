@@ -34,7 +34,7 @@ var BDD = {
 			essence : 99,
 			deplacement : 3,
 			porteeTir : {min : 0, max : 1},
-			vue : 2,
+			vue : 1,
 			attaque :{
 			   primAmmo : {infantry : 55, bazooka : 45, recon : 12, vtb : 14, tank : 5, tankM : 1 , neoTank : 1, dca : 5, artillery :15, aAir : 26, lMiss : 25,  cuirasse : 0, sub : 0, destr : 0, barge : 0, helico : 7, chass :0 , bomba : 0, heliTrans :30 },
 			    secAmmo : {infantry : 55, bazooka : 45, recon : 12, vtb : 14, tank : 5, tankM : 1 , neoTank : 1, dca : 5, artillery :15, aAir : 26, lMiss : 25,  cuirasse : 0, sub : 0, destr : 0, barge : 0, helico : 7, chass :0 , bomba : 0, heliTrans :30 }
@@ -179,7 +179,8 @@ var BDD = {
 			   primAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :0, helico : 0, chass :0 , bomba : 0},
 			    secAmmo : {infantry : 0, bazooka : 0, tank : 0, tankM : 0 , neoTank : 0, recon : 0, dca : 0, aAir : 0, artillery :0,  lMiss : 0, vtb : 0,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,heliTrans :0, helico : 0, chass :0 , bomba : 0}
 			},
-			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 0, 'mer' : 0, 'lac' : 0}
+			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 0, 'mer' : 0, 'lac' : 0},
+			canTransport : {infantry : true, bazooka : true}
 		},
 		Barge: {
 			cout : 12000,
