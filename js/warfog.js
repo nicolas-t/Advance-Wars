@@ -3,8 +3,6 @@
 	this.vue = [];
 	this.warfogTotal = '';
 	if (typeof Warfog.initialized == "undefined" ) {
-
-
 		Warfog.prototype.getAdversairesVisibles = function() {
 			for(var i=0; i < teams.length; i++){
 					for(var j=0; j < teams[i].units.length; j++){
@@ -19,8 +17,7 @@
 			}
 		}
 		Warfog.prototype.recalcul = function() {
-			console.log(game.warfogTotal);
-			game.context.putImageData(game.warfogTotal, 0, 0);
+			game.context.putImageData(this.warfogTotal, 0, 0);
 			this.afficherVue();
 		}
 		Warfog.prototype.afficherVue = function() {

@@ -13,7 +13,6 @@ function Game(map, team) {
 	this.canvas = document.getElementById("canvasMap");
 	this.image = document.getElementById("canvasSource");
 	this.context = this.canvas.getContext("2d");
-	this.warfogTotal = '';
 	this.warfog = '';
 	var that = this;
 
@@ -123,10 +122,9 @@ function Game(map, team) {
 				pix[i+2] = pix[i+2]-60; 	
 			}
 			this.context.putImageData(imgd, 0, 0);
-			this.warfogTotal = $.extend(true, {}, this.context.getImageData(0, 0, 256, 176));
 			this.warfog = new Warfog(this.team);
+			this.warfog.warfogTotal =  this.context.getImageData(0, 0, 256, 176);
 			this.warfog.afficherVue();
-			
 		}
 		Game.prototype.debrouilleWarfog = function(coord) {
 			var imgd = this.context.getImageData(16*coord[0], 16*coord[1], 16, 16);
@@ -140,7 +138,7 @@ function Game(map, team) {
 		}
 		
 		Game.prototype.saveCanvas = function() {
-			this.canvasSave = $.extend(true, {}, this.context.getImageData(0, 0, 256, 176));
+			this.canvasSave = this.context.getImageData(0, 0, 256, 176);
 		}
 		Game.prototype.loadLastCanvas = function() {
 			this.context.putImageData(this.canvasSave, 0, 0);
