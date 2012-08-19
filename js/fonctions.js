@@ -17,12 +17,10 @@ function getID(s){
 $(document).ready(function(){
 
 $('#canvasSource').load(function(){
-	game = new Game(map[nom_map], myTeam);
+	game = new Game(map[nom_map], teams[myTeam]);
 	game.afficherCarte();
 	
-	warfog = new Warfog(teams[myTeam]);
-	warfog.complet();
-	warfog.afficherVue();
+
 });
 
 });
