@@ -37,10 +37,32 @@ border-bottom:1px solid #00aeff;
 	z-index:10;
 	display:none;
 }
-
+.pictoVie, .pictoTransport, .pictoEssence{
+float:left;
+}
+.red{
+	-moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+.red div{
+	-moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+.red> .pictoVie, .pictoTransport, .pictoEssence{
+float:right;
+}
 #cursor, .units, td{
 	cursor: none;
 }
+
 .petitsChiffres{
 	width:5px;
 	height:8px;
