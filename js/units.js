@@ -31,6 +31,7 @@ function Unit(id, team, type, x, y, active, spec) {
 	
 	this.pictoEssence = false;
 	this.pictoVie = false;
+	this.pictoTransport = false;
 	
 	this.elem = ''; // DOM créé en bas.
 	
@@ -110,6 +111,17 @@ function Unit(id, team, type, x, y, active, spec) {
 			else{
 				$(this.elem).css({'background': 'url(images/units/'+this.team.color+'/'+this.type+'_down.gif)'});
 				this.active = false;
+			}
+		}
+		Unit.prototype.updateTransport = function(newValue) {
+			this.isTransporting = newValue;
+			if(this.pictoTransport && !newValue){
+				$('#pictoTransport_'+this.id).remove();
+				this.pictoTransport = false;
+			}
+			if(!this.pictoTransport && newValue){
+				$(this.elem).append('<img id="pictoTransport_'+this.id+'" src="images/pictos/transport.gif"/>');
+				this.pictoTransport = true;
 			}
 		}
 		Unit.initialized = true;

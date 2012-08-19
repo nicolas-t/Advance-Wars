@@ -7,9 +7,11 @@
 		Transport.prototype.ajouterVoyageur = function() {
 			if(!this.unit.isTransporting){
 				this.voyageurSave = $.extend(true, {}, this.voyageur);
-				this.unit.isTransporting = true;
+				this.unit.updateTransport(true);
+
 				this.voyageur.detruireUnite();
 				unitsMap[this.unit.x+'_'+this.unit.y] = this.unit.id;
+				
 			}
 			else{
 				// vehicule plein
@@ -29,7 +31,7 @@
 				this.unit.team.units.push(units[this.voyageur.id]);
 				this.voyageur.creerDOM();
 				$('#menuBox #wait').trigger('click');
-
+				this.unit.updateTransport(false);
 			}
 			else{
 				// vehicule vide
