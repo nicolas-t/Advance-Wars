@@ -2,6 +2,11 @@
 	width:16px;
 	height:16px;
 }
+a{
+color:#000;
+text-decoration:none;
+border-bottom:1px solid #00aeff;
+}
 .cursorFire{
 	width:30px;
 	height:29px;
