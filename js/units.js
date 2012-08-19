@@ -8,7 +8,7 @@ function Team(id, color, heros) {
 	if ( typeof Team.initialized == "undefined" ) {
 		Team.prototype.nouveauJour = function() {
 			for(i = 0; i<this.units.length; i++){
-				units[this.units[i]].updateActive(true);
+				this.units[i].updateActive(true);
 			}
 			this.jours++;
 		}
@@ -21,37 +21,44 @@ function Team(id, color, heros) {
 function Unit(id, team, type, x, y, active, spec) {
 	this.id = id;
 	this.team = team;
-	this.team.units.push(this.id);
+	this.team.units.push(this);
 	this.type = type;
 	this.x = x;
 	this.y = y;
 	this.active = active;
+	this.isTransporting = false;
 	this.spec = spec;
 	
 	this.pictoEssence = false;
 	this.pictoVie = false;
 	
-	this.elem = document.createElement("div");
+	this.elem = ''; // DOM créé en bas.
 	
-	//on créé l'element DOM dans l'objet
-	document.getElementById("body").appendChild(this.elem);
-	var position = $('#over_'+this.x+'_'+this.y).position();
-	$(this.elem).attr('id', 'unit_'+id).addClass('units').css({
-		'background': 'url(images/units/'+this.team.color+'/'+this.type+'.gif)',
-		'left': position.left,
-		'top' : position.top
-	});
-
-	
-	if ( typeof Unit.initialized == "undefined" ) {
-	
+	if ( typeof Unit.initialized == "undefined" ) 
+	{
+		Unit.prototype.creerDOM = function() {
+			this.elem = document.createElement("div");
+			document.getElementById("body").appendChild(this.elem);
+			var position = $('#over_'+this.x+'_'+this.y).position();
+			$(this.elem).attr('id', 'unit_'+id).addClass('units').css({
+				'background': 'url(images/units/'+this.team.color+'/'+this.type+'.gif)',
+				'left': position.left,
+				'top' : position.top
+			});
+		}
 		Unit.prototype.detruireUnite = function() {
 			$(this.elem).remove();
 			delete unitsMap[this.x+'_'+this.y];
-			var v = $.inArray(this.id, this.team.units);
+			for(j=0;j<this.team.units.length;j++)// pas super tout ça
+			{
+				if(this.team.units[j].id == this.id){
+					var v = j;
+				}
+			}
 			this.team.units.splice(v,1);
 			delete units[this.id];
 		}
+	
 		Unit.prototype.updatePosition = function(newCoord) {
 			// on supprime l'ancienne position
 			delete unitsMap[this.x+'_'+this.y];
@@ -79,7 +86,7 @@ function Unit(id, team, type, x, y, active, spec) {
  		Unit.prototype.updateVie = function(value) {
 			var ancienne_valeur = this.spec.vie;
 			this.spec.vie = this.spec.vie - value;
-			if(this.spec.vie<=9){
+			if(this.spec.vie<=10){
 				this.detruireUnite();
 			}
 			else if(this.spec.vie<100 && !this.pictoVie){
@@ -107,6 +114,7 @@ function Unit(id, team, type, x, y, active, spec) {
 		}
 		Unit.initialized = true;
 	}
+	this.creerDOM();
 }	
 
 var units = new Array();
@@ -123,9 +131,10 @@ $(document).ready(function(){
 	units[0] = new Unit(0, teams[1], 'tank', 7, 4, true, $.extend(true, {}, BDD.Unites.Tank));
 	units[1] = new Unit(1, teams[1], 'infantry', 5, 5, true, $.extend(true, {}, BDD.Unites.Infantry));
 	units[2] = new Unit(2, teams[1], 'bazooka', 8, 5, true, $.extend(true, {}, BDD.Unites.Bazooka));
-	units[3] = new Unit(3, teams[0], 'infantry', 7, 5, true, $.extend(true, {}, BDD.Unites.Infantry));
+	units[3] = new Unit(3, teams[0], 'infantry', 8, 7, true, $.extend(true, {}, BDD.Unites.Infantry));
 	units[4] = new Unit(4, teams[0], 'tank', 5, 8, true, $.extend(true, {}, BDD.Unites.Tank));
 	units[5] = new Unit(5, teams[0], 'tank', 7, 2, true, $.extend(true, {}, BDD.Unites.Tank));
+	units[6] = new Unit(6, teams[0], 'vtb', 7, 7, true, $.extend(true, {}, BDD.Unites.Vtb));
 
 	for(j=0;j<units.length;j++)
 	{

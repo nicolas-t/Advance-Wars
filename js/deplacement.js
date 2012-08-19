@@ -252,7 +252,7 @@
 			this.unit.updatePosition(this.positionAvantConfirme);
 			var position = $('#over_'+this.positionAvantConfirme[0]+'_'+this.positionAvantConfirme[1]).position();
 			$('#deplacement_layer td').css('background','');
-			$("#unit_"+this.unit.id).css({'top' : position.top,'left':position.left});
+			$(this.unit.elem).css({'top' : position.top,'left':position.left});
 		}
 		Deplacement.initialized = true;
 	}

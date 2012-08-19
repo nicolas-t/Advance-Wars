@@ -29,11 +29,11 @@
 		Warfog.prototype.getAdversairesVisibles = function() {
 			for(var i=0; i < teams.length; i++){
 					for(var j=0; j < teams[i].units.length; j++){
-						if(($.inArray(units[teams[i].units[j]].x+'_'+units[teams[i].units[j]].y, this.vue) >= 0) || i == this.team.id){
-							$(units[teams[i].units[j]].elem).css('display', 'block');
+						if(($.inArray(teams[i].units[j].x+'_'+teams[i].units[j].y, this.vue) >= 0) || i == this.team.id){
+							$(teams[i].units[j].elem).css('display', 'block');
 						}
 						else{
-							$(units[teams[i].units[j]].elem).css('display', 'none');
+							$(teams[i].units[j].elem).css('display', 'none');
 						}					
 					}
 				
@@ -47,13 +47,10 @@
 			this.getVue();
 			this.getAdversairesVisibles();
 			for(var i=0; i < this.vue.length; i++){
-				if(unitsMap[this.vue[i]] !== undefined){
-					//$(units[unitsMap[this.vue[i]]].elem).css('display', 'block');
-				}
 				this.debrouille(getXY(this.vue[i]));
 			}
 		}	
-		Warfog.prototype.calculPorteeVue = function(oldX, oldY, newX, newY, k, lim) {
+		Warfog.prototype.calculPorteeVue = function(newX, newY, k, lim) {
 			if((map['hip'][newX+'_'+newY] != 'foret') || ((map['hip'][newX+'_'+newY] == 'foret') && (k==0) ) || ((units[unitsMap[newX+'_'+newY]] !== undefined) && (units[unitsMap[newX+'_'+newY]].team.id == this.team.id)))
 			{
 				if($.inArray(newX+'_'+newY, this.vue) == -1){
@@ -73,16 +70,16 @@
 				var ym = y - 1;
 
 				if(xm >= 0 ){
-					this.calculPorteeVue(x,y,xm,y,k,lim);
+					this.calculPorteeVue(xm,y,k,lim);
 				}
 				if(ym >= 0 ){
-					this.calculPorteeVue(x,y,x,ym,k,lim);
+					this.calculPorteeVue(x,ym,k,lim);
 				}
 				if(xp <= maxX ){
-					this.calculPorteeVue(x,y,xp,y,k,lim);
+					this.calculPorteeVue(xp,y,k,lim);
 				}
 				if(yp <= maxY ){
-					this.calculPorteeVue(x,y,x,yp,k,lim);
+					this.calculPorteeVue(x,yp,k,lim);
 				}
 			}
 		}
@@ -90,11 +87,15 @@
 			this.vue = [];
 			for(var i=0; i < this.team.units.length; i++){
 			
-				var x_y = units[this.team.units[i]].x+'_'+units[this.team.units[i]].y;
-				if(map['hip'][x_y] == 'montagne'){vue = 5;}
-				else {vue = units[this.team.units[i]].spec.vue;}
+				if($.inArray(this.team.units[i].x+'_'+this.team.units[i].y, this.vue) ==-1){
+						this.vue.push(this.team.units[i].x+'_'+this.team.units[i].y);
+				}
 				
-				this.vueQuatresDirections(units[this.team.units[i]].x, units[this.team.units[i]].y, 0, vue);
+				var x_y = this.team.units[i].x+'_'+this.team.units[i].y;
+				if(map['hip'][x_y] == 'montagne'){vue = 5;}
+				else {vue = this.team.units[i].spec.vue;}
+				
+				this.vueQuatresDirections(this.team.units[i].x, this.team.units[i].y, 0, vue);
 			}
 		}
 		Warfog.initialized = true;
