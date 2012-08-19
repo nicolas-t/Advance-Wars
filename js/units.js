@@ -41,7 +41,7 @@ function Unit(id, team, type, x, y, active, spec) {
 			this.elem = document.createElement("div");
 			document.getElementById("body").appendChild(this.elem);
 			var position = $('#over_'+this.x+'_'+this.y).position();
-			$(this.elem).attr('id', 'unit_'+id).addClass('units').css({
+			$(this.elem).attr('id', 'unit_'+id).addClass('units '+this.team.color+'').css({
 				'background': 'url(images/units/'+this.team.color+'/'+this.type+'.gif)',
 				'left': position.left,
 				'top' : position.top
@@ -75,7 +75,7 @@ function Unit(id, team, type, x, y, active, spec) {
 				this.updateActive(false);
 			}
 			if(this.spec.essence<=10 && !this.pictoEssence){
-				$(this.elem).append('<img src="images/pictos/essence.gif"/>');
+				$(this.elem).append('<img class="pictoEssence" src="images/pictos/essence.gif"/>');
 				this.pictoEssence = true;
 
 			}
@@ -91,8 +91,7 @@ function Unit(id, team, type, x, y, active, spec) {
 				this.detruireUnite();
 			}
 			else if(this.spec.vie<100 && !this.pictoVie){
-
-				$(this.elem).append('<div id="pictoVie_'+this.id+'" class="petitsChiffres n_'+Math.floor(this.spec.vie/10)+'"></div>');
+				$(this.elem).append('<div id="pictoVie_'+this.id+'" class="pictoVie petitsChiffres n_'+Math.floor(this.spec.vie/10)+'"></div>');
 				this.pictoVie = true;
 			}
 			else if(this.spec.vie<100 && this.pictoVie){
@@ -120,7 +119,7 @@ function Unit(id, team, type, x, y, active, spec) {
 				this.pictoTransport = false;
 			}
 			if(!this.pictoTransport && newValue){
-				$(this.elem).append('<img id="pictoTransport_'+this.id+'" src="images/pictos/transport.gif"/>');
+				$(this.elem).append('<img id="pictoTransport_'+this.id+'" class="pictoTransport" src="images/pictos/transport.gif"/>');
 				this.pictoTransport = true;
 			}
 		}
