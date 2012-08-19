@@ -8,13 +8,15 @@ function Game(map, team) {
 	this.choixChemin = false;
 	this.choixCible = false;
 	this.choixDepot = false;
-	var that = this;
 	
 	this.canvasSave = '';
 	this.canvas = document.getElementById("canvasMap");
 	this.image = document.getElementById("canvasSource");
 	this.context = this.canvas.getContext("2d");
-	
+	this.warfogTotal = '';
+	this.warfog = '';
+	var that = this;
+
 
 	$('#over_layer td')
 	.on('mouseenter',function(){
@@ -84,7 +86,7 @@ function Game(map, team) {
 		deplacement.confirme();
 		that.choixCible = false;
 		that.choixChemin = false;
-		warfog.recalcul();
+		that.warfog.recalcul();
 
 	});
 	$('#menuBox #attack').on('click',function(){
@@ -113,7 +115,30 @@ function Game(map, team) {
 	if ( typeof Game.initialized == "undefined" ) {
 		Game.prototype.afficherCarte = function() {
 			this.context.drawImage(this.image, 0, 0);
+			var imgd = this.context.getImageData(0, 0, 256, 176);
+			var pix = imgd.data;
+			for (var i = 0, n = pix.length; i < n; i += 4) {
+				pix[i ] = pix[i]-110; 
+				pix[i+1] = pix[i+1]-100; 	
+				pix[i+2] = pix[i+2]-60; 	
+			}
+			this.context.putImageData(imgd, 0, 0);
+			this.warfogTotal = $.extend(true, {}, this.context.getImageData(0, 0, 256, 176));
+			this.warfog = new Warfog(this.team);
+			this.warfog.afficherVue();
+			
 		}
+		Game.prototype.debrouilleWarfog = function(coord) {
+			var imgd = this.context.getImageData(16*coord[0], 16*coord[1], 16, 16);
+			var pix = imgd.data;
+			for (var i = 0, n = pix.length; i < n; i += 4) {
+				pix[i ] = pix[i]+110; 
+				pix[i+1] = pix[i+1]+100; 	
+				pix[i+2] = pix[i+2]+60; 	
+			}
+			this.context.putImageData(imgd, 16*coord[0], 16*coord[1]);
+		}
+		
 		Game.prototype.saveCanvas = function() {
 			this.canvasSave = $.extend(true, {}, this.context.getImageData(0, 0, 256, 176));
 		}
@@ -127,7 +152,6 @@ function Game(map, team) {
 				pix[i ] = pix[i]+40; 
 				pix[i+1] = pix[i+1]+60; 	
 				pix[i+2] = pix[i+2]+60; 	
-				pix[i+3] = 255; 	
 			}
 			this.context.putImageData(imgd, 16*x, 16*y);
 		}
@@ -145,7 +169,7 @@ function Game(map, team) {
 			}
 		}
 		Game.prototype.isAllie = function() {
-			if(units[unitsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]]].team.id == that.team){
+			if(units[unitsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]]].team.id == that.team.id){
 				return true;
 			}
 			else{
