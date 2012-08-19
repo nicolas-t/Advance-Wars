@@ -23,7 +23,7 @@
 		Tir.prototype.getCibles = function() {
 			for(var i =0; i < this.portee.length; i++){
 				var v = unitsMap[this.portee[i]];
-				if((v !== undefined) && (units[v].team.id != this.unit.team.id ) ){
+				if((v !== undefined) && (units[v].team.id != this.unit.team.id ) && ($(units[v].elem).is(':visible')) ){
 					this.cibles.push(this.portee[i]);
 					this.degats[this.cases['max'][i]] = this.calculerDegats(this.unit, units[v]);
 
