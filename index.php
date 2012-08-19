@@ -18,6 +18,7 @@
 	<script src="js/fonctions.js"></script>
 	<script src="js/game.js"></script>
 	<script src="js/warfog.js"></script>
+	<script src="js/transport.js"></script>
 	<script>
 	function tri_nombres(a,b){return a-b;}
 	</script>
@@ -66,13 +67,14 @@
 		<!--
 		<div id="debugInfo" style="overflow:auto;font-size:11px;position:absolute; top:200px;width:235px;padding:10px; height:50px; border:1px solid silver;">yo</div>
 		--->
-		<div id="menuBox" style="display:none;font-size:12px;position:absolute; left:260px;width:135px;padding:10px; height:50px; border:1px solid silver;">
+		<div id="menuBox" style="display:none;font-size:12px;position:absolute; left:260px;width:135px;padding:10px; height:60px; border:1px solid silver;">
+			<a href="#" id="charge">Charger</a> / <a href="#" id="decharge">Decharger</a><br />
 			<a href="#" id="attack">Attaquer</a><br />
 			<a href="#" id="wait">Attendre</a><br />
 			<a href="#" id="cancel">Annuler</a><br />
 		
 		</div>
-		<div id="jourBox" style="font-size:12px;position:absolute; left:260px;top:70px;width:135px;padding:10px; height:35px; border:1px solid silver;">
+		<div id="jourBox" style="font-size:12px;position:absolute; left:260px;top:90px;width:135px;padding:10px; height:15px; border:1px solid silver;">
 			<a href="#" id="nouveauJourBleu">Nouveau jour bleu</a><br />
 		</div>
 		<div id="degatsBox" style="font-size:12px;position:absolute; left:260px;top:135px;width:135px;padding:10px; height:20px; border:1px solid silver;">
