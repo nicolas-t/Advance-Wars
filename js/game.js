@@ -81,6 +81,7 @@ function Game(map, team) {
 	//MENU 
 	$('#menuBox #wait').on('click',function(){
 		$('#deplacement_layer td').css('background','');
+		$('#trace_layer td').attr('class','');	
 		$('#menuBox').css('display', 'none');
 		deplacement.confirme();
 		that.choixCible = false;
@@ -99,6 +100,7 @@ function Game(map, team) {
 	});
 	$('#menuBox #decharge').on('click',function(){
 		that.choixDepot = true;
+		that.choixChemin = false;
 		transport.getDepot();
 	});
 
@@ -117,9 +119,9 @@ function Game(map, team) {
 			var imgd = this.context.getImageData(0, 0, 256, 176);
 			var pix = imgd.data;
 			for (var i = 0, n = pix.length; i < n; i += 4) {
-				pix[i ] = pix[i]-110; 
-				pix[i+1] = pix[i+1]-100; 	
-				pix[i+2] = pix[i+2]-60; 	
+				pix[i ] = pix[i]-100; 
+				pix[i+1] = pix[i+1]-90; 	
+				pix[i+2] = pix[i+2]-50; 	
 			}
 			this.context.putImageData(imgd, 0, 0);
 			this.warfog = new Warfog(this.team);
@@ -130,9 +132,9 @@ function Game(map, team) {
 			var imgd = this.context.getImageData(16*coord[0], 16*coord[1], 16, 16);
 			var pix = imgd.data;
 			for (var i = 0, n = pix.length; i < n; i += 4) {
-				pix[i ] = pix[i]+110; 
-				pix[i+1] = pix[i+1]+100; 	
-				pix[i+2] = pix[i+2]+60; 	
+				pix[i ] = pix[i]+100; 
+				pix[i+1] = pix[i+1]+90; 	
+				pix[i+2] = pix[i+2]+50; 	
 			}
 			this.context.putImageData(imgd, 16*coord[0], 16*coord[1]);
 		}
