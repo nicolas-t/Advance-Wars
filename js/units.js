@@ -22,10 +22,14 @@ function Bat(id, team, type, x, y) {
 	this.id = id;
 	this.team = team;
 	this.team.bats.push(this);
+
 	this.type = type;
 	this.x = x;
 	this.y = y;
 	this.elem = '';
+	
+	batsMap[this.x+'_'+this.y] = this.id;
+
 	if ( typeof Bat.initialized == "undefined" ) {
 		Bat.prototype.creerDOM = function() {
 			this.elem = document.createElement("div");
@@ -47,6 +51,7 @@ function Unit(id, team, type, x, y, active, spec) {
 	this.id = id;
 	this.team = team;
 	this.team.units.push(this);
+
 	this.type = type;
 	this.x = x;
 	this.y = y;
@@ -59,7 +64,9 @@ function Unit(id, team, type, x, y, active, spec) {
 	this.pictoTransport = false;
 	
 	this.elem = ''; // DOM créé en bas.
-	
+		
+	unitsMap[this.x+'_'+this.y] = this.id;
+
 	if ( typeof Unit.initialized == "undefined" ) 
 	{
 		Unit.prototype.creerDOM = function() {
@@ -176,11 +183,5 @@ $(document).ready(function(){
 	//def Bats
 	bats[0] = new Bat(0, teams[0], 'qg', 1, 7);
 	bats[0] = new Bat(0, teams[0], 'usine', 2, 6);
-
-	
-	for(j=0;j<units.length;j++)
-	{
-		unitsMap[units[j].x+'_'+units[j].y] = j;
-	}
 
 });
