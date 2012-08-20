@@ -64,11 +64,11 @@
 			<?php echo $over_layer; ?>
 		</table>
 		<div id="cursor" class="cursorSelect"></div>
-		<!--
-		<div id="debugInfo" style="overflow:auto;font-size:11px;position:absolute; top:200px;width:235px;padding:10px; height:50px; border:1px solid silver;">yo</div>
-		--->
+		<div id="units_container"></div>
+		<div id="bats_container"></div>
+
 		<div id="menuBox" style="display:none;font-size:12px;position:absolute; left:260px;width:135px;padding:10px; height:60px; border:1px solid silver;">
-			<a href="#" id="charge">Charger</a> / <a href="#" id="decharge">Decharger</a><br />
+			<a href="#" id="decharge">Decharger</a><br />
 			<a href="#" id="attack">Attaquer</a><br />
 			<a href="#" id="wait">Attendre</a><br />
 			<a href="#" id="cancel">Annuler</a><br />
