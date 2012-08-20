@@ -37,10 +37,19 @@ border-bottom:1px solid #00aeff;
 	z-index:10;
 	display:none;
 }
+.bats{
+	width:19px;
+	height:31px;
+	margin-left:0px;
+	margin-top:-15px;
+	position:absolute;
+	z-index:9;
+	display:block;
+}
 .pictoVie, .pictoTransport, .pictoEssence{
-float:left;
+	float:left;
 }
-.red{
+#units_container .red{
 	-moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -48,7 +57,7 @@ float:left;
     filter: FlipH;
     -ms-filter: "FlipH";
 }
-.red div{
+#units_container .red div{
 	-moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -56,7 +65,7 @@ float:left;
     filter: FlipH;
     -ms-filter: "FlipH";
 }
-.red> .pictoVie, .pictoTransport, .pictoEssence{
+#units_container .red> .pictoVie, .pictoTransport, .pictoEssence{
 float:right;
 }
 #cursor, .units, td{

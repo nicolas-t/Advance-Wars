@@ -74,6 +74,13 @@
 				
 				this.vueQuatresDirections(this.team.units[i].x, this.team.units[i].y, 0, vue);
 			}
+			for(var i=0; i < this.team.bats.length; i++){
+			
+				if($.inArray(this.team.bats[i].x+'_'+this.team.bats[i].y, this.vue) ==-1){
+					this.vue.push(this.team.bats[i].x+'_'+this.team.bats[i].y);
+				}
+			}
+
 		}
 		Warfog.initialized = true;
 	}

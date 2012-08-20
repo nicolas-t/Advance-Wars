@@ -3,6 +3,7 @@ function Team(id, color, heros) {
 	this.id = id;
 	this.color = color;
 	this.heros = heros;
+	this.bats = [];
 	this.units = [];
 	this.jours = 0;
 	if ( typeof Team.initialized == "undefined" ) {
@@ -16,7 +17,31 @@ function Team(id, color, heros) {
 		Team.initialized = true;
 	}
 }
+// class Bat
+function Bat(id, team, type, x, y) {
+	this.id = id;
+	this.team = team;
+	this.team.bats.push(this);
+	this.type = type;
+	this.x = x;
+	this.y = y;
+	this.elem = '';
+	if ( typeof Bat.initialized == "undefined" ) {
+		Bat.prototype.creerDOM = function() {
+			this.elem = document.createElement("div");
+			document.getElementById("bats_container").appendChild(this.elem);
+			var position = $('#over_'+this.x+'_'+this.y).position();
+			$(this.elem).attr('id', 'bat_'+id).addClass('bats '+this.team.color+'').css({
+				'background': 'url(images/bats/'+this.team.color+'/'+this.type+'.png)',
+				'left': position.left,
+				'top' : position.top
+			});
+		}
+		Bat.initialized = true;
+	}
+	this.creerDOM();
 
+}
 // class Unit
 function Unit(id, team, type, x, y, active, spec) {
 	this.id = id;
@@ -39,7 +64,7 @@ function Unit(id, team, type, x, y, active, spec) {
 	{
 		Unit.prototype.creerDOM = function() {
 			this.elem = document.createElement("div");
-			document.getElementById("body").appendChild(this.elem);
+			document.getElementById("units_container").appendChild(this.elem);
 			var position = $('#over_'+this.x+'_'+this.y).position();
 			$(this.elem).attr('id', 'unit_'+id).addClass('units '+this.team.color+'').css({
 				'background': 'url(images/units/'+this.team.color+'/'+this.type+'.gif)',
@@ -130,6 +155,7 @@ function Unit(id, team, type, x, y, active, spec) {
 
 var units = new Array();
 var teams = new Array();
+var bats = new Array();
 var unitsMap = new Array();		
 var batsMap = new Array();		
 
@@ -137,8 +163,8 @@ $(document).ready(function(){
 	//def Teams :
 	teams[0] = new Team(0, 'blue', 'Max');
 	teams[1] = new Team(1, 'red', 'Jeanne');
-	//def Units
-						
+	
+	//def Units			
 	units[0] = new Unit(0, teams[1], 'tank', 7, 4, true, $.extend(true, {}, BDD.Unites.Tank));
 	units[1] = new Unit(1, teams[1], 'infantry', 5, 5, true, $.extend(true, {}, BDD.Unites.Infantry));
 	units[2] = new Unit(2, teams[1], 'bazooka', 8, 5, true, $.extend(true, {}, BDD.Unites.Bazooka));
@@ -147,6 +173,11 @@ $(document).ready(function(){
 	units[5] = new Unit(5, teams[0], 'tank', 7, 2, true, $.extend(true, {}, BDD.Unites.Tank));
 	units[6] = new Unit(6, teams[0], 'vtb', 7, 7, true, $.extend(true, {}, BDD.Unites.Vtb));
 
+	//def Bats
+	bats[0] = new Bat(0, teams[0], 'qg', 1, 7);
+	bats[0] = new Bat(0, teams[0], 'usine', 2, 6);
+
+	
 	for(j=0;j<units.length;j++)
 	{
 		unitsMap[units[j].x+'_'+units[j].y] = j;
