@@ -79,7 +79,8 @@
 		</div>
 		<div id="degatsBox" style="font-size:12px;position:absolute; left:260px;top:135px;width:135px;padding:10px; height:20px; border:1px solid silver;">
 		</div>
-		
+		<div id="shopBox" style="font-size:12px;position:absolute; left:0px;top:180px;width:235px;padding:10px; border:1px solid silver;">
+		</div>
     </body>
 </html>
 
