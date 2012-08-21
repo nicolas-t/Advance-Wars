@@ -79,7 +79,6 @@ function Controller(map, team) {
 					{
 						$('#shopBox').append('<img src="images/units/'+that.team.color+'/'+key.toLowerCase()+'.gif" /><a id="shop_'+key+'" href="#"> '+key+'</a> :<span> '+BDD.Unites[key].cout+'</span><br />');
 						$('#shop_'+key).on('click', { a: key }, function(event){
-
 							c = units.push(new Unit(that.team, event.data.a, bats[id].x, bats[id].y, false, $.extend(true, {}, BDD.Unites[event.data.a])));
 							$(units[c-1].elem).css('display','block');
 							$('#shopBox').html('');
