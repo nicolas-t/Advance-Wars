@@ -182,7 +182,6 @@ $(document).ready(function(){
 	units.push(new Unit( teams[0], 'infantry', 5, 6, true, $.extend(true, {}, BDD.Unites.Infantry)));
 
 	//def Bats
-	bats[0] = new Bat(0, teams[0], 'qg', 1, 7);
-	bats[1] = new Bat(1, teams[0], 'usine', 2, 6);
+	bats[0] = new Bat(0, teams[0], 'usine', 2, 6);
 
 });

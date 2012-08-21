@@ -27,22 +27,16 @@
 			<?php 
 			$maxY = 10;
 			$maxX = 15;
-			$fog_layer="";
-			$deplacement_layer = "";
-			$trace_layer = "";
-			$over_layer = "";
+			$deplacement_layer = $trace_layer = $over_layer = "";
 			for ($y=0; $y<=$maxY; $y++){
-				$fog_layer.= '<tr>';
 				$deplacement_layer.= '<tr>';
 				$trace_layer.= '<tr>';
 				$over_layer.= '<tr>';
 					for ($x=0; $x<=$maxX; $x++){
-						$fog_layer.= '<td id="fog_'.$x.'_'.$y.'"></td>';
 						$deplacement_layer.= '<td id="deplacement_'.$x.'_'.$y.'"></td>';
 						$trace_layer.= '<td id="trace_'.$x.'_'.$y.'"></td>';
 						$over_layer.= '<td id="over_'.$x.'_'.$y.'"></td>';
 					}
-					$fog_layer.= '</tr>';
 					$deplacement_layer.= '</tr>';
 					$trace_layer.= '</tr>';
 					$over_layer.= '</tr>';
@@ -51,9 +45,7 @@
 			?>
 		<img id="canvasSource" src="maps/hip.gif" style="position:absolute;top:-300px;" />
 		<canvas id="canvasMap" width="256" height="176" style="position:absolute;">Votre navigateur ne supporte pas les Canvas.</canvas>
-		<table id="fog_layer" style="position:absolute;opacity:0.0;background:#22489d; " border="0" cellspacing="0" cellpadding="0">
-			<?php echo $fog_layer; ?>
-		</table>
+
 		<table id="deplacement_layer" style="position:absolute;opacity:0.6;" border="0" cellspacing="0" cellpadding="0">
 			<?php echo $deplacement_layer; ?>
 		</table>
@@ -68,9 +60,9 @@
 		<div id="bats_container"></div>
 
 		<div id="menuBox" style="display:none;font-size:12px;position:absolute; left:260px;width:135px;padding:10px; height:60px; border:1px solid silver;">
-			<a href="#" id="decharge">Decharger</a><br />
-			<a href="#" id="attack">Attaquer</a><br />
-			<a href="#" id="wait">Attendre</a><br />
+			<img src="images/pictos/charger.gif" /> <a href="#" id="decharge">Decharger</a><br />
+			<img src="images/pictos/degats.gif" /> <a href="#" id="attack">Attaquer</a><br />
+			<img src="images/pictos/attendre.gif" /> <a href="#" id="wait">Attendre</a><br />
 			<a href="#" id="cancel">Annuler</a><br />
 		
 		</div>
