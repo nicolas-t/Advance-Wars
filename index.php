@@ -7,18 +7,18 @@
         <title>Advance Wars, le plus court chemin</title>
     </head>
 
-    <body id="body">
+    <body>
 	<!--<script src="http://code.jquery.com/jquery-1.8.0.js"></script> -->
 	<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 	<script src="js/bdd.js"></script>
 	<script src="maps/hip.js"></script>
-	<script src="js/units.js"></script>
-	<script src="js/deplacement.js"></script>
-	<script src="js/tir.js"></script>
 	<script src="js/fonctions.js"></script>
-	<script src="js/game.js"></script>
-	<script src="js/warfog.js"></script>
-	<script src="js/transport.js"></script>
+	<script src="js/units.class.js"></script>
+	<script src="js/deplacement.class.js"></script>
+	<script src="js/tir.class.js"></script>
+	<script src="js/controller.class.js"></script>
+	<script src="js/warfog.class.js"></script>
+	<script src="js/transport.class.js"></script>
 	<script>
 	function tri_nombres(a,b){return a-b;}
 	</script>

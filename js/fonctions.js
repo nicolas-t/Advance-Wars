@@ -13,6 +13,6 @@ function getID(s){
 	return g;
 }
 window.onload = function() {
-	game = new Game(map[nom_map], teams[myTeam]);
-	game.afficherCarte();
+	controller = new Controller(map[nom_map], teams[myTeam]);
+	controller.afficherCarte();
 }

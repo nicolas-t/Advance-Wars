@@ -17,14 +17,14 @@
 			}
 		}
 		Warfog.prototype.recalcul = function() {
-			game.context.putImageData(this.warfogTotal, 0, 0);
+			controller.context.putImageData(this.warfogTotal, 0, 0);
 			this.afficherVue();
 		}
 		Warfog.prototype.afficherVue = function() {
 			this.getVue();
 			this.getAdversairesVisibles();
 			for(var i=0; i < this.vue.length; i++){
-				game.debrouilleWarfog(getXY(this.vue[i]));
+				controller.debrouilleWarfog(getXY(this.vue[i]));
 			}
 		}	
 		Warfog.prototype.calculPorteeVue = function(newX, newY, k, lim) {

@@ -1,6 +1,6 @@
 ﻿// fichier à ranger ... vraiment
 
-function Game(map, team) {
+function Controller(map, team) {
 	this.map = map;
 	this.team = team;
 	this.caseSurvolee = [];
@@ -124,12 +124,12 @@ function Game(map, team) {
 		deplacement.cancel();
 		that.choixCible = false;
 		that.choixChemin = false;
-		game.loadLastCanvas();
+		controller.loadLastCanvas();
 
 	});
 
-	if ( typeof Game.initialized == "undefined" ) {
-		Game.prototype.afficherCarte = function() {
+	if ( typeof Controller.initialized == "undefined" ) {
+		Controller.prototype.afficherCarte = function() {
 			this.context.drawImage(this.image, 0, 0);
 			var imgd = this.context.getImageData(0, 0, 256, 176);
 			var pix = imgd.data;
@@ -143,7 +143,7 @@ function Game(map, team) {
 			this.warfog.warfogTotal =  this.context.getImageData(0, 0, 256, 176);
 			this.warfog.afficherVue();
 		}
-		Game.prototype.debrouilleWarfog = function(coord) {
+		Controller.prototype.debrouilleWarfog = function(coord) {
 			var imgd = this.context.getImageData(16*coord[0], 16*coord[1], 16, 16);
 			var pix = imgd.data;
 			for (var i = 0, n = pix.length; i < n; i += 4) {
@@ -154,13 +154,13 @@ function Game(map, team) {
 			this.context.putImageData(imgd, 16*coord[0], 16*coord[1]);
 		}
 		
-		Game.prototype.saveCanvas = function() {
+		Controller.prototype.saveCanvas = function() {
 			this.canvasSave = this.context.getImageData(0, 0, 256, 176);
 		}
-		Game.prototype.loadLastCanvas = function() {
+		Controller.prototype.loadLastCanvas = function() {
 			this.context.putImageData(this.canvasSave, 0, 0);
 		}
-		Game.prototype.porteeDeplacementVisu = function(x,y) {
+		Controller.prototype.porteeDeplacementVisu = function(x,y) {
 			var imgd = this.context.getImageData(16*x, 16*y, 16, 16);
 			var pix = imgd.data;
 			for (var i = 0, n = pix.length; i < n; i += 4) {
@@ -170,11 +170,11 @@ function Game(map, team) {
 			}
 			this.context.putImageData(imgd, 16*x, 16*y);
 		}
-		Game.prototype.placementCurseur = function(e) {
+		Controller.prototype.placementCurseur = function(e) {
 			position = $(e).position();
 			$('#cursor').css({'left': position.left, 'top': position.top});
 		}
-		Game.prototype.choixCurseur = function(e) {
+		Controller.prototype.choixCurseur = function(e) {
 			if($(e).hasClass('cible')){
 				$('#cursor').attr('class', 'cursorFire');
 				$('#degatsBox').html('<img src="images/pictos/degats.gif" /> Dégâts : '+tir.degats[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]+'%');
@@ -183,7 +183,7 @@ function Game(map, team) {
 				$('#cursor').attr('class', 'cursorSelect');
 			}
 		}
-		Game.prototype.isAllie = function() {
+		Controller.prototype.isAllie = function() {
 			if(units[unitsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]]].team.id == that.team.id){
 				return true;
 			}
@@ -191,7 +191,7 @@ function Game(map, team) {
 				return false;
 			}
 		}
-		Game.prototype.isBat = function() {
+		Controller.prototype.isBat = function() {
 			if(batsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]] !== undefined){
 				return true;
 			}
@@ -199,7 +199,7 @@ function Game(map, team) {
 				return false;
 			}
 		}
-		Game.prototype.isUnit = function() {
+		Controller.prototype.isUnit = function() {
 			if(unitsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]] !== undefined){
 				return true;
 			}
@@ -207,10 +207,10 @@ function Game(map, team) {
 				return false;
 			}
 		}
-		Game.prototype.isActive = function() {
+		Controller.prototype.isActive = function() {
 			return units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].active;
 		}
-		Game.prototype.isBat = function() {
+		Controller.prototype.isBat = function() {
 			if(batsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]] !== undefined){
 				return true;
 			}
@@ -218,6 +218,6 @@ function Game(map, team) {
 				return false;
 			}
 		}		
-		Game.initialized = true;
+		Controller.initialized = true;
 	}
 }

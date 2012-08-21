@@ -25,10 +25,10 @@
 			}
 		}
 		Deplacement.prototype.afficherPorteeDeplacement = function() {
-			game.saveCanvas();
+			controller.saveCanvas();
 			for(i in portee)
 			{
-				game.porteeDeplacementVisu(portee[i][0], portee[i][1]);
+				controller.porteeDeplacementVisu(portee[i][0], portee[i][1]);
 			}
 		}
 		Deplacement.prototype.deplacementQuatreDirection = function(x,y,k,cheminparcouru) {
@@ -87,7 +87,7 @@
 		}
 		Deplacement.prototype.pointValide = function(x,y) {
 			// case dans le chemin, et arpentable par l'unité
-			if($.inArray(x+'_'+y , cheminChoisi)>=0 && units[game.selectedUnitID].spec.c_avancement[game.map[game.caseSurvolee[0]+'_'+game.caseSurvolee[1]]]){
+			if($.inArray(x+'_'+y , cheminChoisi)>=0 && units[controller.selectedUnitID].spec.c_avancement[controller.map[controller.caseSurvolee[0]+'_'+controller.caseSurvolee[1]]]){
 				return true;
 			}
 			else{
