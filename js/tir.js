@@ -66,15 +66,16 @@
 		Tir.prototype.calculerDegats = function(attaquant, defendant) {
 
 			if(attaquant.spec.munition.primAmmo>0 || attaquant.spec.munition.primAmmo == 'inf'){
-				var i = this.unit.spec.attaque.primAmmo[defendant.type];
+				var i = attaquant.spec.attaque.primAmmo[defendant.type];
 			}
-			else if(this.unit.spec.munition.secAmmo>0 || attaquant.spec.munition.secAmmo == 'inf'){
+			else if(attaquant.spec.munition.secAmmo>0 || attaquant.spec.munition.secAmmo == 'inf'){
 				var i = attaquant.spec.attaque.secAmmo[defendant.type];
 			}
 			else{
 				// plus de munition
 				var i = 0;
 			}
+
 			
 			var b = 100; // CO attaquant bonus attaque
 			var d = 100; // CO defendant bonus defense
