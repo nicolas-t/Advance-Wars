@@ -77,7 +77,7 @@ function Controller(map, team) {
 				for(key in BDD.Unites){
 					if(bats[id].type == BDD.Unites[key].fabrication)
 					{
-						$('#shopBox').append('<img src="images/units/'+that.team.color+'/'+key+'.gif" /><a id="shop_'+key+'" href="#"> '+key+'</a> :<span> '+BDD.Unites[key].cout+'</span><br />');
+						$('#shopBox').append('<img src="images/units/'+that.team.color+'/'+key.toLowerCase()+'.gif" /><a id="shop_'+key+'" href="#"> '+key+'</a> :<span> '+BDD.Unites[key].cout+'</span><br />');
 						$('#shop_'+key).on('click', { a: key }, function(event){
 
 							c = units.push(new Unit(that.team, event.data.a, bats[id].x, bats[id].y, false, $.extend(true, {}, BDD.Unites[event.data.a])));
