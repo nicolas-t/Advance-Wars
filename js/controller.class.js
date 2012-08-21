@@ -71,7 +71,7 @@ function Controller(map, team) {
 				deplacement.getPortee();
 				that.choixChemin = true;
 			}
-			else if(that.isBat()){
+			else if(that.isBat() && !that.isUnit()){
 				$('#shopBox').html('');
 				id = batsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]];
 				for(key in BDD.Unites){
@@ -82,6 +82,7 @@ function Controller(map, team) {
 
 							c = units.push(new Unit(that.team, event.data.a, bats[id].x, bats[id].y, false, $.extend(true, {}, BDD.Unites[event.data.a])));
 							$(units[c-1].elem).css('display','block');
+							$('#shopBox').html('');
 						});
 					}
 				}
