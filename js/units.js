@@ -173,7 +173,7 @@ $(document).ready(function(){
 	
 	//def Units			
 	units.push(new Unit( teams[1], 'tank', 7, 4, true, $.extend(true, {}, BDD.Unites.Tank)));
-	units.push(new Unit( teams[1], 'infantry', 4, 6, true, $.extend(true, {}, BDD.Unites.Infantry)));
+	units.push(new Unit( teams[1], 'neotank', 4, 6, true, $.extend(true, {}, BDD.Unites.NeoTank)));
 	units.push(new Unit( teams[1], 'bazooka', 8, 5, true, $.extend(true, {}, BDD.Unites.Bazooka)));
 	units.push(new Unit( teams[0], 'infantry', 8, 7, true, $.extend(true, {}, BDD.Unites.Infantry)));
 	units.push(new Unit( teams[0], 'tank', 7, 2, true, $.extend(true, {}, BDD.Unites.Tank)));
