@@ -53,7 +53,7 @@ function Unit(team, type, x, y, active, spec) {
 	this.team = team;
 	this.team.units.push(this);
 
-	this.type = type;
+	this.type = type.toLowerCase();
 	this.x = x;
 	this.y = y;
 	this.active = active;
@@ -173,12 +173,13 @@ $(document).ready(function(){
 	
 	//def Units			
 	units.push(new Unit( teams[1], 'tank', 7, 4, true, $.extend(true, {}, BDD.Unites.Tank)));
-	units.push(new Unit( teams[1], 'infantry', 5, 5, true, $.extend(true, {}, BDD.Unites.Infantry)));
+	units.push(new Unit( teams[1], 'infantry', 4, 6, true, $.extend(true, {}, BDD.Unites.Infantry)));
 	units.push(new Unit( teams[1], 'bazooka', 8, 5, true, $.extend(true, {}, BDD.Unites.Bazooka)));
 	units.push(new Unit( teams[0], 'infantry', 8, 7, true, $.extend(true, {}, BDD.Unites.Infantry)));
-	units.push(new Unit( teams[0], 'tank', 5, 8, true, $.extend(true, {}, BDD.Unites.Tank)));
 	units.push(new Unit( teams[0], 'tank', 7, 2, true, $.extend(true, {}, BDD.Unites.Tank)));
 	units.push(new Unit( teams[0], 'vtb', 7, 7, true, $.extend(true, {}, BDD.Unites.Vtb)));
+	units.push(new Unit( teams[0], 'vtb', 5, 7, true, $.extend(true, {}, BDD.Unites.Vtb)));
+	units.push(new Unit( teams[0], 'infantry', 5, 6, true, $.extend(true, {}, BDD.Unites.Infantry)));
 
 	//def Bats
 	bats[0] = new Bat(0, teams[0], 'qg', 1, 7);
