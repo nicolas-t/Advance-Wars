@@ -30,6 +30,10 @@
 
 				this.unit.team.units.push(units[this.voyageur.id]);
 				this.voyageur.creerDOM();
+				this.voyageur.pictoVie = false;
+				this.voyageur.pictoEssence = false;
+				this.voyageur.updateVie(0);
+				this.voyageur.updateEssence(0);
 				$('#menuBox #wait').trigger('click');
 				this.unit.updateTransport(false);
 			}
