@@ -15,7 +15,7 @@ function Game(map, team) {
 	this.context = this.canvas.getContext("2d");
 	this.warfog = '';
 	var that = this;
-
+	var transport =[];
 
 	$('#over_layer td')
 	.on('mouseenter',function(){
@@ -29,16 +29,15 @@ function Game(map, team) {
 			deplacement.findChemin(that.caseSurvolee[0],that.caseSurvolee[1]);
 		}
 	})
-	.on('click',function(){		
+	.on('click',function(){	
 		if(that.choixChemin){
 			if(deplacement.pointValide(that.caseSurvolee[0],that.caseSurvolee[1]))
 			{
 				if(that.isUnit() && that.isAllie()){
 				
-					if(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport !== undefined && units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport[units[that.selectedUnitID].type.toLowerCase()] == true){
-						//array ?
-						transport = new Transport(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]],units[that.selectedUnitID]);
-						transport.ajouterVoyageur();
+					if(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport !== undefined && units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport[units[that.selectedUnitID].type] == true){
+						transport[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]] = new Transport(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]],units[that.selectedUnitID]);
+						transport[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].ajouterVoyageur();
 						$('#menuBox #wait').trigger('click');
 					}
 				}
@@ -56,9 +55,9 @@ function Game(map, team) {
 			}
 		}
 		else if(that.choixDepot){
-			if(transport.isDepot(that.caseSurvolee))
+			if(transport[that.selectedUnitID].isDepot(that.caseSurvolee))
 			{
-				transport.deposerVoyageur(that.caseSurvolee);
+				transport[that.selectedUnitID].deposerVoyageur(that.caseSurvolee);
 				that.choixDepot = false;
 			}
 		}
@@ -78,7 +77,6 @@ function Game(map, team) {
 				for(key in BDD.Unites){
 					if(bats[id].type == BDD.Unites[key].fabrication)
 					{
-
 						$('#shopBox').append('<a id="shop_'+key+'" href="#"> '+key+'</a> : '+BDD.Unites[key].cout+'<br />');
 						$('#shop_'+key).text(''+key+' : '+BDD.Unites[key].cout).on('click', { a: key }, function(event){
 
@@ -118,7 +116,7 @@ function Game(map, team) {
 	$('#menuBox #decharge').on('click',function(){
 		that.choixDepot = true;
 		that.choixChemin = false;
-		transport.getDepot();
+		transport[that.selectedUnitID].getDepot();
 	});
 
 	$('#menuBox #cancel').on('click',function(){
