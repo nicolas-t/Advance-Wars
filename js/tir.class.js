@@ -25,8 +25,7 @@
 				var v = unitsMap[this.portee[i]];
 				if((v !== undefined) && (units[v].team.id != this.unit.team.id ) && ($(units[v].elem).is(':visible')) ){
 					this.cibles.push(this.portee[i]);
-					this.degats[this.cases['max'][i]] = this.calculerDegats(this.unit, units[v]);
-
+					this.degats[this.portee[i]] = this.calculerDegats(this.unit, units[v]);
 					$('#deplacement_'+this.portee[i]).css('background','blue');
 					$('#over_'+this.portee[i]).addClass('cible');
 				}
@@ -93,6 +92,7 @@
 			adversaire.updateVie(this.degats[adversaire.x+'_'+adversaire.y]);
 			this.unit.updateAmmo();
 			// le défenseur replique
+			//BUG: il replique même s'il est attaqué par une unité à distance...
 			this.unit.updateVie(this.calculerDegats(adversaire, this.unit));
 			adversaire.updateAmmo();
 			$('#wait').trigger('click');
