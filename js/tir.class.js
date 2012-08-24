@@ -91,10 +91,16 @@
 			// l'attaquant attaque
 			adversaire.updateVie(this.degats[adversaire.x+'_'+adversaire.y]);
 			this.unit.updateAmmo();
+			
 			// le défenseur replique
-			//BUG: il replique même s'il est attaqué par une unité à distance...
-			this.unit.updateVie(this.calculerDegats(adversaire, this.unit));
-			adversaire.updateAmmo();
+			var reponse = new Tir(adversaire);
+			reponse.getPortee();
+			reponse.getCibles();
+			if(reponse.isCible([this.unit.x, this.unit.y]))
+			{
+				this.unit.updateVie(this.calculerDegats(adversaire, this.unit));
+				adversaire.updateAmmo();
+			}
 			$('#wait').trigger('click');
 			$('#cursor').attr('class', 'cursorSelect');
 		}
