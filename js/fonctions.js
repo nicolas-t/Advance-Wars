@@ -1,6 +1,4 @@
-﻿var maxX = 15;
-var maxY = 10;
-var myTeam = 0;
+﻿
 function getXY(s){
 	l=s.split('_').reverse();
 	if(l[1] == 'unit'){g = new Array(units[parseInt(l[0])].x, units[parseInt(l[0])].y);}
