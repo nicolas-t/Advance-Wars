@@ -9,6 +9,7 @@ function Controller(map, team) {
 	this.choixCible = false;
 	this.choixDepot = false;
 	
+	this.whosPlaying = 0;
 	this.canvasSave = '';
 	this.canvas = document.getElementById("canvasMap");
 	this.image = document.getElementById("canvasSource");
@@ -16,6 +17,11 @@ function Controller(map, team) {
 	this.warfog = '';
 	var that = this;
 	var transport =[];
+
+	// on initialise le rafraichissement :
+	
+	this.refresh = new Refresh(1000);
+
 
 	$('#over_layer td')
 	.on('mouseenter',function(){
@@ -48,6 +54,7 @@ function Controller(map, team) {
 			}
 		}
 		else if(that.choixCible){
+
 			if(tir.isCible(that.caseSurvolee))
 			{
 				tir.faireFeu(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]]);
@@ -55,6 +62,7 @@ function Controller(map, team) {
 			}
 		}
 		else if(that.choixDepot){
+
 			if(transport[that.selectedUnitID].isDepot(that.caseSurvolee))
 			{
 				transport[that.selectedUnitID].deposerVoyageur(that.caseSurvolee);
@@ -62,8 +70,10 @@ function Controller(map, team) {
 			}
 		}
 		else{
+
 			if(that.isUnit() && that.isAllie() && that.isActive() && $('#menuBox').is(':hidden'))
 			{
+
 				$('#menuBox').css('display', 'block');
 				
 				that.selectedUnitID = unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]];
@@ -71,7 +81,7 @@ function Controller(map, team) {
 				deplacement.getPortee();
 				that.choixChemin = true;
 			}
-			else if(that.isBat() && !that.isUnit()){
+			else if(that.isBat() && !that.isUnit() && that.isBatAllie()){
 				$('#shopBox').html('');
 				id = batsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]];
 				for(key in BDD.Unites){
@@ -90,8 +100,10 @@ function Controller(map, team) {
 		}
 	});
 	
-	$('#jourBox	#nouveauJourBleu').click(function(){
-		teams[0].nouveauJour();
+	$('#jourBox	#finJour').click(function(){
+		if(that.whosPlaying == myTeam){
+			teams[myTeam].finJour();
+		}
 	});
 	
 	//MENU 
@@ -185,7 +197,7 @@ function Controller(map, team) {
 			}
 		}
 		Controller.prototype.isAllie = function() {
-			if(units[unitsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]]].team.id == that.team.id){
+			if((units[unitsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]]].team.id == that.team.id)){
 				return true;
 			}
 			else{
@@ -194,6 +206,14 @@ function Controller(map, team) {
 		}
 		Controller.prototype.isBat = function() {
 			if(batsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]] !== undefined){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		Controller.prototype.isBatAllie = function() {
+			if((bats[batsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]]].team.id == that.team.id)){
 				return true;
 			}
 			else{
