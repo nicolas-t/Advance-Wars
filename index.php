@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -19,8 +19,24 @@
 	<script src="js/controller.class.js"></script>
 	<script src="js/warfog.class.js"></script>
 	<script src="js/transport.class.js"></script>
+	<script src="js/refresh.class.js"></script>
 	<script>
 	function tri_nombres(a,b){return a-b;}
+	function debug_map(arr){
+			$('#deplacement_layer td').css('background','');
+
+		for (a in arr)
+		{
+			$('#deplacement_'+a).css('background','blue');
+		}
+	}
+	var maxX = 15;
+	var maxY = 10;
+	var myTeam = <?php echo (int)$_GET['team']; ?>;
+	var myTeamInverse = [];
+	myTeamInverse[0] = 1;
+	myTeamInverse[1] = 0;
+	var partieId = <?php echo (int)$_GET['id']; ?>;
 	</script>
 
 
@@ -67,11 +83,13 @@
 		
 		</div>
 		<div id="jourBox" style="font-size:12px;position:absolute; left:260px;top:90px;width:135px;padding:10px; height:15px; border:1px solid silver;">
-			<a href="#" id="nouveauJourBleu">Nouveau jour bleu</a><br />
+			<a href="#" id="finJour">Fin de la journée</a><br />
 		</div>
 		<div id="degatsBox" style="font-size:12px;position:absolute; left:260px;top:135px;width:135px;padding:10px; height:20px; border:1px solid silver;">
 		</div>
 		<div id="shopBox" style="font-size:12px;position:absolute; left:0px;top:180px;width:235px;padding:10px; border:1px solid silver;">
+		</div>
+		<div id="debugBox" style="font-size:12px;position:absolute; left:0px;top:200px;width:235px;padding:10px; border:1px solid silver;">
 		</div>
     </body>
 </html>
