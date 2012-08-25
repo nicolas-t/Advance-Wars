@@ -8,13 +8,20 @@ function Team(id, color, heros) {
 	this.jours = 0;
 	this.argent = 1000;
 	if ( typeof Team.initialized == "undefined" ) {
-		Team.prototype.nouveauJour = function() {
+		Team.prototype.finJour = function() {
+			for(i = 0; i<this.units.length; i++){
+				this.units[i].updateActive(false);
+			}
+			controller.refresh.changeJoueur(myTeamInverse[myTeam]);
+			this.jours++;
+		}
+		Team.prototype.debutJour = function() {
 			for(i = 0; i<this.units.length; i++){
 				this.units[i].updateActive(true);
+
 			}
 			this.jours++;
 		}
-
 		Team.initialized = true;
 	}
 }
@@ -61,7 +68,6 @@ function Unit(team, type, x, y, active, spec) {
 	this.spec = spec;
 	
 	this.pictoEssence = false;
-	this.pictoVie = false;
 	this.pictoTransport = false;
 	
 	this.elem = ''; // DOM créé en bas.
@@ -74,11 +80,10 @@ function Unit(team, type, x, y, active, spec) {
 			this.elem = document.createElement("div");
 			document.getElementById("units_container").appendChild(this.elem);
 			if(this.active){a=''}else{a='_down'}
-			var position = $('#over_'+this.x+'_'+this.y).position();
+			this.updatePositionVisuelle([this.x,this.y]);
+			
 			$(this.elem).attr('id', 'unit_'+this.id).addClass('units '+this.team.color+'').css({
-				'background': 'url(images/units/'+this.team.color+'/'+this.type+''+a+'.gif)',
-				'left': position.left,
-				'top' : position.top
+				'background': 'url(images/units/'+this.team.color+'/'+this.type+''+a+'.gif)'
 			});
 		}
 		Unit.prototype.detruireUnite = function() {
@@ -103,6 +108,13 @@ function Unit(team, type, x, y, active, spec) {
 			this.y = newCoord[1];
 			unitsMap[newCoord[0]+'_'+newCoord[1]] = this.id;
 		}
+		Unit.prototype.updatePositionVisuelle = function(newCoord) {
+			var position = $('#over_'+newCoord[0]+'_'+newCoord[1]).position();
+			$(this.elem).css({
+				'left': position.left,
+				'top' : position.top
+			});
+		}
  		Unit.prototype.updateEssence = function(value) {
 			this.spec.essence = this.spec.essence - value;
 			if(this.spec.essence<=0){
@@ -117,20 +129,31 @@ function Unit(team, type, x, y, active, spec) {
  		Unit.prototype.updateAmmo = function(value) {
 			// a faire
 		}
-	
+	 	Unit.prototype.hasPictoVie = function() {
+			if($('#pictoVie_'+this.id).length == 0){
+				return false;
+			}
+			else{
+				 return true;
+			}
+
+		}
  		Unit.prototype.updateVie = function(value) {
-			var ancienne_valeur = this.spec.vie;
+			ancienne_valeur = this.spec.vie;
 			this.spec.vie = this.spec.vie - value;
 			if(this.spec.vie<=10){
-				this.detruireUnite();
+				//pour le test en ligne, on empeche la destruction de l'unite
+				this.spec.vie = 20;
+				$('#pictoVie_'+this.id).remove();
+				this.updateVie(0);
+				//this.detruireUnite();
 			}
-			else if(this.spec.vie<100 && !this.pictoVie){
-				$(this.elem).append('<div id="pictoVie_'+this.id+'" class="pictoVie petitsChiffres n_'+Math.floor(this.spec.vie/10)+'"></div>');
-				this.pictoVie = true;
+			else if(this.spec.vie<100 && !this.hasPictoVie()){
+				//$(this.elem) ne marche pas ici... (firefox);  à retester
+				$('#unit_'+this.id+'').append('<div id="pictoVie_'+this.id+'" class="pictoVie petitsChiffres n_'+Math.floor(this.spec.vie/10)+'"></div>');
 			}
-			else if(this.spec.vie<100 && this.pictoVie){
-				$('#pictoVie_'+this.id).removeClass('n_'+Math.floor(ancienne_valeur/10)).addClass('n_'+Math.floor(this.spec.vie/10));
-				this.pictoVie = true;
+			else if(this.spec.vie<100 && this.hasPictoVie()){
+				$('#pictoVie_'+this.id).attr('class', 'pictoVie petitsChiffres n_'+Math.floor(this.spec.vie/10));
 			}
 		}
 		Unit.prototype.updateActive = function(newValue) {
@@ -172,11 +195,21 @@ $(document).ready(function(){
 	teams[1] = new Team(1, 'red', 'Jeanne');
 	
 	//def Units			
-	units.push(new Unit( teams[1], 'tank', 7, 4, true, $.extend(true, {}, BDD.Unites.Tank)));
-	units.push(new Unit( teams[1], 'neotank', 4, 6, true, $.extend(true, {}, BDD.Unites.Neotank)));
-	units.push(new Unit( teams[1], 'bazooka', 8, 5, true, $.extend(true, {}, BDD.Unites.Bazooka)));
+	units.push(new Unit( teams[1], 'recon', 10, 0, true, $.extend(true, {}, BDD.Unites.Recon)));
+	units.push(new Unit( teams[1], 'tank', 10, 1, true, $.extend(true, {}, BDD.Unites.Tank)));
+	units.push(new Unit( teams[1], 'lmiss', 11, 1, true, $.extend(true, {}, BDD.Unites.Lmiss)));
+	units.push(new Unit( teams[1], 'bazooka', 10, 2, true, $.extend(true, {}, BDD.Unites.Bazooka)));
+	units.push(new Unit( teams[1], 'infantry', 11, 2, true, $.extend(true, {}, BDD.Unites.Infantry)));
+	units.push(new Unit( teams[1], 'vtb', 11, 3, true, $.extend(true, {}, BDD.Unites.Vtb)));
 
+	units.push(new Unit( teams[0], 'recon', 1, 10, true, $.extend(true, {}, BDD.Unites.Recon)));
+	units.push(new Unit( teams[0], 'tank', 1, 9, true, $.extend(true, {}, BDD.Unites.Tank)));
+	units.push(new Unit( teams[0], 'lmiss', 2, 9, true, $.extend(true, {}, BDD.Unites.Lmiss)));
+	units.push(new Unit( teams[0], 'bazooka', 2, 10, true, $.extend(true, {}, BDD.Unites.Bazooka)));
+	units.push(new Unit( teams[0], 'infantry', 3, 10, true, $.extend(true, {}, BDD.Unites.Infantry)));
+	units.push(new Unit( teams[0], 'vtb', 4, 10, true, $.extend(true, {}, BDD.Unites.Vtb)));
 	//def Bats
-	bats[0] = new Bat(0, teams[0], 'usine', 2, 6);
+	//bats[0] = new Bat(0, teams[0], 'usine', 2, 6);
+	//bats[1] = new Bat(1, teams[1], 'usine', 13, 2);
 
 });
