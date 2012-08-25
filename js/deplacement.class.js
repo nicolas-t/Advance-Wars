@@ -213,7 +213,7 @@
 			var cheminChoisi_length = cheminChoisi.length;
 			for(j=0;j<=cheminChoisi_length;j++)
 			{
-				if((unitsMap[cheminChoisi[j]] !== undefined &&$(units[unitsMap[cheminChoisi[j]]].elem).is(':hidden'))){
+				if((unitsMap[cheminChoisi[j]] !== undefined && $(units[unitsMap[cheminChoisi[j]]].elem).is(':hidden'))){
 					$('#trace_layer td').attr('class','');	
 
 					this.positionAvantConfirme = [this.unit.x, this.unit.y];
