@@ -18,9 +18,9 @@ function Controller(map, team) {
 	var that = this;
 	var transport =[];
 
-	// on initialise le rafraichissement :
+	// mode sync : on initialise le rafraichissement :
 	
-	this.refresh = new Refresh(1000);
+	//this.refresh = new Refresh(1000);
 
 
 	$('#over_layer td')
@@ -81,6 +81,7 @@ function Controller(map, team) {
 				deplacement.getPortee();
 				that.choixChemin = true;
 			}
+
 			else if(that.isBat() && !that.isUnit() && that.isBatAllie()){
 				$('#shopBox').html('');
 				id = batsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]];
@@ -101,9 +102,14 @@ function Controller(map, team) {
 	});
 	
 	$('#jourBox	#finJour').click(function(){
+		/* mode sync :
 		if(that.whosPlaying == myTeam){
 			teams[myTeam].finJour();
 		}
+		*/
+		// mode dev :
+		teams[myTeam].finJour();
+		teams[myTeam].debutJour();
 	});
 	
 	//MENU 
@@ -115,6 +121,10 @@ function Controller(map, team) {
 		that.choixCible = false;
 		that.choixChemin = false;
 		that.warfog.recalcul();
+
+	});
+	$('#menuBox #capture').on('click',function(){
+		// à faire
 
 	});
 	$('#menuBox #attack').on('click',function(){
