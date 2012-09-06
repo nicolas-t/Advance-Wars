@@ -78,7 +78,7 @@
 			this.depotQuatresDirections(this.unit.x, this.unit.y, 0, 1);
 		}
 		Transport.prototype.isDepot = function(coord) {
-			if($.inArray(coord[0]+'_'+coord[1], this.casesDepot) >= -1 && unitsMap[coord[0]+'_'+coord[1]] !== undefined){
+			if($.inArray(coord[0]+'_'+coord[1], this.casesDepot) == -1 || unitsMap[coord[0]+'_'+coord[1]] !== undefined){
 				return false;
 			}
 			else{
