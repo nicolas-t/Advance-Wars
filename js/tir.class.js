@@ -25,12 +25,16 @@
 				var v = unitsMap[this.portee[i]];
 				if((v !== undefined) && (units[v].team.id != this.unit.team.id ) && ($(units[v].elem).is(':visible')) ){
 					this.cibles.push(this.portee[i]);
-					this.degats[this.portee[i]] = this.calculerDegats(this.unit, units[v]);
-					$('#deplacement_'+this.portee[i]).css('background','blue');
-					$('#over_'+this.portee[i]).addClass('cible');
 				}
 			}
 			return this.portee;
+		}
+		Tir.prototype.afficherCibles = function() {
+			for(var i =0; i < this.cibles.length; i++){
+				this.degats[this.cibles[i]] = this.calculerDegats(this.unit, units[unitsMap[this.cibles[i]]]);
+				$('#deplacement_'+this.cibles[i]).css('background','blue');
+				$('#over_'+this.cibles[i]).addClass('cible');
+			}
 		}
 		Tir.prototype.calculPorteeTir = function(oldX, oldY, newX, newY, k, lim, arr) {
 			if($.inArray(newX+'_'+newY, arr) == -1){
