@@ -4,10 +4,12 @@ function Controller(map, team) {
 	this.map = map;
 	this.team = team;
 	this.caseSurvolee = [];
-	this.selectedUnitID = '';
+	this.selectedUnit = '';
 	this.choixChemin = false;
 	this.choixCible = false;
 	this.choixDepot = false;
+	
+	this.tir = false;
 	
 	this.whosPlaying = 0;
 	this.canvasSave = '';
@@ -27,7 +29,6 @@ function Controller(map, team) {
 	.on('mouseenter',function(){
 		that.caseSurvolee = getXY($(this).attr('id'));
 		that.placementCurseur(this);
-		
 		if(that.choixCible){
 			that.choixCurseur(this);
 		}
@@ -41,47 +42,46 @@ function Controller(map, team) {
 			{
 				if(that.isUnit() && that.isAllie()){
 				
-					if(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport !== undefined && units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport[units[that.selectedUnitID].type] == true){
-						transport[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]] = new Transport(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]],units[that.selectedUnitID]);
+					if(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport !== undefined && units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport[that.selectedUnit.type] == true){
+						transport[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]] = new Transport(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]],that.selectedUnit);
 						transport[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].ajouterVoyageur();
 						$('#menuBox #wait').trigger('click');
 					}
 				}
 				else{
 					deplacement.deplacementVisuel();
+					that.gestionMenu();
 					that.choixChemin = false;
 				}
 			}
 		}
 		else if(that.choixCible){
 
-			if(tir.isCible(that.caseSurvolee))
+			if(that.tir.isCible(that.caseSurvolee))
 			{
-				tir.faireFeu(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]]);
+				that.tir.faireFeu(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]]);
 				that.choixCible = false;
 			}
 		}
 		else if(that.choixDepot){
 
-			if(transport[that.selectedUnitID].isDepot(that.caseSurvolee))
+			if(transport[that.selectedUnit.id].isDepot(that.caseSurvolee))
 			{
-				transport[that.selectedUnitID].deposerVoyageur(that.caseSurvolee);
+				transport[that.selectedUnit.id].deposerVoyageur(that.caseSurvolee);
 				that.choixDepot = false;
 			}
 		}
 		else{
-
 			if(that.isUnit() && that.isAllie() && that.isActive() && $('#menuBox').is(':hidden'))
 			{
 				$('#menuBox').css('display', 'block');
-				that.gestionMenu();
-				that.selectedUnitID = unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]];
-				deplacement = new Deplacement(units[that.selectedUnitID]);
+				that.selectedUnit = units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]];
+				deplacement = new Deplacement(that.selectedUnit);
 				deplacement.getPortee();
 				that.choixChemin = true;
+				that.gestionMenu();
 			}
-
-			else if(that.isBat() && !that.isUnit() && that.isBatAllie()){
+			else if(that.isBat([that.caseSurvolee[0],that.caseSurvolee[1]]) && !that.isUnit() && that.isBatAllie([that.caseSurvolee[0],that.caseSurvolee[1]])){
 				$('#shopBox').html('');
 				id = batsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]];
 				for(key in BDD.Unites){
@@ -123,23 +123,21 @@ function Controller(map, team) {
 
 	});
 	$('#menuBox #capture').on('click',function(){
-		var bat = bats[batsMap[units[that.selectedUnitID].x+'_'+units[that.selectedUnitID].y]]
-		bat.updateCapture(Math.floor(units[that.selectedUnitID].spec.vie/10));
+		var bat = bats[batsMap[that.selectedUnit.x+'_'+that.selectedUnit.y]]
+		bat.updateCapture(Math.floor(that.selectedUnit.spec.vie/10));
 		$('#menuBox #wait').trigger('click');
 	});
 	$('#menuBox #attack').on('click',function(){
 		$('#deplacement_layer td').css('background','');
 		that.choixCible = true;	
-		that.choixChemin = false;	
-		tir = new Tir(units[that.selectedUnitID]);
-		tir.getPortee();
-		tir.getCibles();
-
+		that.choixChemin = false;
+			
+		that.tir.afficherCibles();
 	});
 	$('#menuBox #decharge').on('click',function(){
 		that.choixDepot = true;
 		that.choixChemin = false;
-		transport[that.selectedUnitID].getDepot();
+		transport[that.selectedUnit.id].getDepot();
 	});
 
 	$('#menuBox #cancel').on('click',function(){
@@ -195,14 +193,22 @@ function Controller(map, team) {
 		}
 		Controller.prototype.gestionMenu = function() {
 			
-			/*générer une menu adapter aux actions possibles*/
-			/*fonction de l'unitée, et de sa position*/
-			/*
-			$('#menuBox a').not('#wait, #cancel').hide();
-			if(){
+			/*générer un menu adapté aux actions possibles*/
+			/*en fonction de l'unit, et de sa position*/
 			
+			$('#menuBox a').not('#wait, #cancel').hide();
+			unitCoord = [that.selectedUnit.x,that.selectedUnit.y];
+			//capture
+			if(that.isBat(unitCoord) && !that.isBatAllie(unitCoord)){
+				$('#menuBox #capture').show();
 			}
-			*/
+			//tir
+			that.tir = new Tir(that.selectedUnit);
+			that.tir.getPortee();
+			that.tir.getCibles();
+			if(that.tir.cibles.length){
+				$('#menuBox #attack').show();
+			}
 		}
 		Controller.prototype.placementCurseur = function(e) {
 			position = $(e).position();
@@ -211,7 +217,7 @@ function Controller(map, team) {
 		Controller.prototype.choixCurseur = function(e) {
 			if($(e).hasClass('cible')){
 				$('#cursor').attr('class', 'cursorFire');
-				$('#degatsBox').html('<img src="images/pictos/degats.gif" /> Dégâts : '+tir.degats[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]+'%');
+				$('#degatsBox').html('<img src="images/pictos/degats.gif" /> Dégâts : '+that.tir.degats[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]+'%');
 			}
 			else{
 				$('#cursor').attr('class', 'cursorSelect');
@@ -225,16 +231,16 @@ function Controller(map, team) {
 				return false;
 			}
 		}
-		Controller.prototype.isBat = function() {
-			if(batsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]] !== undefined){
+		Controller.prototype.isBat = function(coord) {
+			if(batsMap[coord[0]+'_'+coord[1]] !== undefined){
 				return true;
 			}
 			else{
 				return false;
 			}
 		}
-		Controller.prototype.isBatAllie = function() {
-			if((bats[batsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]]].team.id == that.team.id)){
+		Controller.prototype.isBatAllie = function(coord) {
+			if((bats[batsMap[coord[0]+'_'+coord[1]]].team.id == that.team.id)){
 				return true;
 			}
 			else{
@@ -252,14 +258,7 @@ function Controller(map, team) {
 		Controller.prototype.isActive = function() {
 			return units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].active;
 		}
-		Controller.prototype.isBat = function() {
-			if(batsMap[this.caseSurvolee[0]+'_'+this.caseSurvolee[1]] !== undefined){
-				return true;
-			}
-			else{
-				return false;
-			}
-		}		
+	
 		Controller.initialized = true;
 	}
 }
