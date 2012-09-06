@@ -7,6 +7,9 @@ a{
 	text-decoration:none;
 	border-bottom:1px solid #00aeff;
 }
+#menuBox a{
+display:block;
+}
 #shopBox{
 	line-height:20px;
 }

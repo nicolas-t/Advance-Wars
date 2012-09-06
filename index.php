@@ -76,11 +76,11 @@
 		<div id="bats_container"></div>
 
 		<div id="menuBox" style="display:none;font-size:12px;position:absolute; left:260px;width:135px;padding:10px;height:80px; border:1px solid silver;">
-			<img src="images/pictos/capturer.gif" /> <a href="#" id="capture">Capturer</a><br />
-			<img src="images/pictos/charger.gif" /> <a href="#" id="decharge">Decharger</a><br />
-			<img src="images/pictos/degats.gif" /> <a href="#" id="attack">Attaquer</a><br />
-			<img src="images/pictos/attendre.gif" /> <a href="#" id="wait">Attendre</a><br />
-			<a href="#" id="cancel">Annuler</a><br />
+			 <a href="#" id="capture"><img src="images/pictos/capturer.gif" /> Capturer</a>
+			 <a href="#" id="decharge"><img src="images/pictos/charger.gif" /> Decharger</a>
+			 <a href="#" id="attack"><img src="images/pictos/degats.gif" /> Attaquer</a>
+			<a href="#" id="wait"><img src="images/pictos/attendre.gif" /> Attendre</a>
+			<a href="#" id="cancel">Annuler</a>
 		
 		</div>
 		<div id="jourBox" style="font-size:12px;position:absolute; left:260px;top:100px;width:135px;padding:10px; height:15px; border:1px solid silver;">

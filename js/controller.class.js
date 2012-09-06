@@ -73,9 +73,8 @@ function Controller(map, team) {
 
 			if(that.isUnit() && that.isAllie() && that.isActive() && $('#menuBox').is(':hidden'))
 			{
-
 				$('#menuBox').css('display', 'block');
-				
+				that.gestionMenu();
 				that.selectedUnitID = unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]];
 				deplacement = new Deplacement(units[that.selectedUnitID]);
 				deplacement.getPortee();
@@ -193,6 +192,14 @@ function Controller(map, team) {
 				pix[i+2] = pix[i+2]+60; 	
 			}
 			this.context.putImageData(imgd, 16*x, 16*y);
+		}
+		Controller.prototype.gestionMenu = function() {
+			/*générer une menu adapter aux actions possibles*/
+			/*fonction de l'unitée, et de sa position*/
+			$('#menuBox a').not('#wait, #cancel').hide();
+			if(){
+			
+			}
 		}
 		Controller.prototype.placementCurseur = function(e) {
 			position = $(e).position();
