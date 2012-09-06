@@ -124,8 +124,9 @@ function Controller(map, team) {
 
 	});
 	$('#menuBox #capture').on('click',function(){
-		// à faire
-
+		var bat = bats[batsMap[units[that.selectedUnitID].x+'_'+units[that.selectedUnitID].y]]
+		bat.updateCapture(Math.floor(units[that.selectedUnitID].spec.vie/10));
+		$('#menuBox #wait').trigger('click');
 	});
 	$('#menuBox #attack').on('click',function(){
 		$('#deplacement_layer td').css('background','');

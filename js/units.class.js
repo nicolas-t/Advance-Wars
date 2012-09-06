@@ -44,7 +44,7 @@ function Bat(id, team, type, x, y) {
 			this.elem = document.createElement("div");
 			document.getElementById("bats_container").appendChild(this.elem);
 			var position = $('#over_'+this.x+'_'+this.y).position();
-			$(this.elem).attr('id', 'bat_'+this.id).addClass('bats '+this.team.color+'').css({
+			$(this.elem).attr('id', 'bat_'+this.id).addClass('bats '+this.team.color).css({
 				'background': 'url(images/bats/'+this.team.color+'/'+this.type+'.png)',
 				'left': position.left,
 				'top' : position.top
@@ -53,8 +53,26 @@ function Bat(id, team, type, x, y) {
 		Bat.prototype.updateCapture = function(value) {
 			this.capture = this.capture + value;
 			if(this.capture >= 20){
-				// on change la team le possedant
+				this.capture = 0;
+				this.changeTeam();
 			}
+		}
+		Bat.prototype.changeTeam = function() {
+			// on retire de l'ancienne team
+			for(j=0;j<this.team.bats.length;j++)// pas super tout ça
+			{
+				if(this.team.bats[j].id == this.id){
+					var v = j;
+				}
+			}
+			this.team.bats.splice(v,1);
+
+			// et on ajoute dans la nouvelle team
+			this.team = controller.team;
+			this.team.bats.push(this);
+			$(this.elem).attr('class', 'bats '+this.team.color).css({
+				'background': 'url(images/bats/'+this.team.color+'/'+this.type+'.png)'
+			});
 		}
 		Bat.prototype.resetCapture = function() {
 			this.capture = 0;
@@ -214,15 +232,18 @@ $(document).ready(function(){
 	units.push(new Unit( teams[1], 'infantry', 11, 2, true, $.extend(true, {}, BDD.Unites.Infantry)));
 	units.push(new Unit( teams[1], 'vtb', 11, 3, true, $.extend(true, {}, BDD.Unites.Vtb)));
 	*/
+	units.push(new Unit( teams[1], 'recon', 5, 9, true, $.extend(true, {}, BDD.Unites.Tank)));
+	
 	units.push(new Unit( teams[0], 'recon', 1, 10, true, $.extend(true, {}, BDD.Unites.Recon)));
 	units.push(new Unit( teams[0], 'tank', 1, 9, true, $.extend(true, {}, BDD.Unites.Tank)));
 	units.push(new Unit( teams[0], 'lmiss', 2, 9, true, $.extend(true, {}, BDD.Unites.Lmiss)));
 	units.push(new Unit( teams[0], 'bazooka', 2, 10, true, $.extend(true, {}, BDD.Unites.Bazooka)));
-	units.push(new Unit( teams[0], 'infantry', 4, 6, true, $.extend(true, {}, BDD.Unites.Infantry)));
+	units.push(new Unit( teams[0], 'infantry', 3, 7, true, $.extend(true, {}, BDD.Unites.Infantry)));
 	units.push(new Unit( teams[0], 'vtb', 4, 10, true, $.extend(true, {}, BDD.Unites.Vtb)));
 	
 	//def Bats
 	bats[0] = new Bat(0, teams[2], 'ville', 3, 6);
+	bats[1] = new Bat(1, teams[2], 'usine', 1, 7);
 	//bats[1] = new Bat(1, teams[1], 'usine', 13, 2);
 
 });
