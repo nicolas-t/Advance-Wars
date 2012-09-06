@@ -171,10 +171,10 @@ function Unit(team, type, x, y, active, spec) {
 			this.spec.vie = this.spec.vie - value;
 			if(this.spec.vie<=10){
 				//pour le test en ligne, on empeche la destruction de l'unite
-				this.spec.vie = 20;
-				$('#pictoVie_'+this.id).remove();
-				this.updateVie(0);
-				//this.detruireUnite();
+				//this.spec.vie = 20;
+				//$('#pictoVie_'+this.id).remove();
+				//this.updateVie(0);
+				this.detruireUnite();
 			}
 			else if(this.spec.vie<100 && !this.hasPictoVie()){
 				//$(this.elem) ne marche pas ici... (firefox);  à retester
@@ -237,9 +237,7 @@ $(document).ready(function(){
 	units.push(new Unit( teams[0], 'recon', 1, 10, true, $.extend(true, {}, BDD.Unites.Recon)));
 	units.push(new Unit( teams[0], 'tank', 1, 9, true, $.extend(true, {}, BDD.Unites.Tank)));
 	units.push(new Unit( teams[0], 'lmiss', 2, 9, true, $.extend(true, {}, BDD.Unites.Lmiss)));
-	units.push(new Unit( teams[0], 'bazooka', 2, 10, true, $.extend(true, {}, BDD.Unites.Bazooka)));
-	units.push(new Unit( teams[0], 'infantry', 3, 7, true, $.extend(true, {}, BDD.Unites.Infantry)));
-	units.push(new Unit( teams[0], 'vtb', 4, 10, true, $.extend(true, {}, BDD.Unites.Vtb)));
+	units.push(new Unit( teams[0], 'infantry', 3,7, true, $.extend(true, {}, BDD.Unites.Infantry)));
 	
 	//def Bats
 	bats[0] = new Bat(0, teams[2], 'ville', 3, 6);
