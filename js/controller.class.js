@@ -194,12 +194,15 @@ function Controller(map, team) {
 			this.context.putImageData(imgd, 16*x, 16*y);
 		}
 		Controller.prototype.gestionMenu = function() {
+			
 			/*générer une menu adapter aux actions possibles*/
 			/*fonction de l'unitée, et de sa position*/
+			/*
 			$('#menuBox a').not('#wait, #cancel').hide();
 			if(){
 			
 			}
+			*/
 		}
 		Controller.prototype.placementCurseur = function(e) {
 			position = $(e).position();
