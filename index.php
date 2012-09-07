@@ -78,6 +78,7 @@
 		<div id="menuBox" style="display:none;font-size:12px;position:absolute; left:260px;width:135px;padding:10px;height:80px; border:1px solid silver;">
 			 <a href="#" id="capture"><img src="images/pictos/capturer.gif" /> Capturer</a>
 			 <a href="#" id="decharge"><img src="images/pictos/charger.gif" /> Decharger</a>
+			 <a href="#" id="charge"><img src="images/pictos/charger.gif" /> Charger</a>
 			 <a href="#" id="attack"><img src="images/pictos/degats.gif" /> Attaquer</a>
 			<a href="#" id="wait"><img src="images/pictos/attendre.gif" /> Attendre</a>
 			<a href="#" id="cancel">Annuler</a>
