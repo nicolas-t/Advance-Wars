@@ -5,11 +5,13 @@ function Controller(map, team) {
 	this.team = team;
 	this.caseSurvolee = [];
 	this.selectedUnit = '';
+	this.clickedTransportUnit = false;
 	this.choixChemin = false;
 	this.choixCible = false;
 	this.choixDepot = false;
 	
 	this.tir = false;
+	this.transport =[];
 	
 	this.whosPlaying = 0;
 	this.canvasSave = '';
@@ -18,10 +20,8 @@ function Controller(map, team) {
 	this.context = this.canvas.getContext("2d");
 	this.warfog = '';
 	var that = this;
-	var transport =[];
 
 	// mode sync : on initialise le rafraichissement :
-	
 	//this.refresh = new Refresh(1000);
 
 
@@ -40,19 +40,17 @@ function Controller(map, team) {
 		if(that.choixChemin){
 			if(deplacement.pointValide(that.caseSurvolee[0],that.caseSurvolee[1]))
 			{
-				if(that.isUnit() && that.isAllie()){
-				
-					if(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport !== undefined && units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport[that.selectedUnit.type] == true){
-						transport[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]] = new Transport(units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]],that.selectedUnit);
-						transport[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].ajouterVoyageur();
-						$('#menuBox #wait').trigger('click');
-					}
-				}
-				else{
+				if(that.isUnit() && that.isAllie() && units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport !== undefined && units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]].spec.canTransport[that.selectedUnit.type] == true){
+					that.clickedTransportUnit = unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]];
+					
 					deplacement.deplacementVisuel();
-					that.gestionMenu();
 					that.choixChemin = false;
 				}
+				else if(!that.isUnit()){//empeche déplacement visuel sur une unité...
+					deplacement.deplacementVisuel();
+					that.choixChemin = false;
+				}
+				that.gestionMenu();
 			}
 		}
 		else if(that.choixCible){
@@ -65,9 +63,9 @@ function Controller(map, team) {
 		}
 		else if(that.choixDepot){
 
-			if(transport[that.selectedUnit.id].isDepot(that.caseSurvolee))
+			if(that.transport[that.selectedUnit.id].isDepot(that.caseSurvolee))
 			{
-				transport[that.selectedUnit.id].deposerVoyageur(that.caseSurvolee);
+				that.transport[that.selectedUnit.id].deposerVoyageur(that.caseSurvolee);
 				that.choixDepot = false;
 			}
 		}
@@ -106,7 +104,7 @@ function Controller(map, team) {
 			teams[myTeam].finJour();
 		}
 		*/
-		// mode dev :
+		/* mode dev : */
 		teams[myTeam].finJour();
 		teams[myTeam].debutJour();
 	});
@@ -119,6 +117,7 @@ function Controller(map, team) {
 		deplacement.confirme();
 		that.choixCible = false;
 		that.choixChemin = false;
+		that.clickedTransportUnit = false;
 		that.warfog.recalcul();
 
 	});
@@ -131,13 +130,17 @@ function Controller(map, team) {
 		$('#deplacement_layer td').css('background','');
 		that.choixCible = true;	
 		that.choixChemin = false;
-			
 		that.tir.afficherCibles();
 	});
 	$('#menuBox #decharge').on('click',function(){
 		that.choixDepot = true;
 		that.choixChemin = false;
-		transport[that.selectedUnit.id].getDepot();
+		that.transport[that.selectedUnit.id].getDepot();
+	});
+	$('#menuBox #charge').on('click',function(){
+		that.choixChemin = false;
+		that.transport[that.clickedTransportUnit].ajouterVoyageur();
+		$('#menuBox #wait').trigger('click');
 	});
 
 	$('#menuBox #cancel').on('click',function(){
@@ -145,6 +148,7 @@ function Controller(map, team) {
 		deplacement.cancel();
 		that.choixCible = false;
 		that.choixChemin = false;
+		that.clickedTransportUnit = false;
 		controller.loadLastCanvas();
 
 	});
@@ -196,11 +200,12 @@ function Controller(map, team) {
 			/*générer un menu adapté aux actions possibles*/
 			/*en fonction de l'unit, et de sa position*/
 			
-			$('#menuBox a').not('#wait, #cancel').hide();
+			$('#menuBox a').not('#cancel, #wait').hide();
 			unitCoord = [that.selectedUnit.x,that.selectedUnit.y];
 			//capture
 			if(that.isBat(unitCoord) && !that.isBatAllie(unitCoord)){
 				$('#menuBox #capture').show();
+				$('#menuBox #wait').show();
 			}
 			//tir
 			that.tir = new Tir(that.selectedUnit);
@@ -208,6 +213,18 @@ function Controller(map, team) {
 			that.tir.getCibles();
 			if(that.tir.cibles.length){
 				$('#menuBox #attack').show();
+				$('#menuBox #wait').show();		
+			}
+			//charge
+			if(that.clickedTransportUnit){
+				that.transport[that.clickedTransportUnit] = new Transport(units[that.clickedTransportUnit],that.selectedUnit);
+				$('#menuBox #charge').show();
+				$('#menuBox #wait').hide();
+			}
+			//decharge; affiné en vérifiant la présence de points de dépot ?
+			if(that.selectedUnit.isTransporting){
+				$('#menuBox #decharge').show();
+				$('#menuBox #wait').show();	
 			}
 		}
 		Controller.prototype.placementCurseur = function(e) {
