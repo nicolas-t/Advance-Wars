@@ -46,13 +46,16 @@ display:block;
 	z-index:10;
 	display:none;
 }
+.vtb{
+z-index:9;
+}
 .bats{
 	width:19px;
 	height:31px;
 	margin-left:0px;
 	margin-top:-15px;
 	position:absolute;
-	z-index:9;
+	z-index:8;
 	display:block;
 }
 .pictoVie, .pictoTransport, .pictoEssence{

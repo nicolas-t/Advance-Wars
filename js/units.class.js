@@ -110,7 +110,7 @@ function Unit(team, type, x, y, active, spec) {
 			if(this.active){a=''}else{a='_down'}
 			this.updatePositionVisuelle([this.x,this.y]);
 			
-			$(this.elem).attr('id', 'unit_'+this.id).addClass('units '+this.team.color+'').css({
+			$(this.elem).attr('id', 'unit_'+this.id).addClass('units '+this.team.color+' '+this.type+'').css({
 				'background': 'url(images/units/'+this.team.color+'/'+this.type+''+a+'.gif)'
 			});
 		}
@@ -238,6 +238,7 @@ $(document).ready(function(){
 	units.push(new Unit( teams[0], 'tank', 1, 9, true, $.extend(true, {}, BDD.Unites.Tank)));
 	units.push(new Unit( teams[0], 'lmiss', 2, 9, true, $.extend(true, {}, BDD.Unites.Lmiss)));
 	units.push(new Unit( teams[0], 'infantry', 3,7, true, $.extend(true, {}, BDD.Unites.Infantry)));
+	units.push(new Unit( teams[0], 'vtb', 3,8, true, $.extend(true, {}, BDD.Unites.Vtb)));
 	
 	//def Bats
 	bats[0] = new Bat(0, teams[2], 'ville', 3, 6);
