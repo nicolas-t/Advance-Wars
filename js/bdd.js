@@ -40,7 +40,8 @@ var BDD = {
 			   primAmmo : {infantry : 55, bazooka : 45, recon : 12, vtb : 14, tank : 5, tankm : 1 , neotank : 1, dca : 5, artillery :15, aair : 26, lmiss : 25,  cuirasse : 0, sub : 0, destr : 0, barge : 0, helico : 7, chass :0 , bomba : 0, helitrans :30 },
 			    secAmmo : {infantry : 55, bazooka : 45, recon : 12, vtb : 14, tank : 5, tankm : 1 , neotank : 1, dca : 5, artillery :15, aair : 26, lmiss : 25,  cuirasse : 0, sub : 0, destr : 0, barge : 0, helico : 7, chass :0 , bomba : 0, helitrans :30 }
 			    },
-			c_avancement : {'route' : 1, 'foret' : 2, 'plaine' : 2, 'plage' : 0, 'montagne' : 3, 'mer' : 0, 'lac' : 0}
+			c_avancement : {'route' : 1, 'foret' : 2, 'plaine' : 2, 'plage' : 0, 'montagne' : 3, 'mer' : 0, 'lac' : 0},
+			canCapture :  true
 		},
 		Bazooka: {
 			cout : 3000,
@@ -55,7 +56,8 @@ var BDD = {
 			   primAmmo : {infantry : 65, bazooka : 55, tank : 55, tankm : 15 , neotank : 15, recon : 85, dca : 65, aair : 85, artillery :70,  lmiss : 85, vtb : 75,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,helitrans :35, helico : 9, chass :0 , bomba : 0 },
 			    secAmmo : {infantry : 65, bazooka : 55, tank : 6, tankm : 1 , neotank : 1, recon : 18, dca : 6, aair : 35, artillery :32,  lmiss : 35, vtb : 20,  barge : 0, destr : 0,  sub : 0, cuirasse : 0,helitrans :35, helico : 9, chass :0 , bomba : 0}
 			},
-			c_avancement : {'route' : 1, 'foret' : 2, 'plaine' : 2, 'plage' : 0, 'montagne' : 3, 'mer' : 0, 'lac' : 0}
+			c_avancement : {'route' : 1, 'foret' : 2, 'plaine' : 2, 'plage' : 0, 'montagne' : 3, 'mer' : 0, 'lac' : 0},
+			canCapture :  true
 		},
 		Tank: {
 			cout : 7000,
