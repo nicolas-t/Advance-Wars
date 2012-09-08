@@ -234,7 +234,7 @@ function Controller(map, team) {
 		Controller.prototype.choixCurseur = function(e) {
 			if($(e).hasClass('cible')){
 				$('#cursor').attr('class', 'cursorFire');
-				$('#degatsBox').html('<img src="images/pictos/degats.gif" /> Dégâts : '+that.tir.degats[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]+'%');
+				$('#degatsBox').html('<img src="images/pictos/degats.gif" /> Dégâts : '+Math.round(that.tir.degats[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]])+'%');
 			}
 			else{
 				$('#cursor').attr('class', 'cursorSelect');
