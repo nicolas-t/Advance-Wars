@@ -203,7 +203,7 @@ function Controller(map, team) {
 			$('#menuBox a').not('#cancel, #wait').hide();
 			unitCoord = [that.selectedUnit.x,that.selectedUnit.y];
 			//capture
-			if(that.isBat(unitCoord) && !that.isBatAllie(unitCoord)){
+			if(that.isBat(unitCoord) && !that.isBatAllie(unitCoord) && that.selectedUnit.spec.canCapture !== undefined  && that.selectedUnit.spec.canCapture == true){
 				$('#menuBox #capture').show();
 				$('#menuBox #wait').show();
 			}
