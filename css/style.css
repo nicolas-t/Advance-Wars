@@ -152,4 +152,15 @@ z-index:9;
 .trace_fleche_g{
 	background-position : -144px;
 }
-
+.box{
+z-index:10000;
+left:260px;
+top:5px;
+display:none;
+font-size:12px;
+position:absolute;
+padding:5px;
+border:1px solid silver;
+background:#fff;
+box-shadow: 3px 3px 4px silver;
+}

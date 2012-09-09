@@ -75,7 +75,7 @@
 		<div id="units_container"></div>
 		<div id="bats_container"></div>
 
-		<div id="menuBox" style="display:none;font-size:12px;position:absolute; left:260px;width:135px;padding:10px;height:80px; border:1px solid silver;">
+		<div id="menuBox" class="box">
 			 <a href="#" id="capture"><img src="images/pictos/capturer.gif" /> Capturer</a>
 			 <a href="#" id="decharge"><img src="images/pictos/charger.gif" /> Decharger</a>
 			 <a href="#" id="charge"><img src="images/pictos/charger.gif" /> Charger</a>
