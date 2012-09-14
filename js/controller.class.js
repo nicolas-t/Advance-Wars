@@ -74,6 +74,7 @@ function Controller(map, team) {
 			{
 				$('#menuBox').css('display', 'block');
 				that.selectedUnit = units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]];
+				that.selectedUnit.updateCapture(false);
 				deplacement = new Deplacement(that.selectedUnit);
 				deplacement.getPortee();
 				that.choixChemin = true;
@@ -122,6 +123,7 @@ function Controller(map, team) {
 
 	});
 	$('#menuBox #capture').on('click',function(){
+		that.selectedUnit.updateCapture(true);
 		var bat = bats[batsMap[that.selectedUnit.x+'_'+that.selectedUnit.y]]
 		bat.updateCapture(Math.floor(that.selectedUnit.spec.vie/10));
 		$('#menuBox #wait').trigger('click');

@@ -54,6 +54,7 @@ function Bat(id, team, type, x, y) {
 			this.capture = this.capture + value;
 			if(this.capture >= 20){
 				this.capture = 0;
+				controller.selectedUnit.updateCapture(false);
 				this.changeTeam();
 			}
 		}
@@ -182,6 +183,14 @@ function Unit(team, type, x, y, active, spec) {
 			}
 			else if(this.spec.vie<100 && this.hasPictoVie()){
 				$('#pictoVie_'+this.id).attr('class', 'pictoVie petitsChiffres n_'+Math.floor(this.spec.vie/10));
+			}
+		}
+ 		Unit.prototype.updateCapture = function(value) {
+			if(value){
+				$(this.elem).append('<img id="pictoCapture_'+this.id+'" class="pictoCapture" src="images/pictos/capture.gif"/>');
+			}
+			else{
+				$('#pictoCapture_'+this.id).remove();
 			}
 		}
 		Unit.prototype.updateActive = function(newValue) {
