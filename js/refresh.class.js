@@ -25,7 +25,7 @@
 		Refresh.prototype.push = function() {
 			var seen = [];
 			var lol = JSON.stringify(teams, function(key, val) {
-				if(key == "elem" || key == "attaque" || key == "c_avancement"){
+				if(key == "elem" || key == "attaque" || key == "c_avancement" || (key == "color" && val == "gray")){
 					return undefined;
 				}
 			   if (typeof val == "object") {
@@ -60,6 +60,7 @@
 		}
 		// aucune gestion des unites mortes.
 		Refresh.prototype.update = function(retour) {
+		
 			for(i = 0; i<retour.length; i++)
 			{
 				for(j = 0; j<retour[i].units.length; j++)

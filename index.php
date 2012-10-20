@@ -37,6 +37,7 @@
 	myTeamInverse[0] = 1;
 	myTeamInverse[1] = 0;
 	var partieId = <?php echo (int)$_GET['id']; ?>;
+	var modeSync = false;
 	</script>
 
 

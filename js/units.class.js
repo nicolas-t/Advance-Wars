@@ -12,7 +12,9 @@ function Team(id, color, heros) {
 			for(i = 0; i<this.units.length; i++){
 				this.units[i].updateActive(false);
 			}
-			//controller.refresh.changeJoueur(myTeamInverse[myTeam]);
+			if(modeSync){
+				controller.refresh.changeJoueur(myTeamInverse[myTeam]);
+			}
 			this.jours++;
 		}
 		Team.prototype.debutJour = function() {
