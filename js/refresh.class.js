@@ -88,6 +88,7 @@
 							'background': 'url(images/bats/'+retour[i].color+'/'+retour[i].bats[h].type+'.png)'
 						});
 					}
+					// retour non cyclique , on perd retour[i].bats[h].team (et par la même bats[id].team
 					$.extend(true, bats[id], retour[i].bats[h]);
 				}
 			}

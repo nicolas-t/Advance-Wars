@@ -20,7 +20,6 @@ function Team(id, color, heros) {
 		Team.prototype.debutJour = function() {
 			for(i = 0; i<this.units.length; i++){
 				this.units[i].updateActive(true);
-
 			}
 			this.jours++;
 		}
@@ -256,7 +255,7 @@ $(document).ready(function(){
 	units.push(new Unit( teams[0], 'infantry', 3,7, true, $.extend(true, {}, BDD.Unites.Infantry)));
 	
 	//def Bats
-	bats[0] = new Bat(0, teams[2], 'ville', 3, 6);
+	bats[0] = new Bat(0, teams[1], 'ville', 3, 6);
 	//bats[1] = new Bat(1, teams[2], 'usine', 1, 7);
 	//bats[1] = new Bat(1, teams[1], 'usine', 13, 2);
 
