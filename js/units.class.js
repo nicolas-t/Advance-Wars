@@ -56,10 +56,10 @@ function Bat(id, team, type, x, y) {
 			if(this.capture >= 20){
 				this.capture = 0;
 				controller.selectedUnit.updateCapture(false);
-				this.changeTeam();
+				this.changeTeam(controller.team);
 			}
 		}
-		Bat.prototype.changeTeam = function() {
+		Bat.prototype.changeTeam = function(newTeam) {
 			// on retire de l'ancienne team
 			for(j=0;j<this.team.bats.length;j++)// pas super tout ça
 			{
@@ -70,8 +70,8 @@ function Bat(id, team, type, x, y) {
 			this.team.bats.splice(v,1);
 
 			// et on ajoute dans la nouvelle team
-			this.team = controller.team;
-			controller.team.bats.push(this);
+			this.team = newTeam;
+			newTeam.bats.push(this);
 			$(this.elem).attr('class', 'bats '+this.team.color).css({
 				'background': 'url(images/bats/'+this.team.color+'/'+this.type+'.png)'
 			});

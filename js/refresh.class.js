@@ -58,11 +58,12 @@
 				}
 			});
 		}
-		// aucune gestion des unites mortes.
 		Refresh.prototype.update = function(retour) {
 			for(i = 0; i<retour.length; i++)
 			{
 				/* Units */ 
+				/* Aucune gestion des unites detruites */
+
 				for(j = 0; j<retour[i].units.length; j++)
 				{	
 					id = retour[i].units[j].id;
@@ -83,13 +84,7 @@
 				for(h = 0; h<retour[i].bats.length; h++)
 				{	
 					id = retour[i].bats[h].id;
-					if(retour[i].color != undefined){
-						$('#bat_'+id).attr('class', 'bats '+retour[i].color).css({
-							'background': 'url(images/bats/'+retour[i].color+'/'+retour[i].bats[h].type+'.png)'
-						});
-					}
-					// retour non cyclique , on perd retour[i].bats[h].team (et par la même bats[id].team
-					$.extend(true, bats[id], retour[i].bats[h]);
+					bats[id].changeTeam(retour[i]);
 				}
 			}
 
