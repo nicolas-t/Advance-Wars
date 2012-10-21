@@ -72,7 +72,7 @@ function Bat(id, team, type, x, y) {
 
 			// et on ajoute dans la nouvelle team
 			this.team = controller.team;
-			this.team.bats.push(this);
+			controller.team.bats.push(this);
 			$(this.elem).attr('class', 'bats '+this.team.color).css({
 				'background': 'url(images/bats/'+this.team.color+'/'+this.type+'.png)'
 			});
@@ -243,17 +243,21 @@ $(document).ready(function(){
 	units.push(new Unit( teams[1], 'infantry', 11, 2, true, $.extend(true, {}, BDD.Unites.Infantry)));
 	units.push(new Unit( teams[1], 'vtb', 11, 3, true, $.extend(true, {}, BDD.Unites.Vtb)));
 	*/
-	units.push(new Unit( teams[1], 'recon', 5, 9, true, $.extend(true, {}, BDD.Unites.Tank)));
-	
+	//units.push(new Unit( teams[1], 'recon', 5, 9, true, $.extend(true, {}, BDD.Unites.Tank)));
+	units.push(new Unit( teams[1], 'infantry', 4,6, true, $.extend(true, {}, BDD.Unites.Infantry)));
+
+		
+	/*
 	units.push(new Unit( teams[0], 'recon', 1, 10, true, $.extend(true, {}, BDD.Unites.Recon)));
 	units.push(new Unit( teams[0], 'tank', 1, 9, true, $.extend(true, {}, BDD.Unites.Tank)));
 	units.push(new Unit( teams[0], 'lmiss', 2, 9, true, $.extend(true, {}, BDD.Unites.Lmiss)));
-	units.push(new Unit( teams[0], 'infantry', 3,7, true, $.extend(true, {}, BDD.Unites.Infantry)));
 	units.push(new Unit( teams[0], 'vtb', 3,8, true, $.extend(true, {}, BDD.Unites.Vtb)));
+	*/
+	units.push(new Unit( teams[0], 'infantry', 3,7, true, $.extend(true, {}, BDD.Unites.Infantry)));
 	
 	//def Bats
 	bats[0] = new Bat(0, teams[2], 'ville', 3, 6);
-	bats[1] = new Bat(1, teams[2], 'usine', 1, 7);
+	//bats[1] = new Bat(1, teams[2], 'usine', 1, 7);
 	//bats[1] = new Bat(1, teams[1], 'usine', 13, 2);
 
 });

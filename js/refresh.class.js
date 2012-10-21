@@ -60,9 +60,9 @@
 		}
 		// aucune gestion des unites mortes.
 		Refresh.prototype.update = function(retour) {
-		
 			for(i = 0; i<retour.length; i++)
 			{
+				/* Units */ 
 				for(j = 0; j<retour[i].units.length; j++)
 				{	
 					id = retour[i].units[j].id;
@@ -77,6 +77,18 @@
 					else{// c'est une nouvelle unité, il faut la créer
 						
 					}					
+				}
+				
+				/* Bats */
+				for(h = 0; h<retour[i].bats.length; h++)
+				{	
+					id = retour[i].bats[h].id;
+					if(retour[i].color != undefined){
+						$('#bat_'+id).attr('class', 'bats '+retour[i].color).css({
+							'background': 'url(images/bats/'+retour[i].color+'/'+retour[i].bats[h].type+'.png)'
+						});
+					}
+					$.extend(true, bats[id], retour[i].bats[h]);
 				}
 			}
 
