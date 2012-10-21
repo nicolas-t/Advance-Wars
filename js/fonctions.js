@@ -10,6 +10,10 @@ function getID(s){
 	g = parseInt(l[0]);
 	return g;
 }
+function capitaliseFirstLetter(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 window.onload = function() {
 	controller = new Controller(map[nom_map], teams[myTeam]);
 	controller.afficherCarte();
