@@ -64,22 +64,22 @@
 				/* Units */ 
 				/* Aucune gestion des unites detruites */
 
-				for(j = 0; j<retour[i].units.length; j++)
+				for(j = 0; j < retour[i].units.length; j++)
 				{	
 					id = retour[i].units[j].id;
-					if(units[id] != 'undefined'){
+					if(units[id] !== undefined){
 						delete unitsMap[units[id].x+'_'+units[id].y];
 						$.extend(true, units[id], retour[i].units[j]);
-						controller.warfog.getAdversairesVisibles();
 						units[id].updatePosition([retour[i].units[j].x, retour[i].units[j].y]);
 						units[id].updatePositionVisuelle([retour[i].units[j].x, retour[i].units[j].y]);
 						units[id].updateVie(0);
 					}
 					else{// c'est une nouvelle unité, il faut la créer
-						
+						// BUG : l'unité reste display:none; malgres l'appel warfog.getAdversairesVisibles();
+						units.push(new Unit(retour[i], retour[i].units[j].type, retour[i].units[j].x, retour[i].units[j].y, true, $.extend(true, {}, BDD.Unites[capitaliseFirstLetter(retour[i].units[j].type)])));
 					}					
 				}
-				
+
 				/* Bats */
 				for(h = 0; h<retour[i].bats.length; h++)
 				{	
@@ -87,6 +87,8 @@
 					bats[id].changeTeam(retour[i]);
 				}
 			}
+			controller.warfog.getAdversairesVisibles();
+
 
 		}
 		Refresh.initialized = true;

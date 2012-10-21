@@ -172,10 +172,6 @@ function Unit(team, type, x, y, active, spec) {
 			ancienne_valeur = this.spec.vie;
 			this.spec.vie = this.spec.vie - value;
 			if(this.spec.vie<=10){
-				//pour le test en ligne, on empeche la destruction de l'unite
-				//this.spec.vie = 20;
-				//$('#pictoVie_'+this.id).remove();
-				//this.updateVie(0);
 				this.detruireUnite();
 			}
 			else if(this.spec.vie<100 && !this.hasPictoVie()){
@@ -234,8 +230,9 @@ $(document).ready(function(){
 	teams[2] = new Team(2, 'gray', '');// batiments neutres
 	
 	//def Units	
-	/*	
-	units.push(new Unit( teams[1], 'recon', 10, 0, true, $.extend(true, {}, BDD.Unites.Recon)));
+		
+	units.push(new Unit( teams[1], 'recon', 2, 8, true, $.extend(true, {}, BDD.Unites.Recon)));
+	/*
 	units.push(new Unit( teams[1], 'tank', 10, 1, true, $.extend(true, {}, BDD.Unites.Tank)));
 	units.push(new Unit( teams[1], 'lmiss', 11, 1, true, $.extend(true, {}, BDD.Unites.Lmiss)));
 	units.push(new Unit( teams[1], 'bazooka', 10, 2, true, $.extend(true, {}, BDD.Unites.Bazooka)));
@@ -252,11 +249,13 @@ $(document).ready(function(){
 	units.push(new Unit( teams[0], 'lmiss', 2, 9, true, $.extend(true, {}, BDD.Unites.Lmiss)));
 	units.push(new Unit( teams[0], 'vtb', 3,8, true, $.extend(true, {}, BDD.Unites.Vtb)));
 	*/
+	units.push(new Unit( teams[0], 'neotank', 4, 7, true, $.extend(true, {}, BDD.Unites.Neotank)));
+
 	units.push(new Unit( teams[0], 'infantry', 3,7, true, $.extend(true, {}, BDD.Unites.Infantry)));
 	
 	//def Bats
 	bats[0] = new Bat(0, teams[1], 'ville', 3, 6);
-	//bats[1] = new Bat(1, teams[2], 'usine', 1, 7);
+	bats[1] = new Bat(1, teams[0], 'usine', 1, 7);
 	//bats[1] = new Bat(1, teams[1], 'usine', 13, 2);
 
 });
