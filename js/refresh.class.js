@@ -75,8 +75,7 @@
 						units[id].updateVie(0);
 					}
 					else{// c'est une nouvelle unité, il faut la créer
-						// BUG : l'unité reste display:none; malgres l'appel warfog.getAdversairesVisibles();
-						units.push(new Unit(retour[i], retour[i].units[j].type, retour[i].units[j].x, retour[i].units[j].y, true, $.extend(true, {}, BDD.Unites[capitaliseFirstLetter(retour[i].units[j].type)])));
+						units.push(new Unit(teams[retour[i].id], retour[i].units[j].type, retour[i].units[j].x, retour[i].units[j].y, true, $.extend(true, {}, BDD.Unites[capitaliseFirstLetter(retour[i].units[j].type)])));
 					}					
 				}
 
