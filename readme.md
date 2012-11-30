@@ -2,9 +2,9 @@
 -----------
 Advance wars is a gemboy strategy game, here is a javascript clone.
 Developped with :
-*jQuery
-*node.js
-*socket.io 
+* jQuery
+* node.js
+* socket.io 
 
 Demo
 -----------
