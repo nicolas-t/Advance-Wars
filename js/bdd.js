@@ -316,6 +316,24 @@ var BDD = {
 			c_avancement : {'route' : 1, 'foret' : 1, 'plaine' : 1, 'plage' : 1, 'montagne' : 1, 'mer' : 1, 'lac' : 1}
 		},
 		
-    }
+    },
+	Heroes : {
+		Andy : {
+			nom : 'Andy',
+			avatar : 'images/heroes/andy.gif'
+		},
+		Max : {
+			nom : 'Max',
+			avatar : 'images/heroes/max.gif'
+		},
+		Sami : {
+			nom : 'Sami',
+			avatar : 'images/heroes/sami.gif'
+		},
+		Olaf : {
+			nom : 'Olaf',
+			avatar : 'images/heroes/olaf.gif'
+		}
+	}
 }
 

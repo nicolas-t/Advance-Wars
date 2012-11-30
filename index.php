@@ -30,6 +30,7 @@
 	var units = new Array();
 	var teams = new Array();
 	var bats = new Array();
+	var heroes = new Array();
 	var unitsMap = new Array();		
 	var batsMap = new Array();
 	
@@ -38,8 +39,8 @@
 		//def HTML map
 		genererHTMLcarte();
 		//def Teams :
-		teams[0] = new Team(0, 'blue', 'Max');
-		teams[1] = new Team(1, 'red', 'Jeanne');
+		teams[0] = new Team(0, 'blue', $.extend(true, {}, BDD.Heroes.Max));
+		teams[1] = new Team(1, 'red', $.extend(true, {}, BDD.Heroes.Sami));
 		teams[2] = new Team(2, 'gray', '');// batiments neutres
 		
 		//def Bats
