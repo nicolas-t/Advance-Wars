@@ -103,7 +103,7 @@ function Unit(team, type, x, y, active, spec) {
 	this.elem = ''; // DOM créé en bas.
 		
 	unitsMap[this.x+'_'+this.y] = this.id;
-
+	
 	if ( typeof Unit.initialized == "undefined" ) 
 	{
 		Unit.prototype.creerDOM = function() {
@@ -217,45 +217,4 @@ function Unit(team, type, x, y, active, spec) {
 	this.creerDOM();
 }	
 
-var units = new Array();
-var teams = new Array();
-var bats = new Array();
-var unitsMap = new Array();		
-var batsMap = new Array();		
-
-$(document).ready(function(){
-	//def Teams :
-	teams[0] = new Team(0, 'blue', 'Max');
-	teams[1] = new Team(1, 'red', 'Jeanne');
-	teams[2] = new Team(2, 'gray', '');// batiments neutres
 	
-	//def Units	
-		
-	units.push(new Unit( teams[1], 'recon', 2, 8, true, $.extend(true, {}, BDD.Unites.Recon)));
-	/*
-	units.push(new Unit( teams[1], 'tank', 10, 1, true, $.extend(true, {}, BDD.Unites.Tank)));
-	units.push(new Unit( teams[1], 'lmiss', 11, 1, true, $.extend(true, {}, BDD.Unites.Lmiss)));
-	units.push(new Unit( teams[1], 'bazooka', 10, 2, true, $.extend(true, {}, BDD.Unites.Bazooka)));
-	units.push(new Unit( teams[1], 'infantry', 11, 2, true, $.extend(true, {}, BDD.Unites.Infantry)));
-	units.push(new Unit( teams[1], 'vtb', 11, 3, true, $.extend(true, {}, BDD.Unites.Vtb)));
-	*/
-	//units.push(new Unit( teams[1], 'recon', 5, 9, true, $.extend(true, {}, BDD.Unites.Tank)));
-	units.push(new Unit( teams[1], 'infantry', 4,6, true, $.extend(true, {}, BDD.Unites.Infantry)));
-
-		
-	/*
-	units.push(new Unit( teams[0], 'recon', 1, 10, true, $.extend(true, {}, BDD.Unites.Recon)));
-	units.push(new Unit( teams[0], 'tank', 1, 9, true, $.extend(true, {}, BDD.Unites.Tank)));
-	units.push(new Unit( teams[0], 'lmiss', 2, 9, true, $.extend(true, {}, BDD.Unites.Lmiss)));
-	units.push(new Unit( teams[0], 'vtb', 3,8, true, $.extend(true, {}, BDD.Unites.Vtb)));
-	*/
-	units.push(new Unit( teams[0], 'neotank', 4, 7, true, $.extend(true, {}, BDD.Unites.Neotank)));
-
-	units.push(new Unit( teams[0], 'infantry', 3,7, true, $.extend(true, {}, BDD.Unites.Infantry)));
-	
-	//def Bats
-	bats[0] = new Bat(0, teams[1], 'ville', 3, 6);
-	bats[1] = new Bat(1, teams[0], 'usine', 1, 7);
-	//bats[1] = new Bat(1, teams[1], 'usine', 13, 2);
-
-});

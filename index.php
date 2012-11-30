@@ -8,7 +8,6 @@
     </head>
 
     <body>
-	<!--<script src="http://code.jquery.com/jquery-1.8.0.js"></script> -->
 	<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 	<script src="js/bdd.js"></script>
 	<script src="maps/hip.js"></script>
@@ -21,56 +20,54 @@
 	<script src="js/transport.class.js"></script>
 	<script src="js/refresh.class.js"></script>
 	<script>
-	function tri_nombres(a,b){return a-b;}
-	function debug_map(arr){
-			$('#deplacement_layer td').css('background','');
-
-		for (a in arr)
-		{
-			$('#deplacement_'+a).css('background','blue');
-		}
-	}
-	var maxX = 15;
-	var maxY = 10;
-	var myTeam = <?php echo (int)$_GET['team']; ?>;
-	var myTeamInverse = [];
-	myTeamInverse[0] = 1;
-	myTeamInverse[1] = 0;
-	var partieId = <?php echo (int)$_GET['id']; ?>;
-	var modeSync = true;
+	
+	//def constante
+	var myTeam = 0;
+	var myTeamInverse = [1,0];
+	var partieId = 0;
+	var modeSync = false;
+	
+	var units = new Array();
+	var teams = new Array();
+	var bats = new Array();
+	var unitsMap = new Array();		
+	var batsMap = new Array();
+	
+	$(document).ready(function() 
+	{
+		//def HTML map
+		genererHTMLcarte();
+		//def Teams :
+		teams[0] = new Team(0, 'blue', 'Max');
+		teams[1] = new Team(1, 'red', 'Jeanne');
+		teams[2] = new Team(2, 'gray', '');// batiments neutres
+		
+		//def Bats
+		bats[0] = new Bat(0, teams[1], 'ville', 3, 6);
+		bats[1] = new Bat(1, teams[0], 'usine', 1, 7);	
+		
+		//def Units	
+		units.push(new Unit( teams[1], 'recon', 2, 8, true, $.extend(true, {}, BDD.Unites.Recon)));
+		units.push(new Unit( teams[1], 'infantry', 4,6, true, $.extend(true, {}, BDD.Unites.Infantry)));
+		units.push(new Unit( teams[0], 'vtb', 3,8, true, $.extend(true, {}, BDD.Unites.Vtb)));
+		units.push(new Unit( teams[0], 'neotank', 4, 7, true, $.extend(true, {}, BDD.Unites.Neotank)));
+		units.push(new Unit( teams[0], 'infantry', 3,7, true, $.extend(true, {}, BDD.Unites.Infantry)));
+	});
+	
+	$(window).load(function() {
+		controller = new Controller(map[nom_map], teams[myTeam]);
+		controller.afficherCarte();
+	});
+	
 	</script>
-
-
-			<?php 
-			$maxY = 10;
-			$maxX = 15;
-			$deplacement_layer = $trace_layer = $over_layer = "";
-			for ($y=0; $y<=$maxY; $y++){
-				$deplacement_layer.= '<tr>';
-				$trace_layer.= '<tr>';
-				$over_layer.= '<tr>';
-					for ($x=0; $x<=$maxX; $x++){
-						$deplacement_layer.= '<td id="deplacement_'.$x.'_'.$y.'"></td>';
-						$trace_layer.= '<td id="trace_'.$x.'_'.$y.'"></td>';
-						$over_layer.= '<td id="over_'.$x.'_'.$y.'"></td>';
-					}
-					$deplacement_layer.= '</tr>';
-					$trace_layer.= '</tr>';
-					$over_layer.= '</tr>';
-					
-				}
-			?>
 		<img id="canvasSource" src="maps/hip.gif" style="position:absolute;top:-300px;" />
 		<canvas id="canvasMap" width="256" height="176" style="position:absolute;">Votre navigateur ne supporte pas les Canvas.</canvas>
 
 		<table id="deplacement_layer" style="position:absolute;opacity:0.6;" border="0" cellspacing="0" cellpadding="0">
-			<?php echo $deplacement_layer; ?>
 		</table>
 		<table id="trace_layer" style="position:absolute;;" border="0" cellspacing="0" cellpadding="0">
-			<?php echo $trace_layer; ?>
 		</table>
 		<table id="over_layer" style="position:absolute;opacity:0;z-index:100;" border="0" cellspacing="0" cellpadding="0">
-			<?php echo $over_layer; ?>
 		</table>
 		<div id="cursor" class="cursorSelect"></div>
 		<div id="units_container"></div>

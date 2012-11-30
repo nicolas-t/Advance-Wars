@@ -58,7 +58,7 @@
 				}
 			});
 		}
-		Refresh.prototype.update = function(retour) {
+		Refresh.prototype.update = function(retour){ 
 			for(i = 0; i<retour.length; i++)
 			{
 				/* Units */ 
@@ -77,8 +77,8 @@
 					else{// c'est une nouvelle unité, il faut la créer
 						units.push(new Unit(teams[retour[i].id], retour[i].units[j].type, retour[i].units[j].x, retour[i].units[j].y, true, $.extend(true, {}, BDD.Unites[capitaliseFirstLetter(retour[i].units[j].type)])));
 					}					
-				}
-
+				}	
+				
 				/* Bats */
 				for(h = 0; h<retour[i].bats.length; h++)
 				{	
@@ -86,6 +86,7 @@
 					bats[id].changeTeam(retour[i]);
 				}
 			}
+	
 			controller.warfog.getAdversairesVisibles();
 
 

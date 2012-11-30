@@ -86,8 +86,6 @@
 			}
 
 		}
-		
-
 		Transport.initialized = true;
 	}
 }

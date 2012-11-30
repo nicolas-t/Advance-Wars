@@ -2,18 +2,18 @@
 	this.team = team;
 	this.vue = [];
 	this.warfogTotal = '';
+
 	if (typeof Warfog.initialized == "undefined" ) {
 		Warfog.prototype.getAdversairesVisibles = function() {
 			for(var i=0; i < teams.length; i++){
-					for(var j=0; j < teams[i].units.length; j++){
-						if(($.inArray(teams[i].units[j].x+'_'+teams[i].units[j].y, this.vue) >= 0) || i == this.team.id){
-							$(teams[i].units[j].elem).css('display', 'block');
-						}
-						else{
-							$(teams[i].units[j].elem).css('display', 'none');
-						}					
+				for(var j=0; j < teams[i].units.length; j++){
+					if(($.inArray(teams[i].units[j].x+'_'+teams[i].units[j].y, this.vue) >= 0) || i == this.team.id){
+						$(teams[i].units[j].elem).css('display', 'block');
 					}
-				
+					else{
+						$(teams[i].units[j].elem).css('display', 'none');
+					}					
+				}
 			}
 		}
 		Warfog.prototype.recalcul = function() {
@@ -23,6 +23,7 @@
 		Warfog.prototype.afficherVue = function() {
 			this.getVue();
 			this.getAdversairesVisibles();
+			
 			for(var i=0; i < this.vue.length; i++){
 				controller.debrouilleWarfog(getXY(this.vue[i]));
 			}
@@ -35,7 +36,6 @@
 				}
 		
 			}
-
 			this.vueQuatresDirections(newX, newY, k+1, lim);
 		}		
 		Warfog.prototype.vueQuatresDirections = function(x, y, k, lim) {

@@ -1,4 +1,6 @@
 nom_map = "hip";
+var maxX = 15;
+var maxY = 10;
 map = new Array();
 map['hip'] = new Array();
 map['hip']['0_0'] = 'mer';
