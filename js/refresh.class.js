@@ -1,4 +1,6 @@
-﻿function Refresh(duree) {
+﻿/*note used anymore*/
+/*prefered socket and node js*/
+function Refresh(duree) {
 	this.duree = duree;
 	var that = this;
 
