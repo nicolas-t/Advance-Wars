@@ -9,6 +9,9 @@
 
     <body>
 	<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+	<script src="http://localhost:1337/socket.io/socket.io.js"></script>
+	<script src="client.js"></script>
+
 	<script src="js/bdd.js"></script>
 	<script src="maps/hip.js"></script>
 	<script src="js/fonctions.js"></script>
@@ -61,6 +64,9 @@
 	});
 	
 	</script>
+		<div id="debug-node" style="width:500px;height:500px;border:1px solid silver;position:absolute;right:0;top:0;">
+			debug node<br />
+		</div>
 		<img id="canvasSource" src="maps/hip.gif" style="position:absolute;top:-300px;" />
 		<canvas id="canvasMap" width="256" height="176" style="position:absolute;">Votre navigateur ne supporte pas les Canvas.</canvas>
 
