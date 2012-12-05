@@ -219,7 +219,7 @@
 					this.positionAvantConfirme = [this.unit.x, this.unit.y];
 					this.unit.updatePosition(getXY(cheminChoisi[j-1]));
 					this.unit.updateEssence(j-1);
-					$('#menuBox #wait').trigger('click');
+					$(document.getElementById('wait')).trigger('click');
 					return false;
 				}
 				if((j == cheminChoisi_length)){
@@ -229,7 +229,7 @@
 					this.unit.updateEssence(j-1);
 				}
 				else{
-					position = $('#over_'+cheminChoisi[j]).position();
+					position = $(document.getElementById('over_'+cheminChoisi[j])).position();
 					 e.animate({
 						"top" : position.top,
 						"left": position.left
@@ -237,7 +237,7 @@
 					  { queue: true, duration: 60, complete : /*efface le tracé rouge*/
 						  (function(z){
 								return function() {
-									$('#trace_'+z).attr('class', '');
+									$(document.getElementById('trace_'+z)).attr('class', '');
 								}
 						  })(cheminChoisi[j])
 					  }
@@ -250,7 +250,7 @@
 		}
 		Deplacement.prototype.cancel = function() {
 			this.unit.updatePosition(this.positionAvantConfirme);
-			var position = $('#over_'+this.positionAvantConfirme[0]+'_'+this.positionAvantConfirme[1]).position();
+			var position = $(document.getElementById('over_'+this.positionAvantConfirme[0]+'_'+this.positionAvantConfirme[1])).position();
 			$('#deplacement_layer td').css('background','');
 			$(this.unit.elem).css({'top' : position.top,'left':position.left});
 		}

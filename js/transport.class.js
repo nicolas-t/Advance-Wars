@@ -34,7 +34,7 @@
 				this.voyageur.pictoEssence = false;
 				this.voyageur.updateVie(0);
 				this.voyageur.updateEssence(0);
-				$('#menuBox #wait').trigger('click');
+				$(document.getElementById('wait')).trigger('click');
 				this.unit.updateTransport(false);
 			}
 			else{
@@ -46,7 +46,7 @@
 			{
 				if($.inArray(newX+'_'+newY, this.casesDepot) == -1){
 					this.casesDepot.push(newX+'_'+newY);
-					$('#deplacement_'+newX+'_'+newY).css('background','red');
+					$(document.getElementById('deplacement_'+newX+'_'+newY)).css('background','red');
 				}
 			}
 			this.depotQuatresDirections(newX, newY, k+1, lim);

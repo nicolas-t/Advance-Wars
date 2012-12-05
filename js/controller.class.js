@@ -71,9 +71,9 @@ function Controller(map, team) {
 			}
 		}
 		else{
-			if(that.isUnit() && that.isAllie() && that.isActive() && $('#menuBox').is(':hidden'))
+			if(that.isUnit() && that.isAllie() && that.isActive() && $(document.getElementById('menuBox')).is(':hidden'))
 			{
-				$('#menuBox').css('display', 'block');
+				$(document.getElementById('menuBox')).css('display', 'block');
 				that.selectedUnit = units[unitsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]]];
 				that.selectedUnit.updateCapture(false);
 				deplacement = new Deplacement(that.selectedUnit);
@@ -82,16 +82,16 @@ function Controller(map, team) {
 				that.gestionMenu();
 			}
 			else if(that.isBat([that.caseSurvolee[0],that.caseSurvolee[1]]) && !that.isUnit() && that.isBatAllie([that.caseSurvolee[0],that.caseSurvolee[1]])){
-				$('#shopBox').html('');
+				$(document.getElementById('menuBox')).html('');
 				id = batsMap[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]];
 				for(key in BDD.Unites){
 					if(bats[id].type == BDD.Unites[key].fabrication)
 					{
-						$('#shopBox').append('<img src="images/units/'+that.team.color+'/'+key.toLowerCase()+'.gif" /><a id="shop_'+key+'" href="#"> '+key+'</a> :<span> '+BDD.Unites[key].cout+'</span><br />');
-						$('#shop_'+key).on('click', { a: key }, function(event){
+						$(document.getElementById('shopBox')).append('<img src="images/units/'+that.team.color+'/'+key.toLowerCase()+'.gif" /><a id="shop_'+key+'" href="#"> '+key+'</a> :<span> '+BDD.Unites[key].cout+'</span><br />');
+						$(document.getElementById('shop_'+key)).on('click', { a: key }, function(event){
 							c = units.push(new Unit(that.team, event.data.a, bats[id].x, bats[id].y, false, $.extend(true, {}, BDD.Unites[event.data.a])));
 							$(units[c-1].elem).css('display','block');
-							$('#shopBox').html('');
+							$(document.getElementById('shopBox')).html('');
 							that.warfog.recalcul();
 						});
 					}
@@ -100,7 +100,7 @@ function Controller(map, team) {
 		}
 	});
 	
-	$('#jourBox	#finJour').click(function(){
+	$(document.getElementById('finJour')).click(function(){
 		/* mode sync : */
 		if(modeSync){
 			if(that.whosPlaying == myTeam){
@@ -115,10 +115,10 @@ function Controller(map, team) {
 	});
 	
 	//MENU 
-	$('#menuBox #wait').on('click',function(){
+	$(document.getElementById('wait')).on('click',function(){
 		$('#deplacement_layer td').css('background','');
 		$('#trace_layer td').attr('class','');	
-		$('#menuBox').css('display', 'none');
+		$(document.getElementById('menuBox')).css('display', 'none');
 		deplacement.confirme();
 		that.choixCible = false;
 		that.choixChemin = false;
@@ -126,31 +126,31 @@ function Controller(map, team) {
 		that.warfog.recalcul();
 
 	});
-	$('#menuBox #capture').on('click',function(){
+	$(document.getElementById('capture')).on('click',function(){
 		that.selectedUnit.updateCapture(true);
 		var bat = bats[batsMap[that.selectedUnit.x+'_'+that.selectedUnit.y]]
 		bat.updateCapture(Math.floor(that.selectedUnit.spec.vie/10));
-		$('#menuBox #wait').trigger('click');
+		$(document.getElementById('wait')).trigger('click');
 	});
-	$('#menuBox #attack').on('click',function(){
+	$(document.getElementById('attack')).on('click',function(){
 		$('#deplacement_layer td').css('background','');
 		that.choixCible = true;	
 		that.choixChemin = false;
 		that.tir.afficherCibles();
 	});
-	$('#menuBox #decharge').on('click',function(){
+	$(document.getElementById('decharge')).on('click',function(){
 		that.choixDepot = true;
 		that.choixChemin = false;
 		that.transport[that.selectedUnit.id].getDepot();
 	});
-	$('#menuBox #charge').on('click',function(){
+	$(document.getElementById('charge')).on('click',function(){
 		that.choixChemin = false;
 		that.transport[that.clickedTransportUnit].ajouterVoyageur();
 		$('#menuBox #wait').trigger('click');
 	});
 
-	$('#menuBox #cancel').on('click',function(){
-		$('#menuBox').css('display', 'none');
+	$(document.getElementById('cancel')).on('click',function(){
+		$(document.getElementById('menuBox')).css('display', 'none');
 		deplacement.cancel();
 		that.choixCible = false;
 		that.choixChemin = false;
@@ -210,40 +210,40 @@ function Controller(map, team) {
 			unitCoord = [that.selectedUnit.x,that.selectedUnit.y];
 			//capture
 			if(that.isBat(unitCoord) && !that.isBatAllie(unitCoord) && that.selectedUnit.spec.canCapture !== undefined  && that.selectedUnit.spec.canCapture == true){
-				$('#menuBox #capture').show();
-				$('#menuBox #wait').show();
+				$(document.getElementById('capture')).show();
+				$(document.getElementById('wait')).show();
 			}
 			//tir
 			that.tir = new Tir(that.selectedUnit);
 			that.tir.getPortee();
 			that.tir.getCibles();
 			if(that.tir.cibles.length){
-				$('#menuBox #attack').show();
-				$('#menuBox #wait').show();		
+				$(document.getElementById('attack')).show();
+				$(document.getElementById('wait')).show();		
 			}
 			//charge
 			if(that.clickedTransportUnit){
 				that.transport[that.clickedTransportUnit] = new Transport(units[that.clickedTransportUnit],that.selectedUnit);
-				$('#menuBox #charge').show();
-				$('#menuBox #wait').hide();
+				$(document.getElementById('charge')).show();
+				$(document.getElementById('wait')).hide();
 			}
 			//decharge; affiné en vérifiant la présence de points de dépot ?
 			if(that.selectedUnit.isTransporting){
-				$('#menuBox #decharge').show();
-				$('#menuBox #wait').show();	
+				$(document.getElementById('decharge')).show();
+				$(document.getElementById('wait')).show();	
 			}
 		}
 		Controller.prototype.placementCurseur = function(e) {
 			position = $(e).position();
-			$('#cursor').css({'left': position.left, 'top': position.top});
+			$(document.getElementById('cursor')).css({'left': position.left, 'top': position.top});
 		}
 		Controller.prototype.choixCurseur = function(e) {
 			if($(e).hasClass('cible')){
-				$('#cursor').attr('class', 'cursorFire');
-				$('#degatsBox').html('<img src="images/pictos/degats.gif" /> Dégâts : '+Math.round(that.tir.degats[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]])+'%');
+				$(document.getElementById('cursor')).attr('class', 'cursorFire');
+				$(document.getElementById('degatsBox')).html('<img src="images/pictos/degats.gif" /> Dégâts : '+Math.round(that.tir.degats[that.caseSurvolee[0]+'_'+that.caseSurvolee[1]])+'%');
 			}
 			else{
-				$('#cursor').attr('class', 'cursorSelect');
+				$(document.getElementById('cursor')).attr('class', 'cursorSelect');
 			}
 		}
 		Controller.prototype.isAllie = function() {

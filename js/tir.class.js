@@ -32,8 +32,8 @@
 		Tir.prototype.afficherCibles = function() {
 			for(var i =0; i < this.cibles.length; i++){
 				this.degats[this.cibles[i]] = this.calculerDegats(this.unit, units[unitsMap[this.cibles[i]]]);
-				$('#deplacement_'+this.cibles[i]).css('background','blue');
-				$('#over_'+this.cibles[i]).addClass('cible');
+				$(document.getElementById('deplacement_'+this.cibles[i])).css('background','blue');
+				$(document.getElementById('over_'+this.cibles[i])).addClass('cible');
 			}
 		}
 		Tir.prototype.calculPorteeTir = function(oldX, oldY, newX, newY, k, lim, arr) {
@@ -105,8 +105,8 @@
 				this.unit.updateVie(this.calculerDegats(adversaire, this.unit));
 				adversaire.updateAmmo();
 			}
-			$('#wait').trigger('click');
-			$('#cursor').attr('class', 'cursorSelect');
+			$(document.getElementById('wait')).trigger('click');
+			$(document.getElementById('cursor')).attr('class', 'cursorSelect');
 		}
 		Tir.prototype.isCible = function(caseSurvolee) {
 			if($.inArray(caseSurvolee[0]+'_'+caseSurvolee[1], this.cibles)>=0){

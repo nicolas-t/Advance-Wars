@@ -43,8 +43,8 @@ function Bat(id, team, type, x, y) {
 	if ( typeof Bat.initialized == "undefined" ) {
 		Bat.prototype.creerDOM = function() {
 			this.elem = document.createElement("div");
-			document.getElementById("bats_container").appendChild(this.elem);
-			var position = $('#over_'+this.x+'_'+this.y).position();
+			document.getElementById('bats_container').appendChild(this.elem);
+			var position = $(document.getElementById('over_'+this.x+'_'+this.y)).position();
 			$(this.elem).attr('id', 'bat_'+this.id).addClass('bats '+this.team.color).css({
 				'background': 'url(images/bats/'+this.team.color+'/'+this.type+'.png)',
 				'left': position.left,
@@ -139,7 +139,7 @@ function Unit(team, type, x, y, active, spec) {
 			unitsMap[newCoord[0]+'_'+newCoord[1]] = this.id;
 		}
 		Unit.prototype.updatePositionVisuelle = function(newCoord) {
-			var position = $('#over_'+newCoord[0]+'_'+newCoord[1]).position();
+			var position = $(document.getElementById('over_'+newCoord[0]+'_'+newCoord[1])).position();
 			$(this.elem).css({
 				'left': position.left,
 				'top' : position.top
@@ -160,7 +160,7 @@ function Unit(team, type, x, y, active, spec) {
 			// a faire
 		}
 	 	Unit.prototype.hasPictoVie = function() {
-			if($('#pictoVie_'+this.id).length == 0){
+			if($(document.getElementById('pictoVie_'+this.id)).length == 0){
 				return false;
 			}
 			else{
@@ -176,10 +176,10 @@ function Unit(team, type, x, y, active, spec) {
 			}
 			else if(this.spec.vie<100 && !this.hasPictoVie()){
 				//$(this.elem) ne marche pas ici... (firefox);  à retester
-				$('#unit_'+this.id+'').append('<div id="pictoVie_'+this.id+'" class="pictoVie petitsChiffres n_'+Math.floor(this.spec.vie/10)+'"></div>');
+				$(document.getElementById('unit_'+this.id)).append('<div id="pictoVie_'+this.id+'" class="pictoVie petitsChiffres n_'+Math.floor(this.spec.vie/10)+'"></div>');
 			}
 			else if(this.spec.vie<100 && this.hasPictoVie()){
-				$('#pictoVie_'+this.id).attr('class', 'pictoVie petitsChiffres n_'+Math.floor(this.spec.vie/10));
+				$(document.getElementById('pictoVie_'+this.id)).attr('class', 'pictoVie petitsChiffres n_'+Math.floor(this.spec.vie/10));
 			}
 		}
  		Unit.prototype.updateCapture = function(value) {
@@ -187,7 +187,7 @@ function Unit(team, type, x, y, active, spec) {
 				$(this.elem).append('<img id="pictoCapture_'+this.id+'" class="pictoCapture" src="images/pictos/capture.gif"/>');
 			}
 			else{
-				$('#pictoCapture_'+this.id).remove();
+				$(document.getElementById('pictoCapture_'+this.id)).remove();
 			}
 		}
 		Unit.prototype.updateActive = function(newValue) {
