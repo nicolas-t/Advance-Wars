@@ -1,0 +1,27 @@
+{
+  "name": "Advance-Wars",
+  "version": "0.0.1",
+  "author": "Nicolas Turlais",
+  "description": "Advance wars javascript clone",
+  "contributors": [ 
+    {
+      "name": "Nicolas Turlais"
+    } 
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicolas-t/Advance-Wars.git"
+  },
+  "keywords": [
+    "advance",
+    "wars",
+    "javascript"
+  ],
+  "dependencies" : {
+    "socket.io" :  "0.9.x"
+  },  
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.6"
+  }
+}
