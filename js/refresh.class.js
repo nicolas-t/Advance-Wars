@@ -1,4 +1,4 @@
-﻿/*note used anymore*/
+﻿/*not used anymore*/
 /*prefered socket and node js*/
 function Refresh(duree) {
 	this.duree = duree;

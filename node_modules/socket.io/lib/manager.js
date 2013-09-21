@@ -113,6 +113,7 @@ function Manager (server, options) {
 
   // reset listeners
   this.oldListeners = server.listeners('request').splice(0);
+  server.removeAllListeners('request');
 
   server.on('request', function (req, res) {
     self.handleRequest(req, res);
@@ -615,6 +616,7 @@ Manager.prototype.handleUpgrade = function (req, socket, head) {
 
   req.head = head;
   this.handleClient(data, req);
+  req.head = null;
 };
 
 /**

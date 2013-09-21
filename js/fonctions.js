@@ -36,4 +36,6 @@ function getID(s){
 function capitaliseFirstLetter(string){
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
+function isEven(value) {
+	return (value%2 == 0);
+}

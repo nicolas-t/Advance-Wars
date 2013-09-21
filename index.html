@@ -10,7 +10,6 @@
     <body>
 	<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 	<script src="http://localhost:1337/socket.io/socket.io.js"></script>
-	<script src="client.js"></script>
 
 	<script src="js/bdd.js"></script>
 	<script src="maps/hip.js"></script>
@@ -23,19 +22,20 @@
 	<script src="js/transport.class.js"></script>
 	<script src="js/refresh.class.js"></script>
 	<script>
-	
+
+
 	//def constante
-	var myTeam = 0;
+	var myTeam        = 0;
 	var myTeamInverse = [1,0];
-	var partieId = 0;
-	var modeSync = false;
+	var partieId      = 0;
+	var modeSync      = false;
 	
-	var units = new Array();
-	var teams = new Array();
-	var bats = new Array();
-	var heroes = new Array();
+	var units    = new Array();
+	var teams    = new Array();
+	var bats     = new Array();
+	var heroes   = new Array();
 	var unitsMap = new Array();		
-	var batsMap = new Array();
+	var batsMap  = new Array();
 	
 	$(document).ready(function() 
 	{
@@ -57,11 +57,35 @@
 		units.push(new Unit( teams[0], 'neotank', 4, 7, true, $.extend(true, {}, BDD.Unites.Neotank)));
 		units.push(new Unit( teams[0], 'infantry', 3,7, true, $.extend(true, {}, BDD.Unites.Infantry)));
 	});
-	
-	$(window).load(function() {
-		controller = new Controller(map[nom_map], teams[myTeam]);
-		controller.afficherCarte();
+
+	//node
+	jQuery(window).load(function(){
+		var socket = io.connect('http://localhost:1337');
+
+		socket.on('connect', function(){
+			socket.emit('newUser');
+		});
+
+		socket.on('log', function(data){
+			c = new Date();
+			d = c.getHours()+':'+c.getMinutes()+':'+c.getSeconds()+'';
+			$('#debug-node').append(d + ' : ' + data + '<br />');
+		});
+		socket.on('createTeam', function(data){
+			if(isEven(data)){
+				myTeam = 0;
+			}
+			else{
+				myTeam = 1;
+			}
+
+			console.log(myTeam);
+			controller = new Controller(map[nom_map], teams[myTeam]);
+			controller.afficherCarte();
+		});		
 	});
+
+
 	
 	</script>
 		<div id="debug-node" style="width:500px;height:500px;border:1px solid silver;position:absolute;right:0;top:0;">

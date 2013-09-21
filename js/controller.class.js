@@ -1,30 +1,25 @@
 ﻿// fichier à ranger ... vraiment
 
 function Controller(map, team) {
-	this.map = map;
-	this.team = team;
-	this.caseSurvolee = [];
-	this.selectedUnit = '';
+	this.map                  = map;
+	this.team                 = team;
+	this.caseSurvolee         = [];
+	this.selectedUnit         = '';
 	this.clickedTransportUnit = false;
-	this.choixChemin = false;
-	this.choixCible = false;
-	this.choixDepot = false;
+	this.choixChemin          = false;
+	this.choixCible           = false;
+	this.choixDepot           = false;
 	
-	this.tir = false;
-	this.transport =[];
+	this.tir       = false;
+	this.transport = [];
 	
 	this.whosPlaying = 0;
-	this.canvasSave = '';
-	this.canvas = document.getElementById("canvasMap");
-	this.image = document.getElementById("canvasSource");
-	this.context = this.canvas.getContext("2d");
-	this.warfog = '';
-	var that = this;
-
-	// mode sync : on initialise le rafraichissement :
-	if(modeSync){
-		this.refresh = new Refresh(1000);
-	}
+	this.canvasSave  = '';
+	this.canvas      = document.getElementById("canvasMap");
+	this.image       = document.getElementById("canvasSource");
+	this.context     = this.canvas.getContext("2d");
+	this.warfog      = '';
+	var that         = this;
 
 	$('#over_layer td')
 	.on('mouseenter',function(){
@@ -120,10 +115,11 @@ function Controller(map, team) {
 		$('#trace_layer td').attr('class','');	
 		$(document.getElementById('menuBox')).css('display', 'none');
 		deplacement.confirme();
-		that.choixCible = false;
-		that.choixChemin = false;
-		that.clickedTransportUnit = false;
+		
 		that.warfog.recalcul();
+		that.choixCible           = false;
+		that.choixChemin          = false;
+		that.clickedTransportUnit = false;
 
 	});
 	$(document.getElementById('capture')).on('click',function(){
@@ -192,6 +188,7 @@ function Controller(map, team) {
 			this.context.putImageData(this.canvasSave, 0, 0);
 		}
 		Controller.prototype.porteeDeplacementVisu = function(x,y) {
+
 			var imgd = this.context.getImageData(16*x, 16*y, 16, 16);
 			var pix = imgd.data;
 			for (var i = 0, n = pix.length; i < n; i += 4) {

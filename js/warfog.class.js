@@ -1,6 +1,6 @@
 ﻿function Warfog(team) {
-	this.team = team;
-	this.vue = [];
+	this.team        = team;
+	this.vue         = [];
 	this.warfogTotal = '';
 
 	if (typeof Warfog.initialized == "undefined" ) {

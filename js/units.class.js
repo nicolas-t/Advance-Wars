@@ -1,11 +1,11 @@
 ﻿// class Team
 function Team(id, color, heros) {
-	this.id = id;
-	this.color = color;
-	this.heros = heros;
-	this.bats = [];
-	this.units = [];
-	this.jours = 0;
+	this.id     = id;
+	this.color  = color;
+	this.heros  = heros;
+	this.bats   = [];
+	this.units  = [];
+	this.jours  = 0;
 	this.argent = 1000;
 	if ( typeof Team.initialized == "undefined" ) {
 		Team.prototype.finJour = function() {
@@ -26,16 +26,17 @@ function Team(id, color, heros) {
 		Team.initialized = true;
 	}
 }
+
 // class Bat
 function Bat(id, team, type, x, y) {
-	this.id = id;
+	this.id   = id;
 	this.team = team;
 	this.team.bats.push(this);
 	
-	this.type = type;
-	this.x = x;
-	this.y = y;
-	this.elem = '';
+	this.type    = type;
+	this.x       = x;
+	this.y       = y;
+	this.elem    = '';
 	this.capture = 0;
 	
 	batsMap[this.x+'_'+this.y] = this.id;
@@ -46,9 +47,9 @@ function Bat(id, team, type, x, y) {
 			document.getElementById('bats_container').appendChild(this.elem);
 			var position = $(document.getElementById('over_'+this.x+'_'+this.y)).position();
 			$(this.elem).attr('id', 'bat_'+this.id).addClass('bats '+this.team.color).css({
-				'background': 'url(images/bats/'+this.team.color+'/'+this.type+'.png)',
-				'left': position.left,
-				'top' : position.top
+				'background' : 'url(images/bats/'+this.team.color+'/'+this.type+'.png)',
+				'left'       : position.left,
+				'top'        : position.top
 			});
 		}
 		Bat.prototype.updateCapture = function(value) {
@@ -86,21 +87,21 @@ function Bat(id, team, type, x, y) {
 }
 // class Unit
 function Unit(team, type, x, y, active, spec) {
-	this.id = units.length;
+	this.id   = units.length;
 	this.team = team;
 	this.team.units.push(this);
 
-	this.type = type.toLowerCase();
-	this.x = x;
-	this.y = y;
-	this.active = active;
+	this.type           = type.toLowerCase();
+	this.x              = x;
+	this.y              = y;
+	this.active         = active;
 	this.isTransporting = false;
-	this.spec = spec;
+	this.spec           = spec;
 	
-	this.pictoEssence = false;
+	this.pictoEssence   = false;
 	this.pictoTransport = false;
 	
-	this.elem = ''; // DOM créé en bas.
+	this.elem           = ''; // DOM créé en bas.
 		
 	unitsMap[this.x+'_'+this.y] = this.id;
 	
@@ -170,7 +171,7 @@ function Unit(team, type, x, y, active, spec) {
 		}
  		Unit.prototype.updateVie = function(value) {
 			ancienne_valeur = this.spec.vie;
-			this.spec.vie = this.spec.vie - value;
+			this.spec.vie   = this.spec.vie - value;
 			if(this.spec.vie<=10){
 				this.detruireUnite();
 			}

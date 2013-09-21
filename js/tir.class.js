@@ -1,11 +1,11 @@
 ﻿function Tir(unit) {
-	this.unit=unit;
-	this.cases=[];
-	this.cases['max']=[];
-	this.cases['min']=[];
-	this.portee = [];
-	this.cibles = [];
-	this.degats = [];
+	this.unit         = unit;
+	this.cases        = [];
+	this.cases['max'] = [];
+	this.cases['min'] = [];
+	this.portee       = [];
+	this.cibles       = [];
+	this.degats       = [];
 	$('.cible').removeClass('cible');
 
 	if ( typeof Tir.initialized == "undefined" ) {
